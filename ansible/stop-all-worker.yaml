@@ -1,0 +1,7 @@
+- hosts: all-worker
+  remote_user: cs
+  tasks:
+    - debug: var=ansible_all_ipv4_addresses
+
+    - name: Kill lotus session
+      shell: 'tmux kill-session -t lotus'

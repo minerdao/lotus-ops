@@ -1,0 +1,22 @@
+- hosts: lotus-seal-miner
+  remote_user: cs
+  environment:
+    RUST_LOG: trace
+    RUST_BACKTRACE: full
+    FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_param_path }}'
+    FIL_PROOFS_MAXIMIZE_CACHING: '{{ fil_proofs_maximize_caching }}'
+    FIL_PROOFS_USE_GPU_COLUMN_BUILDER: '{{ fil_proofs_use_gpu_column_builder }}'
+    FIL_PROOFS_USE_GPU_TREE_BUILDER: '{{ fil_proofs_use_gpu_tree_builder }}'
+    LOTUS_PATH: '{{ lotus_path }}'
+    LOTUS_STORAGE_PATH: '{{ lotus_storage_path }}'
+    WORKER_PATH: '{{ lotus_worker_path }}'
+    FULLNODE_API_INFO: '{{ fullnode_api_info }}'
+  vars:
+    - post_miner_host: 192.168.200.61
+    - post_miner_port: 1357
+  tasks:
+    - name: Start seal miner
+      shell: |
+        tmux new-window -t lotus -n miner
+        tmux send-keys -t lotus:miner "lotus-miner run --post=false --p2p=true --sctype=get --sclisten={{ post_miner_host }}:{{ post_miner_port }}" C-m
+        tmux pipe-pane -o "cat >>{{ log_path }}/lotus-seal-miner-`date +%Y-%m-%d-%H-%M`.log"

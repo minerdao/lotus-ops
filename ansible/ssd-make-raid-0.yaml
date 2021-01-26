@@ -1,0 +1,24 @@
+- hosts: worker-commit
+  remote_user: cs
+  gather_facts: no
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars:
+    - workspace: /home/cs/workspace
+  tasks:
+    - name: Create workspace directory
+      file:
+        path: '{{ workspace }}'
+        state: directory
+
+    - name: Copy make raid shell to remote server
+      copy:
+        src: '{{ workspace }}/lotus-deploy/scripts/setup-ssd-raid-0.sh'
+        dest: '{{ workspace }}'
+        owner: root
+        group: root
+        mode: +x
+
+    - name: Setup raid-0
+      shell: '{{ workspace }}/setup-ssd-raid-0.sh'

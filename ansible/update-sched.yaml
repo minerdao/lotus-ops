@@ -1,0 +1,14 @@
+- hosts: lotus-seal-worker-precommit
+  remote_user: cs
+  become: yes
+  become_user: root
+  become_method: sudo
+  environment:
+    WORKER_PATH: '{{ lotus_worker_path }}'
+  vars:
+    - workspace: '/home/cs/workspace'
+  tasks:
+    - name: Copy myscheduler config to worker
+      copy:
+        src: '{{ workspace }}/lotus-deploy/config/myscheduler-precommit.json'
+        dest: '{{ lotus_worker_path }}/myscheduler.json'

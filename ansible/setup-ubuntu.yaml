@@ -1,0 +1,22 @@
+- hosts: worker
+  remote_user: cs
+  gather_facts: no
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Update ubuntu mirrors to aliyun
+      shell: '
+        cp -r /etc/apt/sources.list /etc/apt/sources.list.bak &&
+        sed -i "s/\/\/.*archive.ubuntu.com/\/\/mirrors.aliyun.com/g;s/\/\/.*security.ubuntu.com/\/\/mirrors.aliyun.com/g" /etc/apt/sources.list
+      '
+
+    - name: Update apt
+      shell: 'apt update'
+
+    - name: Install base library
+      shell: '
+        apt install -y mesa-opencl-icd ocl-icd-opencl-dev ntpdate ubuntu-drivers-common &&
+        ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&
+        ntpdate ntp.aliyun.com
+      '

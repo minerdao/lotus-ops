@@ -1,0 +1,15 @@
+- hosts: miner
+  remote_user: cs
+  environment:
+    RUST_LOG: trace
+    FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_param_path }}'
+    LOTUS_PATH: '{{ ansible_env.HOME }}/disk_md0/lotus'
+    LOTUS_STORAGE_PATH: '{{ ansible_env.HOME }}/disk_md0/lotusstorage'
+    WORKER_PATH: '{{ ansible_env.HOME }}/disk_md0/lotusworker'
+  tasks:
+    - debug: var=fil_proofs_param_path
+    - debug: var=owner
+
+    - name: Init miner
+      shell: |
+        lotus-miner init --owner={{ owner }} --sector-size=32GiB
