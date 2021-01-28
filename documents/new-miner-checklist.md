@@ -18,7 +18,7 @@
   ntpdate ntp.aliyun.com
   ```
 - [ ] NVMe SSD批量组Raid0，挂载，设置挂载目录的权限
-- [ ] Deamon、Miner和C2-worker上复制证明参数
+- [ ] 给Deamon、Miner和C2-worker上拷贝证明参数
 
 ## Deamon CheckList
 **Deamon 启动说明**
@@ -37,6 +37,7 @@
 - [ ] 启动Seal-miner，配置扇区ID分配的Server
 - [ ] 启动Winning-PoSt-miner、Window-PoSt-miner
 - [ ] Seal-miner、Winning-PoSt-miner、Window-PoSt-miner attach存储
+- [ ] 为Window-PoSt、PreCommitSector和ProveCommitSector设置独立的钱包
 
 ## Worker CheckList
 - [ ] 复制Miner的api和token到每台Worker机器上的`LOTUS_MINER`目录下
