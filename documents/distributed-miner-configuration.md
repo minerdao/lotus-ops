@@ -17,7 +17,7 @@
   - Deal-miner：负责接单和检索，和订单扇区密封的任务分配；
   - Seal-miner：负责普通扇区密封的任务分配。
 
-![Distributed Miner](./images/distributed-miner.png)
+![Distributed Miner](../images/distributed-miner.png)
 
 ## 实现思路
 **1. 解决SectorID不重复**
