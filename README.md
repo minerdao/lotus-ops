@@ -7,6 +7,7 @@
 - Ansible部署工具使用 - max
 - Filecoin同构/异构集群搭建流程详解 - mje
 - Filecoin存储管理，存储i/o性能分析，网络分析 - mje
+- 新矿工节点上线CheckList - max
 - Filecoin监控报警系统搭建 - max
 - 接单配置及接单流程 - max
 - 时空证明运行流程、原理详解 - max
