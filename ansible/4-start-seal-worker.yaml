@@ -26,10 +26,10 @@
         path: '{{ item }}'
         state: absent
       loop:
-       - '/home/cs/disk_md0/starstorage'
-       - '/home/cs/disk_md0/starworker'
-       - '/home/cs/disk_md0/lotusstorage'
-       - '/home/cs/disk_md0/lotusworker'
+        - '/home/cs/disk_md0/starstorage'
+        - '/home/cs/disk_md0/starworker'
+        - '/home/cs/disk_md0/lotusstorage'
+        - '/home/cs/disk_md0/lotusworker'
 
     - name: Create lotus storage, lotus worker and log path
       file:

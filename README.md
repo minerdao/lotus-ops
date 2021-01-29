@@ -2,6 +2,7 @@
 
 - Filecoin挖矿流程详解 - mje
 - 扇区生命周期详解，扇区状态管理 - max
+- 扇区状态重置、失败和错误扇区处理 - max
 - 节点管理，节点常用操作，节点同步常见问题 - mje
 - 钱包管理及使用场景 - mje
 - Ansible部署工具使用 - max
@@ -9,10 +10,10 @@
 - Filecoin存储管理，存储i/o性能分析，网络分析 - mje
 - 新矿工节点上线CheckList - max
 - Filecoin监控报警系统搭建 - max
-- 接单配置及接单流程 - max
+- Filecoin 订单配置 - max
+- Miner接单密封流程 - max
 - 时空证明运行流程、原理详解 - max
 - 爆块流程及原理详解 - max
-- 扇区状态重置、失败和错误扇区处理 - max
 - 源码编译及编译常见问题 - mje
 - AP模板复制功能使用及原理
 - 分布式Miner模块配置和使用 - max
