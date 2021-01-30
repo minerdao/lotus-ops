@@ -1,0 +1,55 @@
+[public-daemon]
+192.168.1.10
+
+[window-post-miner]
+192.168.1.11
+
+[winning-post-miner]
+192.168.1.12
+
+[seal-miner]
+192.168.1.13
+
+[precommit-worker]
+192.168.1.[20:50]
+
+[commit-worker]
+192.168.1.[60:80]
+
+[all:vars]
+remote_user=filguard
+
+# fil proofs 环境变量
+fil_proofs_param_path=/home/filguard/disk_md0/proofs_param/v28
+fil_proofs_parent_cache=/home/filguard/disk_md0/cache/parent
+fil_proofs_maximize_caching=1
+fil_proofs_use_gpu_column_builder=1
+fil_proofs_use_gpu_tree_builder=1
+
+# Rust环境变量
+rust_log=trace
+rust_backtrace=full
+
+# Repo环境变量
+lotus_path=/home/filguard/disk_md0/lotus
+lotus_miner_path=/home/filguard/disk_md0/lotusminer
+lotus_worker_path_0=/home/filguard/disk_md0/lotusworker0
+lotus_worker_path_1=/home/filguard/disk_md0/lotusworker1
+log_path=/home/filguard/disk_md0/logs
+tmp_dir=/home/filguard/disk_md0/tmp
+worker_port=3456
+workspace=/home/filguard/workspace
+
+# C2 环境变量
+num_handles=15
+num_kernels=2
+
+# 扇区分配Miner的IP和端口
+sector_counter_host=192.168.1.11
+sector_counter_port=1357
+
+# 替换为Daemon的token和listenAddress
+fullnode_api_info=<token>:<address>
+
+# 替换为Miner的token和listenAddress
+seal_miner_api_info=<token>:<address>

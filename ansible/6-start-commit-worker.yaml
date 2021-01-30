@@ -1,0 +1,63 @@
+- hosts: commit-worker
+  remote_user: '{{ remote_user }}'
+  environment:
+    RUST_LOG: '{{ rust_log }}'
+    RUST_BACKTRACE: '{{ rust_backtrace }}'
+    FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_param_path }}'
+    FIL_PROOFS_MAXIMIZE_CACHING: '{{ fil_proofs_maximize_caching }}'
+    FIL_PROOFS_USE_GPU_COLUMN_BUILDER: '{{ fil_proofs_use_gpu_column_builder }}'
+    FIL_PROOFS_USE_GPU_TREE_BUILDER: '{{ fil_proofs_use_gpu_tree_builder }}'
+    MINER_API_INFO: '{{ seal_miner_api_info }}'
+    NUM_HANDLES: '{{ num_handles }}'
+    NUM_KERNELS: '{{ num_kernels }}'
+  vars:
+    - lotus_worker_path_0: '{{ lotus_worker_path_0 }}'
+    - lotus_worker_path_1: '{{ lotus_worker_path_1 }}'
+    - worker_port_0: 3450
+    - worker_port_1: 3451
+    - workspace: '{{ workspace }}'
+  tasks:
+    - debug: var=ansible_default_ipv4.address
+    - debug: var=ansible_all_ipv4_addresses
+    - debug: var=ansible_hostname
+    - debug: var=lotus_miner_path
+
+    - name: Create lotus worker path, log path, tmp path
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: '{{ remote_user }}'
+        group: '{{ remote_user }}'
+        mode: u=rwxr,g=xr,o=x
+      loop:
+        - '{{ lotus_worker_path_0 }}'
+        - '{{ lotus_worker_path_1 }}'
+        - '{{ log_path }}'
+        - '{{ tmp_dir }}/tmp0'
+        - '{{ tmp_dir }}/tmp1'
+
+    - name: Copy myscheduler config to commit worker
+      copy:
+        src: '{{ workspace }}/lotus-deploy/config/myscheduler-commit.json'
+        dest: '{{ item }}/myscheduler'
+      loop:
+        - '{{ lotus_worker_path_0 }}'
+        - '{{ lotus_worker_path_1 }}'
+
+    - name: Start commit worker 0
+      shell: |
+        tmux new -s lotus -d -n worker0
+        tmux send-keys -t lotus:worker0 "export LOTUS_WORKER_PATH={{ lotus_worker_path_0 }}" C-m
+        tmux send-keys -t lotus:worker0 "export CUDA_VISIBLE_DEVICES=0" C-m
+        tmux send-keys -t lotus:worker0 "export TMPDIR={{ tmp_dir }}/tmp0" C-m
+        tmux send-keys -t lotus:worker0 "lotus-worker run --listen={{ ansible_default_ipv4.address }}:{{ worker_port_0 }}" C-m
+        tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker0-`date +%Y-%m-%d-%H-%M`.log"
+
+    - name: Start commit worker 1
+      shell: |
+        tmux new-window -t lotus -n worker1
+        tmux send-keys -t lotus:worker1 "export LOTUS_WORKER_PATH={{ lotus_worker_path_1 }}" C-m
+        tmux send-keys -t lotus:worker1 "export CUDA_VISIBLE_DEVICES=1" C-m
+        tmux send-keys -t lotus:worker1 "export TMPDIR={{ tmp_dir }}/tmp1" C-m
+        tmux send-keys -t lotus:worker1 "lotus-worker run --listen={{ ansible_default_ipv4.address }}:{{ worker_port_1 }}" C-m
+        tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker1-`date +%Y-%m-%d-%H-%M`.log"

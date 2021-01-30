@@ -1,0 +1,11 @@
+{
+  "AddPieceMax": 3,
+  "PreCommit1Max": 7,
+  "PreCommit2Max": 1,
+  "Commit2Max": 0,
+  "DiskHoldMax": 320,
+  "ForceP1FromLocalAP": true,
+  "ForceP2FromLocalP1": true,
+  "ForceC2FromLocalP2": false,
+  "IsPlanOffline": false
+}

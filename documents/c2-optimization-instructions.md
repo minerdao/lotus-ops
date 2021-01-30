@@ -8,8 +8,12 @@
 
 由于二者在不用硬件上计算的差异，现根据目前常用配置给出推荐设置。
 
-1.AMD CPU可根据内存峰值的大小进行设置，建议256G内存设置`NUM_HANDLES=10`；
+1. AMD CPU可根据内存峰值的大小进行设置，建议256G内存设置`NUM_HANDLES=10`；
 
-2.Intel CPU 建议设置`NUM_HANDLES=10`；
+2. Intel CPU 建议设置`NUM_HANDLES=10`；
 
-3.3090建议设置`NUM_KERNELS=3`（设置最高为4），2080ti建议设置`NUM_KERNELS=2`（设置最高为3），3080建议设置`NUM_KERNELS=2`（设置最高为2）（如3090有并行需求，需要根据并行数降低NUM_KERNELS值）。
+3. `NUM_KERNELS`建议配置：
+- 3090建议设置`NUM_KERNELS=3`（设置最高为4）；
+    如3090有并行需求，需要根据并行数降低NUM_KERNELS值
+- 3080建议设置`NUM_KERNELS=2`（设置最高为2）。
+- 2080Ti建议设置`NUM_KERNELS=2`（设置最高为3）；

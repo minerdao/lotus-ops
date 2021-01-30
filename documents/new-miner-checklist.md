@@ -1,9 +1,11 @@
 # 新矿工节点上线CheckList
 
 ## 机器CheckList
-* [ ] 所有Miner和计算Worker用户名必须一致
-* [ ] hostname按照 `192-168-100-40` 的格式
-* [ ] 禁用所有机器(Miner和Worker)的swap
+- [ ] 所有Miner和计算Worker用户名必须一致
+- [ ] hostname按照 `192-168-100-40` 的格式
+- [ ] 禁用所有机器(Miner和Worker)的swap
+- [ ] Ubuntu系统禁用自动更新
+- [ ] 显卡驱动禁用自动更新
 
 ## 部署CheckList
 - [ ] 设置Miner和Worker机器SSH免密码登录
