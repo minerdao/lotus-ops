@@ -3,7 +3,7 @@
 ## 1. 安装Ansible
 - 在管理机器上安装Ansible，[参照安装文档](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible-on-ubuntu)；
 - 在管理机器的`/etc/hosts`中配置远程目标机器的IP和主机名映射关系，例如：
-  ```toml
+  ```
   # Miner
   192.168.1.11 postminer
   192.168.1.12 sealminer
@@ -26,7 +26,7 @@
 
 ## 2. 配置Ansible环境变量
 根据自己的实际环境，修改管理机器的Ansible环境变量配置文件`sudo vi /etc/ansible/hosts`:
-```toml
+```
 [public-daemon]
 192.168.1.10
 
