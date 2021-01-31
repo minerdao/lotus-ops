@@ -1,11 +1,11 @@
 - hosts: worker64
-  remote_user: cs
+  remote_user: '{{ remote_user }}'
   gather_facts: no
   become: yes
   become_user: root
   become_method: sudo
   vars:
-    - workspace: /home/cs/workspace
+    - - workspace: '{{ workspace }}'
   tasks:
     - name: Create workspace directory
       file:
@@ -14,7 +14,7 @@
 
     - name: Copy node exporter script to remote server
       copy:
-        src: '{{ workspace }}/lotus-deploy/scripts/install-node-exporter.sh'
+        src: '{{ workspace }}/lotus-ops/scripts/install-node-exporter.sh'
         dest: '{{ workspace }}'
         owner: root
         group: root
@@ -22,7 +22,7 @@
 
     - name: Copy node exporter service to remote server
       copy:
-        src: '{{ workspace }}/lotus-deploy/service/node-exporter.service'
+        src: '{{ workspace }}/lotus-ops/service/node-exporter.service'
         dest: /etc/systemd/system/
         owner: root
         group: root

@@ -1,11 +1,10 @@
 - hosts: miner
-  remote_user: cs
+  remote_user: '{{ remote_user }}'
   environment:
-    RUST_LOG: trace
     FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_param_path }}'
-    LOTUS_PATH: '{{ ansible_env.HOME }}/disk_md0/lotus'
-    LOTUS_MINER_PATH: '{{ ansible_env.HOME }}/disk_md0/lotusstorage'
-    WORKER_PATH: '{{ ansible_env.HOME }}/disk_md0/lotusworker'
+    LOTUS_PATH: '{{ lotus_path }}'
+    LOTUS_MINER_PATH: '{{ lotus_miner_path }}'
+    LOTUS_WORKER_PATH: '{{ ansible_env.HOME }}/disk_md0/lotusworker'
   tasks:
     - debug: var=fil_proofs_param_path
     - debug: var=owner

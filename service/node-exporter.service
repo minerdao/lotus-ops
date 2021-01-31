@@ -1,0 +1,11 @@
+[Unit]
+Description=Node Exporter
+After=network.target
+
+[Service]
+User=cs
+Type=simple
+ExecStart=/usr/local/bin/node_exporter --collector.textfile.directory="~/disk_md0/prometheus/run"
+
+[Install]
+WantedBy=multi-user.target

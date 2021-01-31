@@ -1,8 +1,6 @@
 - hosts: miner
-  remote_user: cs
+  remote_user: '{{ remote_user }}'
   environment:
-    RUST_LOG: trace
-    RUST_BACKTRACE: full
     LOTUS_MINER_PATH: '{{ lotus_miner_path }}'
   tasks:
     - debug: var=ansible_all_ipv4_addresses

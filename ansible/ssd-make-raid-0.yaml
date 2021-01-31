@@ -1,5 +1,5 @@
 - hosts: worker-commit
-  remote_user: cs
+  remote_user: '{{ remote_user }}'
   gather_facts: no
   become: yes
   become_user: root
@@ -14,11 +14,11 @@
 
     - name: Copy make raid shell to remote server
       copy:
-        src: '{{ workspace }}/lotus-deploy/scripts/setup-ssd-raid-0.sh'
+        src: '{{ workspace }}/lotus-ops/scripts/setup-ssd-raid-0.sh'
         dest: '{{ workspace }}'
         owner: root
         group: root
         mode: +x
 
-    - name: Setup raid-0
+    - name: Setup raid0
       shell: '{{ workspace }}/setup-ssd-raid-0.sh'
