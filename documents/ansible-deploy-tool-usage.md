@@ -16,12 +16,18 @@
   192.168.1.69 w69
   192.168.1.70 w70
   ```
-- 在要部署的远程目标机器上，安装Python环境；
-- 配置管理机器到远程目标机器的SSH免密码登录；
+- 在要部署的远程目标机器上，安装Python环境及openssh-server；
+  ```python
+  sudo apt-get install python
+  sudo apt-get install openssh-server
+  ```
+- 在管理机器安装openssh-client，配置到远程目标机器的SSH免密码登录；
   ```sh
-  $ ssh-keyscan <remote-server>> >> ~/.ssh/known_hosts
-  $ ssh-copy-id <remote-server>>
-  # 其中<remote-server>为远程目标机器的主机名，可以使用脚本批量处理
+  sudo apt-get install openssh-client
+  cd   # cd到根目录下
+  ssh-keygen -t rsa -P ""  # 一路回车
+  ssh-copy-id xxx.xx.xx.xx  #设置你要免密登录的机器IP，输入密码即可完成 
+  # 注意这种方式有一个硬性要求，即你需要远程免密的设备，用户名必须与当前管理机一致
   ```
 
 ## 2. 配置Ansible环境变量
@@ -91,13 +97,14 @@ seal_miner_api_info=<token>:<address>
 ```sh
 $ echo "alias an=/usr/bin/ansible" >> $HOME/.profile
 $ echo "alias ap=/usr/bin/ansible-playbook" >> $HOME/.profile
+$ source $HOME/.profile
 ```
 #### 2.2 Clone工作目录
 将本项目clone至`$HOME/workspace`目录下。
 ```sh
 $ mkdir -p $HOME/workspace
 $ cd $HOME/workspace
-$ git clone https://github.com/fileguard/lotus-ops.git
+$ git clone https://github.com/filguard/lotus-ops.git
 ```
 
 ## 3. Ansible部署脚本使用说明
