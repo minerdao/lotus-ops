@@ -88,6 +88,11 @@ fullnode_api_info=<token>:<address>
 
 # 替换为Miner的token和listenAddress
 seal_miner_api_info=<token>:<address>
+
+# Miner目录备份配置
+backup_host=192.168.1.60
+backup_user=filguard
+backup_path=/home/filguard/disk_md0/backup
 ```
 
 ## 2. 部署准备

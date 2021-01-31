@@ -1,0 +1,23 @@
+- hosts: window-post-miner
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars:
+    - workspace: '{{ workspace }}'
+  tasks:
+    - name: Install inotify-tools
+      shell: |
+        sudo apt install inotify-tools
+
+    - name: Copy backup script to window post miner
+      copy:
+        src: '{{ workspace }}/lotus-ops/scripts/backup-miner.sh'
+        dest: '{{ workspace }}/scripts'
+        mode: +x
+
+    - name: Start backup window post miner
+      shell: |
+        tmux new-window -t lotus:2 -n backup
+        tmux send-keys -t lotus:backup "{{ workspace }}/scripts/backup-miner.sh {{ lotus_miner_path }} {{ backup_path }} {{ backup_user }} {{ backup_host }}" C-m
+        tmux pipe-pane -o "cat >>{{ log_path }}/backup-`date +%Y-%m-%d-%H-%M`.log"
