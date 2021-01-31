@@ -40,6 +40,7 @@
 - [ ] 启动Winning-PoSt-miner、Window-PoSt-miner
 - [ ] Seal-miner、Winning-PoSt-miner、Window-PoSt-miner attach存储
 - [ ] 为Window-PoSt、PreCommitSector和ProveCommitSector设置独立的钱包
+- [ ] rsync实时备份Seal-miner、Winning-PoSt-miner、Window-PoSt-miner目录
 
 ## Worker CheckList
 - [ ] 复制Miner的api和token到每台Worker机器上的`LOTUS_MINER`目录下
