@@ -3,5 +3,8 @@
   tasks:
     - debug: var=ansible_all_ipv4_addresses
 
-    - name: Kill lotus session
-      shell: 'tmux kill-session -t lotus'
+    - name: Kill commit worker window
+      shell: 'tmux kill-window -t lotus:worker{{item}}'
+      loop:
+        - 0
+        - 1
