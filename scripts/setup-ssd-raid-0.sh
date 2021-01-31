@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-mount_path=/home/cs/disk_md0
+mount_path=$HOME/disk_md0
 
 for i in {0..5};
 do
