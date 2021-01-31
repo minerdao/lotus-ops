@@ -1,0 +1,19 @@
+- hosts: precommit-worker,commit-worker
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars:
+    - workspace: '{{ workspace }}'
+    - version: 'filecoin'
+  tasks:
+    - name: Copy lotus bin to all amd worker
+      copy:
+        src: '{{ item }}'
+        dest: '/usr/local/bin/'
+        mode: +x
+      loop: 
+        - '{{ workspace }}/{{ version }}/lotus'
+        - '{{ workspace }}/{{ version }}/lotus-miner'
+        - '{{ workspace }}/{{ version }}/lotus-worker'
+        - '{{ workspace }}/{{ version }}/lotus-shed'
