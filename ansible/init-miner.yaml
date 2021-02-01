@@ -1,12 +1,11 @@
 - hosts: miner
   remote_user: '{{ remote_user }}'
   environment:
-    FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_param_path }}'
+    FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_parameter_cache }}'
     LOTUS_PATH: '{{ lotus_path }}'
     LOTUS_MINER_PATH: '{{ lotus_miner_path }}'
-    LOTUS_WORKER_PATH: '{{ ansible_env.HOME }}/disk_md0/lotusworker'
   tasks:
-    - debug: var=fil_proofs_param_path
+    - debug: var=fil_proofs_parameter_cache
     - debug: var=owner
 
     - name: Init miner

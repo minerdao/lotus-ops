@@ -3,7 +3,7 @@
   environment:
     RUST_LOG: '{{ rust_log }}'
     RUST_BACKTRACE: '{{ rust_backtrace }}'
-    FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_param_path }}'
+    FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_parameter_cache }}'
     LOTUS_PATH: '{{ lotus_path }}'
   tasks:
     - name: Start lotus daemon
