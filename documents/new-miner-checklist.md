@@ -25,7 +25,10 @@
   ntpdate ntp.aliyun.com
   ```
 - [ ] NVMe SSD批量组Raid0，挂载，设置挂载目录的权限
-  - 
+  - 更新起始盘符
+  - 更新`--raid-devices`数量
+  - 更新分区数量
+  - 更新用户名和组
 - [ ] 给Deamon、Miner和C2-worker上拷贝证明参数
 
 ## Deamon CheckList
