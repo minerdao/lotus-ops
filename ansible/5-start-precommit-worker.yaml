@@ -7,6 +7,7 @@
     FIL_PROOFS_MAXIMIZE_CACHING: '{{ fil_proofs_maximize_caching }}'
     FIL_PROOFS_USE_GPU_COLUMN_BUILDER: '{{ fil_proofs_use_gpu_column_builder }}'
     FIL_PROOFS_USE_GPU_TREE_BUILDER: '{{ fil_proofs_use_gpu_tree_builder }}'
+    FIL_PROOFS_MULTICORE_SDR_PRODUCERS: '{{  fil_proofs_multicore_sdr_producers }}'
     MINER_API_INFO: '{{ seal_miner_api_info }}'
   vars:
     - env_cpu_core_begin_num_0: 0
