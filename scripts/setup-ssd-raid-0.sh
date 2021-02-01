@@ -42,7 +42,7 @@ mkdir $mount_path
 mount /dev/md0 $mount_path
 
 echo "Change owner & mod"
-chown cs:cs $mount_path
+chown ubuntu:ubuntu $mount_path
 
 echo "Setup fstab"
 uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
