@@ -1,4 +1,4 @@
-- hosts: worker-commit
+- hosts: worker-precommit
   remote_user: '{{ remote_user }}'
   gather_facts: no
   become: yes
