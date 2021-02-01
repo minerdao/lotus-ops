@@ -33,17 +33,16 @@
 ## Miner CheckList
 - [ ] 配置Miner的环境变量，初始化Miner(默认为Seal-miner)
 - [ ] 修改Miner的配置文件，更改[API]、[Storage]、[Fees]中的相关配置
-- [ ] 更改Miner进程的ulimit，设置`open files`为`65535`
+- [ ] 更改Miner进程的ulimit，设置`open files`为`1048576`
 - [ ] 复制`LOTUS_MINER`目录到Winning-PoSt-miner和Window-PoSt-miner上
 - [ ] Seal-miner、Winning-PoSt-miner、Window-PoSt-miner分别挂载存储
 - [ ] 启动Seal-miner，配置扇区ID分配的Server
 - [ ] 启动Winning-PoSt-miner、Window-PoSt-miner
 - [ ] Seal-miner、Winning-PoSt-miner、Window-PoSt-miner attach存储
 - [ ] 为Window-PoSt、PreCommitSector和ProveCommitSector设置独立的钱包
-- [ ] rsync实时备份Seal-miner、Winning-PoSt-miner、Window-PoSt-miner目录
+- [ ] inotify+rsync实时备份Seal-miner、Winning-PoSt-miner、Window-PoSt-miner
 
 ## Worker CheckList
-- [ ] 复制Miner的api和token到每台Worker机器上的`LOTUS_MINER`目录下
 - [ ] 配置Worker的环境变量，更改调度配置文件
 - [ ] 批量启动P1 + P2 Worker
 - [ ] 批量启动C2 Worker
