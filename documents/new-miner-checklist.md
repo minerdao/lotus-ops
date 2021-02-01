@@ -2,7 +2,11 @@
 
 ## 机器CheckList
 - [ ] 所有Miner和计算Worker用户名必须一致
-- [ ] hostname按照 `192-168-100-40` 的格式
+- [ ] hostname按照以下格式命名:
+  - Miner-192-168-1-3
+  - Daemon-192-168-1-4
+  - WorkerP-192-168-1-5 (P1 + P2机器)
+  - WorkerC-192-168-1-6 (C2机器)
 - [ ] 禁用所有机器(Miner和Worker)的swap
 - [ ] Ubuntu系统禁用自动更新
 - [ ] 显卡驱动禁用自动更新
@@ -10,12 +14,13 @@
 ## 部署CheckList
 - [ ] 设置Miner和Worker机器SSH免密码登录
 - [ ] Ubuntu apt源更新为国内镜像(无国际线路的情况)
-- [ ] 安装基本依赖库、时钟校验
+- [ ] 安装基础依赖库
   ```sh
   sudo apt update
-  sudo apt install -y pkg-config mesa-opencl-icd ocl-icd-opencl-dev libclang-dev libhwloc-dev hwloc gcc git bzr jq tree python
-
-  # time adjust
+  sudo apt install -y pkg-config mesa-opencl-icd ocl-icd-opencl-dev libclang-dev libhwloc-dev hwloc gcc git bzr jq tree openssh-server python3
+  ```
+- [ ] 时钟校验
+  ```sh
   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
   ntpdate ntp.aliyun.com
   ```
