@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-mount_path=$HOME/disk_md0
+mount_point=/home/ubuntu/disk_md0
 
 for i in {1..2};
 do
@@ -38,12 +38,12 @@ mkfs.ext4 /dev/md0
 sleep 30s
 
 echo "Mount raid0"
-mkdir $mount_path
-mount /dev/md0 $mount_path
+mkdir $mount_point
+mount /dev/md0 $mount_point
 
 echo "Change owner & mod"
-chown ubuntu:ubuntu $mount_path
+chown ubuntu:ubuntu $mount_point
 
 echo "Setup fstab"
 uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
-echo "${uuid} ${mount_path} ext4 defaults 0 0" >> /etc/fstab
+echo "${uuid} ${mount_point} ext4 defaults 0 0" >> /etc/fstab
