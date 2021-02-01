@@ -11,10 +11,10 @@
     NUM_HANDLES: '{{ num_handles }}'
     NUM_KERNELS: '{{ num_kernels }}'
   vars:
-    - lotus_worker_path_0: '{{ lotus_worker_path_0 }}'
-    - lotus_worker_path_1: '{{ lotus_worker_path_1 }}'
     - worker_port_0: 3450
     - worker_port_1: 3451
+    - worker_port_2: 3452
+    - worker_port_3: 3453
   tasks:
     - debug: var=ansible_default_ipv4.address
     - debug: var=ansible_all_ipv4_addresses
@@ -31,9 +31,13 @@
       loop:
         - '{{ lotus_worker_path_0 }}'
         - '{{ lotus_worker_path_1 }}'
+        - '{{ lotus_worker_path_2 }}'
+        - '{{ lotus_worker_path_3 }}'
         - '{{ log_path }}'
         - '{{ tmp_dir }}/tmp0'
         - '{{ tmp_dir }}/tmp1'
+        - '{{ tmp_dir }}/tmp2'
+        - '{{ tmp_dir }}/tmp3'
 
     - name: Copy myscheduler config to commit worker
       copy:
@@ -42,6 +46,8 @@
       loop:
         - '{{ lotus_worker_path_0 }}'
         - '{{ lotus_worker_path_1 }}'
+        - '{{ lotus_worker_path_2 }}'
+        - '{{ lotus_worker_path_3 }}'
 
     - name: Start commit worker 0
       shell: |

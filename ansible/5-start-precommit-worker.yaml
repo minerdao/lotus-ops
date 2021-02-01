@@ -10,8 +10,6 @@
     FIL_PROOFS_MULTICORE_SDR_PRODUCERS: '{{  fil_proofs_multicore_sdr_producers }}'
     MINER_API_INFO: '{{ seal_miner_api_info }}'
   vars:
-    - lotus_worker_path_0: '{{ lotus_worker_path_0 }}'
-    - lotus_worker_path_1: '{{ lotus_worker_path_1 }}'
     - env_cpu_core_begin_num_0: 0
     - env_cpu_core_end_num_0: 8
     - env_cpu_core_begin_num_1: 8
