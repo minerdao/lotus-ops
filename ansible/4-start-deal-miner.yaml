@@ -9,9 +9,6 @@
     FIL_PROOFS_USE_GPU_TREE_BUILDER: '{{ fil_proofs_use_gpu_tree_builder }}'
     LOTUS_PATH: '{{ lotus_path }}'
     LOTUS_MINER_PATH: '{{ lotus_miner_path }}'
-  vars:
-    - sector_counter_host: '{{ sector_counter_host }}'
-    - sector_counter_port: '{{ sector_counter_port }}'
   tasks:
     - name: Start deal miner
       shell: |
