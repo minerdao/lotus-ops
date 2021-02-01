@@ -19,7 +19,7 @@ echo "${ssd} was fdisked"
 sleep 1s
 done
 
-mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=$raid_devices /dev/nvme[1,2]n1p1 <<EOF
+mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=2 /dev/nvme[1,2]n1p1 <<EOF
   y
 EOF
 echo "Raid0 array created"
