@@ -15,7 +15,6 @@
     - lotus_worker_path_1: '{{ lotus_worker_path_1 }}'
     - worker_port_0: 3450
     - worker_port_1: 3451
-    - workspace: '{{ workspace }}'
   tasks:
     - debug: var=ansible_default_ipv4.address
     - debug: var=ansible_all_ipv4_addresses

@@ -3,8 +3,6 @@
   become: yes
   become_user: root
   become_method: sudo
-  vars:
-    - workspace: '{{ workspace }}'
   tasks:
     - debug: var=ansible_hostname
 

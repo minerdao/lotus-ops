@@ -4,7 +4,6 @@
   become_user: root
   become_method: sudo
   vars:
-    - workspace: '{{ workspace }}'
     - lotus_bin_path: 'lotus-bin'
     - version: '1.4.1'
     - platform: 'amd'
