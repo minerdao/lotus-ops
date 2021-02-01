@@ -3,10 +3,8 @@
   become: yes
   become_user: root
   become_method: sudo
-  environment:
-    WORKER_PATH: '{{ workspace }}'
   vars:
-    - workspace: '/home/cs/workspace'
+    - workspace: '{{ workspace }}'
   tasks:
     - name: Copy myscheduler config to worker
       copy:

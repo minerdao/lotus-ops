@@ -5,7 +5,7 @@
   become_user: root
   become_method: sudo
   vars:
-    - workspace: /home/cs/workspace
+    - workspace: '{{ workspace }}'
   tasks:
     - name: Create workspace directory
       file:

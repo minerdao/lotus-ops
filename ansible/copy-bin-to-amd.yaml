@@ -1,0 +1,21 @@
+- hosts: amd
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars:
+    - workspace: '{{ workspace }}'
+    - lotus_bin_path: 'lotus-bin'
+    - version: '1.4.1'
+    - platform: 'amd'
+  tasks:
+    - name: Copy lotus bin to all amd
+      copy:
+        src: '{{ item }}'
+        dest: '/usr/local/bin/'
+        mode: +x
+      loop:
+        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus'
+        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus-miner'
+        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus-worker'
+        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus-shed'
