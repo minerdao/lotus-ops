@@ -1,0 +1,21 @@
+- hosts: post-miner
+  remote_user: '{{ remote_user }}'
+  environment:
+    RUST_LOG: '{{ rust_log }}'
+    RUST_BACKTRACE: '{{ rust_backtrace }}'
+    FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_parameter_cache }}'
+    FIL_PROOFS_MAXIMIZE_CACHING: '{{ fil_proofs_maximize_caching }}'
+    FIL_PROOFS_USE_GPU_COLUMN_BUILDER: '{{ fil_proofs_use_gpu_column_builder }}'
+    FIL_PROOFS_USE_GPU_TREE_BUILDER: '{{ fil_proofs_use_gpu_tree_builder }}'
+    FULLNODE_API_INFO: '{{ fullnode_api_info }}'
+    LOTUS_PATH: '{{ lotus_path }}'
+    LOTUS_MINER_PATH: '{{ lotus_miner_path }}'
+  vars:
+    - miner_log_path: '/home/ubuntu/logs'
+  tasks:
+    - name: Start post miner
+      shell: |
+        tmux new -s lotus -d -n post-miner
+        tmux send-keys -t lotus:post-miner "ulimit -n 1048576" C-m
+        tmux send-keys -t lotus:post-miner "lotus-miner run --window-post=true --winning-post=true --p2p=false --sctype=alloce --sclisten={{ sector_counter_host }}:{{ sector_counter_port }}" C-m
+        tmux pipe-pane -o "cat >>{{ miner_log_path }}/post-miner-`date +%Y-%m-%d-%H-%M`.log"

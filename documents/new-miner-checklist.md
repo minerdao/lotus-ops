@@ -42,8 +42,14 @@
 
 ## Miner CheckList
 - [ ] 配置Miner的环境变量，初始化Miner(默认为Seal-miner)
+  ```sh
+  lotus-miner init --owner f3xxxxxxxx
+  ```
 - [ ] 修改Miner的配置文件，更改[API]、[Storage]、[Fees]中的相关配置
-- [ ] 更改Miner进程的ulimit，设置`open files`为`1048576`
+  ```toml
+  MaxPreCommitGasFee = "0.15 FIL"
+  MaxCommitGasFee = "0.3 FIL"
+  ```
 - [ ] 复制`LOTUS_MINER`目录到Winning-PoSt-miner和Window-PoSt-miner上
 - [ ] Seal-miner、Winning-PoSt-miner、Window-PoSt-miner分别挂载存储
 - [ ] 启动Seal-miner，配置扇区ID分配的Server
