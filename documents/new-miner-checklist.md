@@ -17,7 +17,7 @@
 - [ ] 安装基础依赖库
   ```sh
   sudo apt update
-  sudo apt install -y pkg-config mesa-opencl-icd ocl-icd-opencl-dev libclang-dev libhwloc-dev hwloc gcc git bzr jq tree openssh-server python3
+  sudo apt install -y make pkg-config mesa-opencl-icd ocl-icd-opencl-dev libclang-dev libhwloc-dev hwloc gcc git bzr jq tree openssh-server python3
   ```
 - [ ] 时钟校验
   ```sh
