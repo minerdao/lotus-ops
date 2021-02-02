@@ -69,13 +69,22 @@ myScheduler 社区版加入以下外部 lotus-worker 功能支持：
   "AllowP2C2Parallel": true
 }
 ```
+## (五)	自义定 pledge 任务实用工具
 
-## (五)	调度过程日志分析与问题排查
-由于调度的频繁度，导致在运行过程中，容易产生非常大的日志量，可以通过下面的方式轻松查询相关成功分配和未分配的调度情况列表：
+- ①	lotus-miner sectors mypledge
+mypledge 一次性填充所有可以工作AP的 lotus-worker 的数量 AddPieceMax 总和，自动化任务可以定时调用 mypledge
+
+- ②	lotus-miner sectors mypledgeonce
+mypledgeonce 一次性为每个可以工作AP　的 lotus-worker 发送一个 AP，适合初始实施时，第一次使用 AP模板复制功能
+
+## (六)	调度过程日志分析与问题排查
+由于调度的频繁度，在运行过程中，有大量的日志用于记录任务分配细节，可以通过下面的方式轻松查询相关成功分配和未分配的调度情况列表：
 - ①	more miner.log |grep -a trySchedMine > trySchedMine.txt， 这个里面记录了，所有成功调度的 has sucessfully scheduled 相关信息。
 - ②	more miner.log |grep -a "not scheduling" > not_scheduling.txt， 则是拒绝接收任务分配的worker 的日志。
 - ③	对于个别扇区的调度分配过程，则可以用以下方式查询和它相关的全部日志过程，
 more miner.log |grep -a "s-t0XXXX-YYYY"> s-t0XXXX-YYYY.txt ，格式是 "s-t0你的MinerID-某个扇区编号“。对于长时间不分配任务工作的 worker，一般是在 miner日志中可以看到 out of space 或者 didn't receive heartbeats for 的官方标准错误提醒。
+- ④ 如果在 sealing workers 看到大量的 worker 闲置情况，但是挺多已经预分配的工作任务在 Preparing 里面，而长时间无法到在 Running。Preparing 通过了第一步的预备分配，在实际分配响应任务的时候不满足条件，就无法到达 Running 执行状态。尽量减少在动态参数配置文件中不必要的限制，限制条件越多，则越容易无法达到真正可运行状态。有时可以偿试进行一次 lotus-miner sectors mypledgeonce 触发新一轮的 AP 分配和调度。
+
 
 下面的三种 miner 日志，存在任何一种，都表示这个 worker 不会接收任何工作任务：
 ```sh
@@ -85,3 +94,4 @@ cat miner.log |grep -a "out of space "|awk '{print $8}'|sort -rn|uniq -c
 
 cat miner.log |grep -a "trySchedMine skipping disabled worker "|awk '{print $9}'|sort -rn|uniq -c
 ```
+对于这种 disabled worker 状态又不是断连，从调度程序的角度来看，disabled worker 和  out of space 一样的，不接收工作，更像是假死，而且 disabled 和 enabled 是互相动态变化的。
