@@ -41,8 +41,8 @@
 
     - name: Copy myscheduler config to commit worker
       copy:
-        src: '{{ workspace }}/lotus-deploy/config/myscheduler-commit.json'
-        dest: '{{ item }}/myscheduler'
+        src: '{{ workspace }}/lotus-ops/config/myscheduler-commit.json'
+        dest: '{{ item }}/myscheduler.json'
       loop:
         - '{{ lotus_worker_path_0 }}'
         - '{{ lotus_worker_path_1 }}'

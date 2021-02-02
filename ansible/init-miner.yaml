@@ -1,4 +1,4 @@
-- hosts: miner
+- hosts: seal-miner
   remote_user: '{{ remote_user }}'
   environment:
     FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_parameter_cache }}'
