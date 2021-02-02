@@ -40,7 +40,7 @@
     - name: Copy myscheduler config to precommit worker
       copy:
         src: '{{ workspace }}/lotus-ops/config/myscheduler-precommit.json'
-        dest: '{{ item }}/myscheduler'
+        dest: '{{ item }}/myscheduler.json'
       loop:
         - '{{ lotus_worker_path_0 }}'
         - '{{ lotus_worker_path_1 }}'
