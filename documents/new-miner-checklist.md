@@ -54,7 +54,11 @@
 - [ ] Seal-miner、Winning-PoSt-miner、Window-PoSt-miner分别挂载存储
 - [ ] 启动Seal-miner，配置扇区ID分配的Server
 - [ ] 启动Winning-PoSt-miner、Window-PoSt-miner
+- [ ] 设置Miner sectorstore.json 中的`CanStore`为`false`
 - [ ] Seal-miner、Winning-PoSt-miner、Window-PoSt-miner attach存储
+  ```sh
+  lotus-miner storage attach --store --init /home/ubuntu/sectorsdir/storage
+  ```
 - [ ] 为Window-PoSt、PreCommitSector和ProveCommitSector设置独立的钱包
 - [ ] inotify+rsync实时备份Seal-miner、Winning-PoSt-miner、Window-PoSt-miner
 
