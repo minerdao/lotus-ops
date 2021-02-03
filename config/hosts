@@ -25,7 +25,7 @@ fil_proofs_parent_cache=/home/filguard/disk_md0/cache/parent
 fil_proofs_maximize_caching=1
 fil_proofs_use_gpu_column_builder=1
 fil_proofs_use_gpu_tree_builder=1
-fil_proofs_multicore_sdr=1
+fil_proofs_use_multicore_sdr=1
 fil_proofs_multicore_sdr_producers=1
 
 # Rust环境变量
