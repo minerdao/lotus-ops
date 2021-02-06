@@ -1,18 +1,11 @@
 #!/usr/bin/env bash
-for i in m50 m51
+for i in h211 h212 h215 h216
 do
   ssh-keyscan $i >> ~/.ssh/known_hosts
   ssh-copy-id $i
 done
 
-for i in w{60..78};
-do
-  ssh-keyscan $i >> ~/.ssh/known_hosts
-  ssh-copy-id $i
-done
-
-# commit worker
-for i in w{80..84};
+for i in h1{11..19};
 do
   ssh-keyscan $i >> ~/.ssh/known_hosts
   ssh-copy-id $i
