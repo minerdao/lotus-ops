@@ -16,6 +16,11 @@
 [commit-worker]
 10.0.2.[11:16]
 
+[amd]
+10.0.99.101
+10.0.1.[11:19]
+10.0.2.[11:16]
+
 [all:vars]
 remote_user=caslx
 
