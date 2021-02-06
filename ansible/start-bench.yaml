@@ -12,5 +12,5 @@
     - name: Start benchmark
       shell: |
         tmux new -s lotus -d -n bench
-        tmux send-keys -t lotus:worker0 "env FIL_PROOFS_USE_MULTICORE_SDR=1 FIL_PROOFS_MULTICORE_SDR_PRODUCERS=1 NUM_HANDLES=15 NUM_KERNELS=2 ENV_CPU_CORE_BEGIN_NUM=0 ENV_CPU_CORE_END_NUM=8 lotus-bench sealing --sector-size 32GiB --skip-unseal --storage-dir /home/caslx/disk_md0" C-m
+        tmux send-keys -t lotus:bench "env FIL_PROOFS_USE_MULTICORE_SDR=1 FIL_PROOFS_MULTICORE_SDR_PRODUCERS=1 NUM_HANDLES=15 NUM_KERNELS=2 ENV_CPU_CORE_BEGIN_NUM=0 ENV_CPU_CORE_END_NUM=8 lotus-bench sealing --sector-size 32GiB --skip-unseal --storage-dir /home/caslx/disk_md0" C-m
         tmux pipe-pane -o "cat >>{{ log_path }}/bench-`date +%Y-%m-%d-%H-%M`.log"
