@@ -5,7 +5,7 @@
   become_method: sudo
   vars:
     - lotus_bin_path: 'lotus-bin'
-    - version: '1.4.1'
+    - version: '1.4.0'
     - platform: 'amd'
   tasks:
     - name: Copy lotus bin to all amd
@@ -18,3 +18,4 @@
         - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus-miner'
         - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus-worker'
         - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus-shed'
+        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus-bench'
