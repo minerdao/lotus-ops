@@ -13,7 +13,6 @@
   vars:
     - worker_port_0: 3450
     - worker_port_1: 3451
-    - worker_port_2: 3452
   tasks:
     - debug: var=ansible_default_ipv4.address
     - debug: var=ansible_all_ipv4_addresses
@@ -30,11 +29,9 @@
       loop:
         - '{{ lotus_worker_path_0 }}'
         - '{{ lotus_worker_path_1 }}'
-        - '{{ lotus_worker_path_2 }}'
         - '{{ log_path }}'
         - '{{ tmp_dir }}/tmp0'
         - '{{ tmp_dir }}/tmp1'
-        - '{{ tmp_dir }}/tmp2'
 
     - name: Copy myscheduler config to commit worker
       copy:
@@ -43,7 +40,6 @@
       loop:
         - '{{ lotus_worker_path_0 }}'
         - '{{ lotus_worker_path_1 }}'
-        - '{{ lotus_worker_path_2 }}'
 
     - name: Start commit worker 0
       shell: |
@@ -62,12 +58,3 @@
         tmux send-keys -t lotus:worker1 "export TMPDIR={{ tmp_dir }}/tmp1" C-m
         tmux send-keys -t lotus:worker1 "lotus-worker run --listen={{ ansible_all_ipv4_addresses[1] }}:{{ worker_port_1 }} --addpiece=false --precommit1=false --precommit2=false" C-m
         tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker1-`date +%Y-%m-%d-%H-%M`.log"
-
-    - name: Start commit worker 2
-      shell: |
-        tmux new-window -t lotus -n worker2
-        tmux send-keys -t lotus:worker2 "export LOTUS_WORKER_PATH={{ lotus_worker_path_2 }}" C-m
-        tmux send-keys -t lotus:worker2 "export CUDA_VISIBLE_DEVICES=2" C-m
-        tmux send-keys -t lotus:worker2 "export TMPDIR={{ tmp_dir }}/tmp2" C-m
-        tmux send-keys -t lotus:worker2 "lotus-worker run --listen={{ ansible_all_ipv4_addresses[1] }}:{{ worker_port_2 }} --addpiece=false --precommit1=false --precommit2=false" C-m
-        tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker2-`date +%Y-%m-%d-%H-%M`.log"

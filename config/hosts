@@ -1,20 +1,20 @@
 [public-daemon]
-192.168.1.10
+10.0.99.101
 
 [window-post-miner]
-192.168.1.11
+10.0.99.105
 
 [winning-post-miner]
-192.168.1.12
+10.0.99.104
 
 [seal-miner]
-192.168.1.13
+10.0.99.103
 
 [precommit-worker]
-192.168.1.[20:50]
+10.0.1.[11:19]
 
 [commit-worker]
-192.168.1.[60:80]
+10.0.2.[11:16]
 
 [all:vars]
 remote_user=caslx
@@ -47,7 +47,7 @@ num_handles=15
 num_kernels=2
 
 # 扇区分配Miner的IP和端口
-sector_counter_host=192.168.1.11
+sector_counter_host=10.0.99.105
 sector_counter_port=1357
 
 # 替换为Daemon的token和listenAddress
