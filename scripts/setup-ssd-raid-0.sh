@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 mount_point=/home/caslx/disk_md0
 
-for i in {1..8};
+for i in {0..7};
 do
 ssd=/dev/nvme${i}n1
 echo $ssd
@@ -19,7 +19,7 @@ echo "${ssd} was fdisked"
 sleep 1s
 done
 
-mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=8 /dev/nvme[1,2,3,4,5,6,7,8]n1p1 <<EOF
+mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=8 /dev/nvme[0,1,2,3,4,5,6,7]n1p1 <<EOF
   y
 EOF
 echo "Raid0 array created"
