@@ -11,6 +11,9 @@
 - [ ] Ubuntu系统禁用自动更新
 - [ ] 显卡驱动禁用自动更新
 
+## Monitor CheckList
+- [ ] `sudo apt install -y sshpass`
+
 ## 部署CheckList
 - [ ] 设置Miner和Worker机器SSH免密码登录
 - [ ] Ubuntu apt源更新为国内镜像(无国际线路的情况)

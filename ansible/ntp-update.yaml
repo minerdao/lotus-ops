@@ -1,0 +1,14 @@
+- hosts: precommit-worker,commit-worker
+  remote_user: '{{ remote_user }}'
+  gather_facts: no
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - debug: var=ansible_all_ipv4_addresses
+
+    - name: Npt update
+      shell: |
+        'cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime'
+        'apt install -y ntpdate'
+        'ntpdate ntp1.aliyun.com'
