@@ -17,11 +17,11 @@
 192.168.1.[60:80]
 
 [all:vars]
-remote_user=filguard
+remote_user=caslx
 
 # fil proofs 环境变量
-fil_proofs_parameter_cache=/home/filguard/disk_md0/proofs_param/v28
-fil_proofs_parent_cache=/home/filguard/disk_md0/cache/parent
+fil_proofs_parameter_cache=/home/caslx/disk_md0/proofs_param/v28
+fil_proofs_parent_cache=/home/caslx/disk_md0/cache/parent
 fil_proofs_maximize_caching=1
 fil_proofs_use_gpu_column_builder=1
 fil_proofs_use_gpu_tree_builder=1
@@ -33,14 +33,14 @@ rust_log=trace
 rust_backtrace=full
 
 # Repo环境变量
-lotus_path=/home/filguard/disk_md0/lotus
-lotus_miner_path=/home/filguard/disk_md0/lotusminer
-lotus_worker_path_0=/home/filguard/disk_md0/lotusworker0
-lotus_worker_path_1=/home/filguard/disk_md0/lotusworker1
-log_path=/home/filguard/logs
-tmp_dir=/home/filguard/tmp
+lotus_path=/home/caslx/disk_md0/lotus
+lotus_miner_path=/home/caslx/disk_md0/lotusminer
+lotus_worker_path_0=/home/caslx/disk_md0/lotusworker0
+lotus_worker_path_1=/home/caslx/disk_md0/lotusworker1
+log_path=/home/caslx/logs
+tmp_dir=/home/caslx/tmp
 worker_port=3456
-workspace=/home/filguard/workspace
+workspace=/home/caslx/workspace
 
 # C2 环境变量
 num_handles=15

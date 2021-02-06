@@ -50,7 +50,6 @@
   MaxPreCommitGasFee = "0.15 FIL"
   MaxCommitGasFee = "0.3 FIL"
   ```
-- [ ] 复制`LOTUS_MINER`目录到Winning-PoSt-miner和Window-PoSt-miner上
 - [ ] Seal-miner、Winning-PoSt-miner、Window-PoSt-miner分别挂载存储
 - [ ] 启动Seal-miner，配置扇区ID分配的Server
 - [ ] 启动Winning-PoSt-miner、Window-PoSt-miner
