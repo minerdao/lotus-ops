@@ -1,0 +1,8 @@
+- hosts: amd
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Copy lotus bin to all amd
+      shell: 'apt install libhwloc-dev -y'
