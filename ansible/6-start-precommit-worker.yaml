@@ -17,6 +17,14 @@
     - debug: var=ansible_hostname
     - debug: var=lotus_miner_path
 
+    - name: Remove old worker path
+      file:
+        path: '{{ item }}'
+        state: absent
+      loop:
+        - '{{ lotus_worker_path_0 }}'
+        - '{{ lotus_worker_path_1 }}'
+
     - name: Create cache path, lotus worker path, tmp path, log path
       file:
         path: '{{ item }}'
