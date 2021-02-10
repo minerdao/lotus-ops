@@ -19,27 +19,27 @@
     - debug: var=ansible_hostname
     - debug: var=lotus_miner_path
 
-    - name: Remove old worker path
-      file:
-        path: '{{ item }}'
-        state: absent
-      loop:
-        - '{{ lotus_worker_path_0 }}'
-        - '{{ lotus_worker_path_1 }}'
+    # - name: Remove old worker path
+    #   file:
+    #     path: '{{ item }}'
+    #     state: absent
+    #   loop:
+    #     - '{{ lotus_worker_path_0 }}'
+    #     - '{{ lotus_worker_path_1 }}'
 
-    - name: Create lotus worker path, log path, tmp path
-      file:
-        path: "{{ item }}"
-        state: directory
-        owner: '{{ remote_user }}'
-        group: '{{ remote_user }}'
-        mode: u=rwxr,g=xr,o=x
-      loop:
-        - '{{ lotus_worker_path_0 }}'
-        - '{{ lotus_worker_path_1 }}'
-        - '{{ log_path }}'
-        - '{{ tmp_dir }}/tmp0'
-        - '{{ tmp_dir }}/tmp1'
+    # - name: Create lotus worker path, log path, tmp path
+    #   file:
+    #     path: "{{ item }}"
+    #     state: directory
+    #     owner: '{{ remote_user }}'
+    #     group: '{{ remote_user }}'
+    #     mode: u=rwxr,g=xr,o=x
+    #   loop:
+    #     - '{{ lotus_worker_path_0 }}'
+    #     - '{{ lotus_worker_path_1 }}'
+    #     - '{{ log_path }}'
+    #     - '{{ tmp_dir }}/tmp0'
+    #     - '{{ tmp_dir }}/tmp1'
 
     - name: Copy myscheduler config to commit worker
       copy:

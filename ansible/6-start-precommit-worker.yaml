@@ -17,28 +17,28 @@
     - debug: var=ansible_hostname
     - debug: var=lotus_miner_path
 
-    - name: Remove old worker path
-      file:
-        path: '{{ item }}'
-        state: absent
-      loop:
-        - '{{ lotus_worker_path_0 }}'
-        - '{{ lotus_worker_path_1 }}'
+    # - name: Remove old worker path
+    #   file:
+    #     path: '{{ item }}'
+    #     state: absent
+    #   loop:
+    #     - '{{ lotus_worker_path_0 }}'
+    #     - '{{ lotus_worker_path_1 }}'
 
-    - name: Create cache path, lotus worker path, tmp path, log path
-      file:
-        path: '{{ item }}'
-        state: directory
-        owner: '{{ remote_user }}'
-        group: '{{ remote_user }}'
-        mode: u=rwxr,g=xr,o=x
-      loop:
-        - '{{ fil_proofs_parent_cache }}'
-        - '{{ lotus_worker_path_0 }}'
-        - '{{ lotus_worker_path_1 }}'
-        - '{{ tmp_dir }}/tmp0'
-        - '{{ tmp_dir }}/tmp1'
-        - '{{ log_path }}'
+    # - name: Create cache path, lotus worker path, tmp path, log path
+    #   file:
+    #     path: '{{ item }}'
+    #     state: directory
+    #     owner: '{{ remote_user }}'
+    #     group: '{{ remote_user }}'
+    #     mode: u=rwxr,g=xr,o=x
+    #   loop:
+    #     - '{{ fil_proofs_parent_cache }}'
+    #     - '{{ lotus_worker_path_0 }}'
+    #     - '{{ lotus_worker_path_1 }}'
+    #     - '{{ tmp_dir }}/tmp0'
+    #     - '{{ tmp_dir }}/tmp1'
+    #     - '{{ log_path }}'
 
     - name: Copy myscheduler config to precommit worker
       copy:
