@@ -73,14 +73,14 @@ myScheduler 社区版加入以下外部 lotus-worker 功能支持：
 ## 自义定 pledge 任务实用工具
 
 - ①	`lotus-miner sectors mypledge`
-mypledge 一次性填充所有可以工作AP的 lotus-worker 的数量 AddPieceMax 总和，自动化任务可以定时调用 mypledge
+mypledge 一次性填充所有可以工作AP的 lotus-worker 的数量 `AddPieceMax` 总和，自动化任务可以定时调用 mypledge
 
 - ②	`lotus-miner sectors mypledgeonce`
-mypledgeonce 一次性为每个可以工作AP　的 lotus-worker 发送一个 AP，适合初始实施时，第一次使用 AP模板复制功能
+mypledgeonce 一次性为每个可以工作AP　的 lotus-worker 发送一个 AP，适合初始实施时，第一次使用 AP 模板复制功能
 
 ## 调度过程日志分析与问题排查
 由于调度的频繁度，在运行过程中，有大量的日志用于记录任务分配细节，可以通过下面的方式轻松查询相关成功分配和未分配的调度情况列表：
-- ①	`more miner.log |grep -a trySchedMine > trySchedMine.txt`， 这个里面记录了，所有成功调度的 has sucessfully scheduled 相关信息。
+- ①	`more miner.log |grep -a trySchedMine > trySchedMine.txt`， 这个里面记录了，所有成功调度的 `has sucessfully scheduled` 相关信息。
 - ②	`more miner.log |grep -a "not scheduling" > not_scheduling.txt`， 则是拒绝接收任务分配的worker 的日志。
 - ③	对于个别扇区的调度分配过程，则可以用以下方式查询和它相关的全部日志过程，
 `more miner.log |grep -a "s-t0XXXX-YYYY"> s-t0XXXX-YYYY.txt` ，格式是 "s-t0你的MinerID-某个扇区编号“。对于长时间不分配任务工作的 worker，一般是在 miner日志中可以看到 `out of space` 或者 `didn't receive heartbeats for` 的官方标准错误提醒。
