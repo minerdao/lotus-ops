@@ -18,6 +18,9 @@ Filecoin网络的扇区，需要通过一系列的计算过程，最终得到扇
 ![Distributed Miner](../images/sector-state.png)
 
 ### 更新扇区状态
+```sh
+$ lotus-miner sectors update-state 
+```
 
 ### 删除扇区
 ```sh

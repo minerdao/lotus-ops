@@ -5,6 +5,6 @@
   tasks:
     - debug: var=ansible_all_ipv4_addresses
     - debug: var=miner_store_path
-    
+
     - name: Attach lotus store storage
       shell: 'lotus-miner storage attach --store --init {{ miner_store_path }}'
