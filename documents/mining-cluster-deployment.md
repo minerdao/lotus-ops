@@ -89,6 +89,16 @@ export FIL_PROOFS_USE_MULTICORE_SDR=1
 export LOTUS_WORKER_PATH=<YOUR_FAST_DISK_FOLDER5> 
 ```
 
+启动worker
+```sh
+$ lotus-worker run
+```
+
+查看worker信息
+```sh
+$ lotus-worker info
+```
+
 ## 6. 封装Sector
 封装一个sector
 ```sh
