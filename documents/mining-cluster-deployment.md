@@ -138,7 +138,6 @@ $ lotus send <TARGET_ADDRESS> <AMOUNT>
 # 例如: lotus send fxxxxx001 10
 ```
 
-
 从指定钱包地址发送代币
 ```sh
 $ lotus send --from=<SENDER_ADDRESS> <TARGET_ADDRESS> <AMOUNT>
