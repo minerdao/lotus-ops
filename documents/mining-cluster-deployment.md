@@ -1,13 +1,13 @@
-# Filecoin同构集群搭建流程详解
+# Filecoin同构集群搭建
 
 ## 1. 准备钱包
-初始化并将Deamon同步到最新高度后，运行以下命令创建钱包。
+初始化并将Deamon同步到最新高度后，运行以下命令创建钱包:
 ```sh
 $ lotus wallet new bls
 ```
 
 ## 2. 配置Miner环境变量
-在`vi ~/.profile`文件中，添加以下内容：
+在`vi ~/.profile`文件中，添加以下内容:
 ```sh
 export BELLMAN_CPU_UTILIZATION=0.875
 export FIL_PROOFS_MAXIMIZE_CACHING=1
@@ -23,7 +23,7 @@ export TMPDIR=<FAST_DISK_FOLDER3>
 # 存储miner相关文件，建议放在空间大的磁盘分区
 export LOTUS_MINER_PATH=<FAST_DISK_FOLDER4>
 ```
-其中：
+其中:
 - `FAST_DISK_FOLDER1`为证明参数文件目录，32GB的扇区大约需要110GB的空间；
 - `FAST_DISK_FOLDER2`为PreCommit1缓存文件路径，大小为56GB；
 - `FAST_DISK_FOLDER3`为临时文件目录，主要用于存放GPU锁定文件；
@@ -74,12 +74,12 @@ export MINER_API_INFO=<TOKEN>:<API>
 
 `<TOKEN>`为`~/.lotusminer/token`文件中的内容, `<API>`为`~/.lotusminer/api`文件中的内容。
 
-或输入以下命令直接获取：
+或输入以下命令直接获取:
 ```sh
 $ lotus-miner auth api-info --perm admin
 ```
 
-提高PreCommit1的速度：
+提高PreCommit1的速度:
 ```sh
 export FIL_PROOFS_USE_MULTICORE_SDR=1
 ```
