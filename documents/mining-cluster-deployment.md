@@ -79,7 +79,7 @@ export MINER_API_INFO=<TOKEN>:<API>
 $ lotus-miner auth api-info --perm admin
 ```
 
-提高PreCommit1的速度:
+PreCommit1多CPU核心绑定:
 ```sh
 export FIL_PROOFS_USE_MULTICORE_SDR=1
 ```

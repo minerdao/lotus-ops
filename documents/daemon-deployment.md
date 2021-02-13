@@ -73,7 +73,7 @@ lotus daemon启动后，默认会在`~/.lotus`目录下初始化Lotus节点目�
 ### 通过快照启动Lotus节点
 通过以下命令，从现有节点上导出Lotus快照。
 ```sh
-$ lotus chain export --skip-old-msgs --recent-stateroots=2000 chain.car
+$ lotus chain export --skip-old-msgs --recent-stateroots=2000 snapshot.car
 ```
 
 通过以下命令，导入到现有节点，需要注意：
