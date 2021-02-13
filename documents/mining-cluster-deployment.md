@@ -7,7 +7,7 @@ $ lotus wallet new bls
 ```
 
 ## 2. 配置Miner环境变量
-在`vi ~/.profile`文件中，添加以下内容:
+在`~/.profile`文件中，添加以下内容:
 ```sh
 export BELLMAN_CPU_UTILIZATION=0.875
 export FIL_PROOFS_MAXIMIZE_CACHING=1
