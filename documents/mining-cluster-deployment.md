@@ -74,12 +74,12 @@ export MINER_API_INFO=<TOKEN>:<API>
 
 `<TOKEN>`为`~/.lotusminer/token`文件中的内容, `<API>`为`~/.lotusminer/api`文件中的内容。
 
-或输入以下命令直接获取:
+或输入以下命令直接获取：
 ```sh
 $ lotus-miner auth api-info --perm admin
 ```
 
-PreCommit1多CPU核心绑定:
+PreCommit1多CPU核心绑定：
 ```sh
 export FIL_PROOFS_USE_MULTICORE_SDR=1
 ```
@@ -89,18 +89,18 @@ export FIL_PROOFS_USE_MULTICORE_SDR=1
 export LOTUS_WORKER_PATH=<YOUR_FAST_DISK_FOLDER5> 
 ```
 
-启动worker
+启动worker:
 ```sh
 $ lotus-worker run
 ```
 
-查看worker信息
+查看worker信息:
 ```sh
 $ lotus-worker info
 ```
 
 ## 6. 封装Sector
-封装一个sector
+封装一个sector:
 ```sh
 $ lotus-miner sectors pledge
 ```
