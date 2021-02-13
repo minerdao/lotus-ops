@@ -14,7 +14,7 @@ Filecoin网络的扇区，需要通过一系列的计算过程，最终得到扇
 订单扇区是矿工通过Filecoin的订单撮合市场，存储了客户的真实数据以后生成的扇区。
 
 ## 扇区状态管理
-扇区主要状态包括：PreCommit1、PreCommit2、Committing、FinalizeSector。
+扇区主要状态包括：PreCommit1、PreCommit2、Committing、FinalizeSector，状态变化如下图所示：
 ![Distributed Miner](../images/sector-state.png)
 
 ### 更新扇区状态
