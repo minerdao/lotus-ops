@@ -9,7 +9,6 @@
 - [Ansible部署工具使用](./documents/ansible-deploy-tool-usage.md)
 - [Filecoin节点搭建及启动](./documents/daemon-deployment.md)
 - [Filecoin同构集群搭建流程](./documents/mining-cluster-deployment.md)
-- Filecoin异构集群搭建流程 - mje
 - Filecoin存储管理，存储i/o性能分析，网络分析 - mje
 - [新矿工节点上线CheckList](./documents/new-miner-checklist.md)
 - Filecoin监控报警系统搭建 - max

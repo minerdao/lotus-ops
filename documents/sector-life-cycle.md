@@ -19,10 +19,15 @@ Filecoin网络的扇区，需要通过一系列的计算过程，最终得到扇
 
 ### 更新扇区状态
 ```sh
-$ lotus-miner sectors update-state 
+$ lotus-miner sectors update-state --really-do-it <sectorId> <newState>
+```
+针对`CommitFailed`状态的扇区，可通过以下命令，将扇区状态更改为`Committing`状态。
+```sh
+$ lotus-miner sectors update-state --really-do-it <sectorId> Committing
 ```
 
 ### 删除扇区
 ```sh
 $ lotus-miner sectors remove --really-do-it <sectorId>
 ```
+针对`PreCommitFailed`和`SealPreCommit1Failed`状态的扇区，因为还没有质押，可通过上面的命令直接删除。

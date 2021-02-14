@@ -11,9 +11,9 @@
   - 检查显卡驱动，`nvidia-smi`看一下驱动是否正常
   - 查看Miner进程（`lotus-miner sealing job`看进程在不在）
 - [ ] 异常状态扇区处理 `lotus-miner info`
-  - PreCommitFailed: `lotus-miner sectors update-state --really-do-it <SectorId> Removing`
-  - CommitFailed: `lotus-miner sectors update-state --really-do-it <SectorId> Committing`
-  - SealPreCommit1Failed: `lotus-miner sectors update-state --really-do-it <SectorId> Removing`
+  - PreCommitFailed: `lotus-miner sectors remove --really-do-it <sectorId>`
+  - SealPreCommit1Failed: `lotus-miner sectors remove --really-do-it <sectorId>`
+  - CommitFailed: `lotus-miner sectors update-state --really-do-it <sectorId> Committing`
 - [ ] 调度程序工作问题排查（繁忙时命令会有所堵塞）
   `lotus-miner sealing jobs 与 lotus-miner sealing workers | grep hostname`
 - [ ] 掉线的 lotus-worker 检查

@@ -120,7 +120,7 @@ $ lotus-miner sealing workers
 $ lotus-miner sectors list
 ```
 
-## 7. 集群常用操作
+## 7. 钱包常用操作
 列出钱包地址:
 ```sh
 $ lotus wallet list
