@@ -1,13 +1,17 @@
 # Filecoin同构集群搭建
 
-## 1. 准备钱包
-初始化并将Deamon同步到最新高度后，运行以下命令创建钱包:
+## 1. 同步Daemon
+集群搭建首先需要同步Daemon到最新高度，按照[Filecoin节点搭建及启动](./daemon-deployment.md)搭建并同步好Daemon。
+
+## 2. 准备钱包
+初始化并将Daemon同步到最新高度后，运行以下命令创建钱包:
 ```sh
 $ lotus wallet new bls
 ```
+Lotus钱包相关
 
-## 2. 配置Miner环境变量
-在`~/.profile`文件中，添加以下内容:
+## 3. 配置Miner环境变量
+在`~/.profile`文件中，添加以下内容，并`source ~/.profile`:
 ```sh
 export BELLMAN_CPU_UTILIZATION=0.875
 export FIL_PROOFS_MAXIMIZE_CACHING=1
@@ -29,17 +33,19 @@ export LOTUS_MINER_PATH=<FAST_DISK_FOLDER4>
 - `FAST_DISK_FOLDER3`为临时文件目录，主要用于存放GPU锁定文件；
 - `FAST_DISK_FOLDER4`为Miner相关文件的存储目录，至少需要2TB的存储空间；
 
-## 3. 初始化Miner
+## 4. 初始化Miner
 配置好上面的环境变量后，通过以下命令初始化Miner。
 ```sh
 $ lotus-miner init --owner=<WALLET_ADDRESS>
 ```
 此处的`WALLET_ADDRESS`为上面第一步中创建的钱包地址。
 
-## 4. 启动Miner
+## 5. 启动Miner
+#### 5.1 配置`LOTUS_MINER_PATH`路径
 Miner配置文件默认在`~/.lotusminer/config.toml`文件中, 若配置了`$LOTUS_MINER_PATH`环境变量，则在此路径下。
 
-在配置文件`config.toml`中，打开以下配置，把下面的`MINER_IP_ADDRESS`改成Miner本机地址，并指定一个端口，`lotus-miner`默认端口是`2345`。
+#### 5.2 更新Miner配置文件
+在配置文件`config.toml`中，打开以下配置，把下面的`MINER_IP_ADDRESS`改成Miner本机的内网IP地址，并指定一个端口，`lotus-miner`默认端口是`2345`。
 ```toml
 [API]
 ListenAddress = "/ip4/<MINER_IP_ADDRESS>/tcp/<PORT>/http"
@@ -55,17 +61,28 @@ AllowCommit = false
 AllowUnseal = true
 ```
 
-启动Miner：
+#### 5.3 更改存储路径
+修改`$LOTUS_MINER_PATH/sectorstore.json`文件，将`CanStore`的值改为`false`。
+
+#### 5.4 启动Miner
 ```sh
 $ lotus-miner run
 ```
-查看Miner状态：
+
+#### 5.5 查看Miner状态
 ```sh
 $ lotus-miner info
 ```
 
-## 5. 启动Worker
-设置环境变量，使Workers可以连接到Miner
+#### 5.6 挂载存储路径
+`<STORAGE_PATH>`为存储封装结果的路径。
+```sh
+lotus-miner storage attach --store --init <STORAGE_PATH>
+```
+
+## 6. 启动Worker
+#### 6.1 配置`MINER_API_INFO`
+设置环境变量，使Workers可以连接到Miner：
 
 ```sh
 export MINER_API_INFO=<TOKEN>:<API>
@@ -78,90 +95,52 @@ export MINER_API_INFO=<TOKEN>:<API>
 ```sh
 $ lotus-miner auth api-info --perm admin
 ```
-
-PreCommit1多CPU核心绑定：
-```sh
-export FIL_PROOFS_USE_MULTICORE_SDR=1
-```
-
-设置worker路径的环境变量，建议放在空间大的磁盘分区:
+#### 6.2 配置`LOTUS_WORKER_PATH`
+设置Worker路径的环境变量，建议放在空间大的磁盘分区:
 ```sh
 export LOTUS_WORKER_PATH=<YOUR_FAST_DISK_FOLDER5> 
 ```
 
-启动worker:
+#### 6.3 配置Worker其他环境变量
+```sh
+export FIL_PROOFS_USE_MULTICORE_SDR=1
+export FIL_PROOFS_MAXIMIZE_CACHING=1
+export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1
+export FIL_PROOFS_USE_GPU_TREE_BUILDER=1
+```
+其中：
+- `FIL_PROOFS_USE_MULTICORE_SDR`：PreCommit1多CPU核心绑定；
+- `FIL_PROOFS_MAXIMIZE_CACHING`：PreCommit1开启内存最大化；
+- `FIL_PROOFS_USE_GPU_COLUMN_BUILDER`：使用GPU计算COLUMN hash；
+- `FIL_PROOFS_USE_GPU_TREE_BUILDER`：使用GPU计算TREE hash；
+
+#### 6.4 启动worker
 ```sh
 $ lotus-worker run
 ```
 
-查看worker信息:
+#### 6.5 查看worker信息
 ```sh
 $ lotus-worker info
 ```
 
-## 6. 封装Sector
-封装一个sector:
+## 7. 封装Sector
+#### 7.1 封装一个sector
 ```sh
 $ lotus-miner sectors pledge
 ```
 
-查看启动的封装任务:
+#### 7.2 查看启动的封装任务
 ```sh
 $ lotus-miner sealing jobs
 ```
 
-检查启动的workers:
+#### 7.3 检查启动的workers
 ```sh
 $ lotus-miner sealing workers
 ```
 
-查看sector信息:
+#### 7.4 查看sector信息
 ```sh
 $ lotus-miner sectors list
-```
-
-## 7. 钱包常用操作
-列出钱包地址:
-```sh
-$ lotus wallet list
-```
-
-查看余额:
-```sh
-$ lotus wallet balance <WALLET_ADDRESS>
-```
-
-默认钱包地址:
-```sh
-$ lotus wallet default
-```
-
-设置默认钱包地址:
-```sh
-$ lotus wallet set-default <WALLET_ADDRESS>
-# 例如: lotus wallet set-default fxxxx001
-```
-
-从默认钱包地址发送代币:
-```sh
-$ lotus send <TARGET_ADDRESS> <AMOUNT>
-# 例如: lotus send fxxxxx001 10
-```
-
-从指定钱包地址发送代币:
-```sh
-$ lotus send --from=<SENDER_ADDRESS> <TARGET_ADDRESS> <AMOUNT>
-# 例如: lotus send --from=fxxxxxx002 fxxxxxx001 3
-```
-
-导出钱包地址:
-```sh
-$ lotus wallet export <WALLET_ADDRESS> <WALLET_ADDRESS>.key
-# 例如: lotus wallet export fxxxxx001 > fxxxxx001.key
-```
-
-导入钱包地址:
-```sh
-$ lotus wallet import <WALLET_ADDRESS>.key
-# 例如: lotus wallet import fxxxxx001.key
 ```

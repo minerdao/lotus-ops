@@ -85,6 +85,16 @@ $ lotus chain export --skip-old-msgs --recent-stateroots=2000 snapshot.car
 $ lotus daemon --import-snapshot snapshot.car
 ```
 
+## 更新配置文件
+Daemon配置文件默认在`~/.lotus/config.toml`文件中, 若配置了`$LOTUS_PATH`环境变量，则在此路径下。
+把下面的`DAEMON_IP_ADDRESS`改成Deamon本机的内网IP地址，并指定一个端口，默认端口是`1234`。
+```toml
+[API]
+ListenAddress = "/ip4/<DAEMON_IP_ADDRESS>/tcp/1234/http"
+#  RemoteListenAddress = ""
+#  Timeout = "30s"
+```
+
 ## 节点常用操作
 ```sh
 # 等待节点同步
