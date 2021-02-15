@@ -77,7 +77,11 @@ $ lotus-miner info
 #### 5.6 挂载存储路径
 `<STORAGE_PATH>`为存储封装结果的路径。
 ```sh
+# 新增存储路径
 lotus-miner storage attach --store --init <STORAGE_PATH>
+
+# 查看Miner存储路径
+lotus-miner storage list
 ```
 
 ## 6. 启动Worker
