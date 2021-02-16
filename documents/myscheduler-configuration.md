@@ -1,6 +1,6 @@
 # myScheduler调度程序使用
 
-## myScheduler 调度程序简介
+## 1. myScheduler 调度程序简介
   目前官方窗口调度Scheduler工作效果不理想，有的worker工作繁忙，有的 worker 又非常轻闲。个人认为filecoin运维人员最为熟悉自己的设备，所以基于运维人员的工作任务指令，重新编写了一套调度程序，摈弃官方窗口调度和纯基于设备资源排序的规则，重新自定义排序规则，总体调度目标是让相关任务均匀分配到各个可以执行的 worker 上面，调度程序支持以下业务功能：
 - ①	支持90% 以上的设备利用率；
 - ②	由你的运维人员，设置每个 Worker 最大的 AP/P1/P2/C2 工作任务数量；
@@ -11,7 +11,7 @@
 - ⑦	以上 Worker 参数，均可以在 Worker 运行过程中动态调整、实时生效；
 - ⑧	`lotus-miner sectors mypledge` 一次性填充所有 lotus-worker 可以工作AP的数量总和，可用自动化任务定时调用 mypledge
 
-## lotus-worker 动态参数设置
+## 2. lotus-worker 动态参数设置
 如果首次启动 lotus-worker，调度程序会自动将 run 相关的参数写进 `$LOTUS_WORKER_PATH` 路径下面的参数文件 `myscheduler.json`， miner 本地worker，则是在 `$LOTUS_MINER_PATH` 目录创建此配置文件，并且设置为默认初始状态，相关参数均可以在不重启 lotus-worker 的状态下，动态修改并实时生效。以下是默认参数：
 ```json
 {
@@ -48,10 +48,10 @@
 |     IgnoreOutOfSpace      |     false     |     当miner日志中看到某个 worker 不断出现`out of space`时，它不会接收任何工作任务。如果此时 worker 的物理磁盘空间其实仍然存在部分剩余，则可以设置此参数为 true，系统临时跳过 out of space检测，此 worker 自动进入紧缩空间工作模式，待可用空间正常，再将此参数设置回   false  |
 
 
-## lotus-worker run 初始参数
+## 3. lotus-worker run 初始参数
 对于 `lotus-worker run` 初始参数， myscheduler 可以不额外添加设置任何自定义项目，直接仅使用官方的标准参数，这样方便在官方标准程序之间来回切换。
 
-## 调度外部 lotus-worker 参数设置
+## 4. 调度外部 lotus-worker 参数设置
 myScheduler 社区版加入以下外部 lotus-worker 功能支持：
 - ①	支持调度各类开源软件编译的 lotus-worker 优化版本；
 - ②	支持调度外部 C2 的 lotus-worker 版本；
@@ -70,7 +70,7 @@ myScheduler 社区版加入以下外部 lotus-worker 功能支持：
   "AllowP2C2Parallel": true
 }
 ```
-## 自义定 pledge 任务实用工具
+## 5. 自义定 pledge 任务实用工具
 
 - ①	`lotus-miner sectors mypledge`
 mypledge 一次性填充所有可以工作AP的 lotus-worker 的数量 `AddPieceMax` 总和，自动化任务可以定时调用 mypledge
@@ -78,7 +78,7 @@ mypledge 一次性填充所有可以工作AP的 lotus-worker 的数量 `AddPiece
 - ②	`lotus-miner sectors mypledgeonce`
 mypledgeonce 一次性为每个可以工作AP　的 lotus-worker 发送一个 AP，适合初始实施时，第一次使用 AP 模板复制功能
 
-## 调度过程日志分析与问题排查
+## 6. 调度过程日志分析与问题排查
 由于调度的频繁度，在运行过程中，有大量的日志用于记录任务分配细节，可以通过下面的方式轻松查询相关成功分配和未分配的调度情况列表：
 - ①	`more miner.log |grep -a trySchedMine > trySchedMine.txt`， 这个里面记录了，所有成功调度的 `has sucessfully scheduled` 相关信息。
 - ②	`more miner.log |grep -a "not scheduling" > not_scheduling.txt`， 则是拒绝接收任务分配的worker 的日志。

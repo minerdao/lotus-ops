@@ -1,6 +1,6 @@
 # 新矿工节点上线CheckList
 
-## 机器CheckList
+## 1. 机器CheckList
 - [ ] 所有Miner和计算Worker用户名必须一致
 - [ ] hostname按照以下格式命名:
   - Miner-192-168-1-3
@@ -11,7 +11,7 @@
 - [ ] Ubuntu系统禁用自动更新
 - [ ] 显卡驱动禁用自动更新
 
-## 部署CheckList
+## 2. 部署CheckList
 - [ ] 设置Miner和Worker机器SSH免密码登录
 - [ ] Ubuntu apt源更新为国内镜像(无国际线路的情况)
 - [ ] 安装基础依赖库
@@ -32,7 +32,7 @@
   - 更新用户名和组
 - [ ] 给Deamon、Miner和C2-worker上拷贝证明参数
 
-## Deamon CheckList
+## 3. Deamon CheckList
 **Deamon 启动说明**
 用一台独立的机器启动一个带公网IP的Deamon备用节点，然后在Winning-PoSt-miner和Window-PoSt-miner上再分别启动一个节点，PoSt-miner通过内网连接各自机器上的Deamon。
 - [ ] 检查独立Deamon机器的公网和端口是否能通(远程telnet)
@@ -40,7 +40,7 @@
 - [ ] 配置独立Deamon的`ListenAddress`为公网IP和端口，同步到最新高度
 - [ ] 启动Winning-PoSt-miner和Window-PoSt-miner上的Deamon并同步到最新高度
 
-## Miner CheckList
+## 4. Miner CheckList
 - [ ] 配置Miner的环境变量，初始化Miner(默认为Seal-miner)
   ```sh
   lotus-miner init --owner f3xxxxxxxx
@@ -62,7 +62,7 @@
 - [ ] 为Window-PoSt、PreCommitSector和ProveCommitSector设置独立的钱包
 - [ ] inotify+rsync实时备份Seal-miner、Winning-PoSt-miner、Window-PoSt-miner
 
-## Worker CheckList
+## 5. Worker CheckList
 - [ ] 配置Worker的环境变量，更改调度配置文件
 - [ ] 批量启动P1 + P2 Worker
 - [ ] 批量启动C2 Worker

@@ -1,6 +1,6 @@
 # 常用环境变量说明
 
-## 通用环境变量
+## 1. 通用环境变量
 - `FIL_PROOFS_PARAMETER_CACHE`：proof 证明参数路径，默认在`/var/tmp/filecoin-proof-parameters`下。
   ```sh
   export FIL_PROOFS_PARAMETER_CACHE=/home/user/nvme_disk/filecoin-proof-parameters
@@ -26,13 +26,13 @@
   export GOPROXY=https://goproxy.cn
   ```
 
-## Lotus Deamon环境变量
+## 2. Lotus Deamon环境变量
 - `LOTUS_PATH`：lotus daemon 路径，例如：
   ```sh
   export LOTUS_PATH=/home/user/nvme_disk/lotus
   ```
 
-## Lotus Miner环境变量
+## 3. Lotus Miner环境变量
 - `LOTUS_MINER_PATH`：lotus miner 路径，例如：
   ```sh
   export LOTUS_MINER_PATH=/home/user/nvme_disk/lotusminer
@@ -43,7 +43,7 @@
   ```
 - `BELLMAN_CUSTOM_GPU`：指定GPU型号；
 
-## Lotus Worker环境变量
+## 4. Lotus Worker环境变量
 - `LOTUS_WORKER_PATH`：Lotus worker 路径；
   ```sh
   export LOTUS_WORKER_PATH=/home/user/nvme_disk/lotusworker

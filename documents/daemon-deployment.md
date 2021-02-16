@@ -1,6 +1,6 @@
 # Filecoin节点搭建及启动
 
-## 编译安装
+## 1. 编译安装
 ### 安装基础依赖库
 ```sh
 $ sudo apt update
@@ -62,7 +62,7 @@ env CGO_CFLAGS_ALLOW="-D__BLST_PORTABLE__" RUSTFLAGS="-C target-cpu=native -g" F
 ```
 可直接运行本项目下的`./scripts/build-amd.sh`和`./scripts/build-intel.sh`来针对AMD和Intel的CPU分别编译。
 
-## 启动节点
+## 2. 启动节点
 ### 直接启动Lotus节点
 ```sh
 $ lotus daemon
@@ -85,7 +85,7 @@ $ lotus chain export --skip-old-msgs --recent-stateroots=2000 snapshot.car
 $ lotus daemon --import-snapshot snapshot.car
 ```
 
-## 更新配置文件
+## 3. 更新配置文件
 Daemon配置文件默认在`~/.lotus/config.toml`文件中, 若配置了`$LOTUS_PATH`环境变量，则在此路径下。
 把下面的`DAEMON_IP_ADDRESS`改成Deamon本机的内网IP地址，并指定一个端口，默认端口是`1234`。
 ```toml
@@ -95,7 +95,7 @@ ListenAddress = "/ip4/<DAEMON_IP_ADDRESS>/tcp/1234/http"
 #  Timeout = "30s"
 ```
 
-## 节点常用操作
+## 4. 节点常用操作
 ```sh
 # 等待节点同步
 $ lotus sync wait
