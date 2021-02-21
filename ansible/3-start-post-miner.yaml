@@ -1,4 +1,4 @@
-- hosts: window-post-miner
+- hosts: post-miner
   remote_user: '{{ remote_user }}'
   environment:
     RUST_LOG: '{{ rust_log }}'
@@ -10,10 +10,12 @@
     FULLNODE_API_INFO: '{{ fullnode_api_info }}'
     LOTUS_PATH: '{{ lotus_path }}'
     LOTUS_MINER_PATH: '{{ lotus_miner_path }}'
+  vars:
+    - miner_log_path: '/home/ubuntu/logs'
   tasks:
     - name: Start post miner
       shell: |
-        tmux new-window -t lotus:1 -n window-post-miner
-        tmux send-keys -t lotus:window-post-miner "ulimit -n 1048576" C-m
-        tmux send-keys -t lotus:window-post-miner "lotus-miner run --window-post=true --winning-post=false --p2p=false --sctype=alloce --sclisten={{ sector_counter_host }}:{{ sector_counter_port }}" C-m
-        tmux pipe-pane -o "cat >>{{ log_path }}/window-post-miner-`date +%Y-%m-%d-%H-%M`.log"
+        tmux new -s lotus -d -n post-miner
+        tmux send-keys -t lotus:post-miner "ulimit -n 1048576" C-m
+        tmux send-keys -t lotus:post-miner "lotus-miner run --window-post=true --winning-post=true --p2p=false --sctype=alloce --sclisten={{ sector_counter_host }}:{{ sector_counter_port }}" C-m
+        tmux pipe-pane -o "cat >>{{ miner_log_path }}/post-miner-`date +%Y-%m-%d-%H-%M`.log"

@@ -14,8 +14,8 @@
       copy:
         src: '{{ workspace }}/lotus-ops/scripts/setup-ssd-raid-0.sh'
         dest: '{{ workspace }}'
-        owner: root
-        group: root
+        owner: '{{ remote_user }}'
+        group: '{{ remote_user }}'
         mode: +x
 
     - name: Setup raid0

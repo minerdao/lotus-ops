@@ -96,8 +96,8 @@ backup_user=filguard
 backup_path=/home/filguard/disk_md0/backup
 ```
 
-## 2. 部署准备
-#### 2.1 设置Ansible别名
+## 3. 部署准备
+#### 3.1 设置Ansible别名
 在管理机器上，将ansible和ansible-playbook分别设置`an`和`ap`的别名，方便快捷操作：
 
 ```sh
@@ -105,7 +105,7 @@ $ echo "alias an=/usr/bin/ansible" >> $HOME/.profile
 $ echo "alias ap=/usr/bin/ansible-playbook" >> $HOME/.profile
 $ source $HOME/.profile
 ```
-#### 2.2 Clone工作目录
+#### 3.2 Clone工作目录
 将本项目clone至`$HOME/workspace`目录下。
 ```sh
 $ mkdir -p $HOME/workspace
@@ -113,7 +113,7 @@ $ cd $HOME/workspace
 $ git clone https://github.com/filguard/lotus-ops.git
 ```
 
-## 3. Ansible部署脚本使用说明
+## 4. Ansible部署脚本使用说明
 
 **注意：以下所有操作都需切换到`$HOME/workspace/lotus-ops/ansible`目录下：**
 ```sh

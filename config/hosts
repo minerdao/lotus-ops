@@ -25,6 +25,7 @@ fil_proofs_parent_cache=/home/filguard/disk_md0/cache/parent
 fil_proofs_maximize_caching=1
 fil_proofs_use_gpu_column_builder=1
 fil_proofs_use_gpu_tree_builder=1
+fil_proofs_use_multicore_sdr=1
 fil_proofs_multicore_sdr_producers=1
 
 # Rust环境变量
@@ -36,8 +37,8 @@ lotus_path=/home/filguard/disk_md0/lotus
 lotus_miner_path=/home/filguard/disk_md0/lotusminer
 lotus_worker_path_0=/home/filguard/disk_md0/lotusworker0
 lotus_worker_path_1=/home/filguard/disk_md0/lotusworker1
-log_path=/home/filguard/disk_md0/logs
-tmp_dir=/home/filguard/disk_md0/tmp
+log_path=/home/filguard/logs
+tmp_dir=/home/filguard/tmp
 worker_port=3456
 workspace=/home/filguard/workspace
 
