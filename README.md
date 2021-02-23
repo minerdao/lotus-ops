@@ -4,7 +4,7 @@
 - [Filecoin最新挖矿硬件推荐配置](./documents/hardware-configuration.md)
 - [扇区生命周期详解，扇区状态管理](./documents/sector-life-cycle.md)
 - 扇区状态重置、失败和错误扇区处理 - max
-- 节点管理，节点常用操作，节点同步常见问题 - mje
+- [节点管理，节点常用操作，节点同步常见问题](./documents/daemon-operation.md)
 - [钱包管理及使用场景](./documents/wallet-management.md)
 - [Ansible部署工具使用](./documents/ansible-deploy-tool-usage.md)
 - [Filecoin节点搭建及启动](./documents/daemon-deployment.md)
