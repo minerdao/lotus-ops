@@ -117,7 +117,6 @@ lotus-miner actor control list
 > control-0  t02222  f3defg...  post   100 FIL
 ```
 
-
 ## 3. 为PreCommit和ProveCommit配置Control钱包
 **(1) 创建Control钱包**
 
