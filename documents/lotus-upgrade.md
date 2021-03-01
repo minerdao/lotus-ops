@@ -17,5 +17,6 @@
 2. 替换daemon的二进制文件，确保lotus -v的结果为: lotus version 1.5.0+mainnet+git.bd15c4293.dirty，并重启daemon，等待daemon同步完毕。
 3. 替换miner和worker上的二进制文件，重启miner和worker，确保:
     - `lotus-miner -v`的结果为：`lotus-miner version 1.5.0+mainnet+git.bd15c4293.dirty`
-    - `lotus-worker -v`的结果为：`lotus-worker version 1.5.0+mainnet+git.bd15c4293.dirty`；
-  等待未完成的任务恢复并全部完成后，重新启动pledge sector脚本发任务。
+    - `lotus-worker -v`的结果为：`lotus-worker version 1.5.0+mainnet+git.bd15c4293.dirty`
+  
+4. 等待未完成的任务恢复并全部完成后，重新启动pledge sector脚本发任务。
