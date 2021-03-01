@@ -1,12 +1,5 @@
 # Lotus升级指南
 
-## 安装包下载
-请先根据自己的CPU和操作系统版本，下载Filguard团队提供的优化后的二进制升级包。
-- [lotus-v1.5.0-ubuntu18.04-amd.tar](https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar)
-- [lotus-v1.5.0-ubuntu20.04-amd.tar](https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-2004/lotus-v1.5.0-ubuntu20.04-amd-7302.tar)
-- [lotus-v1.5.0-ubuntu18.04-intel.tar](https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/intel-2678-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-intel-2678.tar)
-- [lotus-v1.5.0-ubuntu20.04-intel.tar](https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/intel-2678-ubuntu-2004/lotus-v1.5.0-ubuntu20.04-intel-2678.tar)
-
 ## 更新说明
 本次1.5.0 Filguard优化版本主要更新以下功能：
 - 优化PreCommit1 CPU核心绑定，可指定CPU绑定核心数和核心组的范围，大大提升CPU核心利用率，使用SDR可以跑更多的P1并发；
