@@ -103,3 +103,4 @@ $ lotus sync wait
 # 查看节点同步状态
 $ lotus sync status
 ```
+更多节点操作查看[节点操作](./documents/daemon-operation.md)章节。
