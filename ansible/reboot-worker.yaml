@@ -1,4 +1,4 @@
-- hosts: precommit-worker,commit-worker
+- hosts: precommit-worker
   remote_user: '{{ remote_user }}'
   gather_facts: no
   become: yes
@@ -8,4 +8,4 @@
     - debug: var=ansible_all_ipv4_addresses
 
     - name: Reboot
-      shell: 'reboot'
+      shell: 'poweroff'

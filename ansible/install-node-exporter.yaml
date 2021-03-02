@@ -1,4 +1,4 @@
-- hosts: worker64
+- hosts: node-miner
   remote_user: '{{ remote_user }}'
   gather_facts: no
   become: yes

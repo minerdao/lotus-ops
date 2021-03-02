@@ -1,4 +1,4 @@
-- hosts: public-daemon,window-post-miner,winning-post-miner
+- hosts: public-daemon
   remote_user: '{{ remote_user }}'
   environment:
     RUST_LOG: '{{ rust_log }}'
@@ -10,4 +10,3 @@
       shell: |
         tmux new -s lotus -d -n daemon
         tmux send-keys -t lotus:daemon "lotus daemon" C-m
-        tmux pipe-pane -o "cat >>{{ log_path }}/daemon-`date +%Y-%m-%d-%H-%M`.log"

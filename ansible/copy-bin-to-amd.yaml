@@ -1,12 +1,11 @@
-- hosts: amd
+- hosts: precommit-worker
   remote_user: '{{ remote_user }}'
   become: yes
   become_user: root
   become_method: sudo
   vars:
     - lotus_bin_path: 'lotus-bin'
-    - version: '1.4.0'
-    - platform: 'amd'
+    - version: '1.5.0'
   tasks:
     - name: Copy lotus bin to all amd
       copy:
@@ -14,8 +13,8 @@
         dest: '/usr/local/bin/'
         mode: +x
       loop:
-        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus'
-        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus-miner'
-        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus-worker'
-        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus-shed'
-        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/{{ platform }}/lotus-bench'
+        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/lotus'
+        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/lotus-miner'
+        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/lotus-worker'
+        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/lotus-shed'
+        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/lotus-bench'
