@@ -31,9 +31,25 @@ lotus fetch-params 32GiB # 下载 32GiB 扇区对应的 Proof 参数
 # 先导出本机Daemon的快照
 lotus chain export --skip-old-msgs --recent-stateroots=900 chain.car
 # 首先备份.lotus/datastore/chain文件夹（若导入出现故障可以使用备份文件夹重新恢复即可），清空chain文件夹后进行导入
-lotus daemon --import-snapshot chain.car 
+lotus daemon --import-snapshot chain.car
 ```
-## 4. 常见问题
+
+## 4. 给Deamon配置公网IP
+给Daemon节点配置公网IP以后，可以让节点更稳定、更健康，评分更高，不错过任何一个爆块机会。
+
+### 4.1 配置公网IP
+配置公网IP分如下两种情况：
+**(1) Daemon有公网IP**
+假设Daemon的公网IP为`123.123.73.123`，内网IP为`10.0.1.100`，Daemon监听的端口为`1234`。
+
+**(2) Daemon无公网IP**
+如果Daemon没有公网IP，就需要在路由器、或有公网IP的服务器上，增加公网IP和端口向Daemon内网IP和端口的转发规则，假设公网机器的IP为`123.123.73.123`，Daemon的内网IP为`10.0.1.100`，`123.123.73.123:12340`端口映射到内网的`10.0.1.100:1234`端口。
+
+### 4.2 更改Daemon配置
+修改`$LOTUS_PATH/config.toml`文件中的以下内容：
+
+
+## 5. 常见问题
 - 消息堵塞
 使用命令`lotus mpool pending --local | wc -l`查看本地堵塞消息数量，若不为0，则需要手动进行消息清理，具体清理方法参考「消息池操作」一章。
 - 高度无法跟上主网
