@@ -46,8 +46,31 @@ lotus daemon --import-snapshot chain.car
 如果Daemon没有公网IP，就需要在路由器、或有公网IP的服务器上，增加公网IP和端口向Daemon内网IP和端口的转发规则，假设公网机器的IP为`123.123.73.123`，Daemon的内网IP为`10.0.1.100`，`123.123.73.123:12340`端口映射到内网的`10.0.1.100:1234`端口。
 
 ### 4.2 更改Daemon配置
-修改`$LOTUS_PATH/config.toml`文件中的以下内容：
+给Daemon节点配置公网IP以后，可以让节点更稳定、更健康，评分更高，不错过任何一个爆块机会。
 
+### 4.1 配置公网IP
+配置公网IP分如下两种情况：
+**(1) Daemon有公网IP**
+假设Daemon的公网IP为`123.123.73.123`，内网IP为`10.0.1.100`，Daemon监听的端口为`1234`。
+
+**(2) Daemon无公网IP**
+如果Daemon没有公网IP，就需要在路由器、或有公网IP的服务器上，增加公网IP和端口向Daemon内网IP和端口的转发规则，假设公网机器的IP为`123.123.73.123`，Daemon的内网IP为`10.0.1.100`，公网的`123.123.73.123:12350`端口映射到内网的`10.0.1.100:1235`端口。
+
+### 4.2 更改Daemon配置
+修改`$LOTUS_PATH/config.toml`文件中的以下内容：
+- 将`ListenAddresses`中的端口改为内网的端口，如`1235`;
+- 将`AnnounceAddresses`中的IP改为公网IP，如`123.123.73.123`，端口改为公网端口`12350`。
+```toml
+[Libp2p]
+ListenAddresses = ["/ip4/0.0.0.0/tcp/1235", "/ip6/::/tcp/0"]
+AnnounceAddresses = ["/ip4/123.123.73.123/tcp/12350"]
+```
+注意：要修改的是Libp2p部分，而不是API部分。
+
+修改好并重启Daemon后，可以通过以下命令，查看Daemon的公网连接地址：
+```sh
+lotus net listen
+```
 
 ## 5. 常见问题
 - 消息堵塞
