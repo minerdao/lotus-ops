@@ -28,10 +28,13 @@ lotus fetch-params 32GiB # 下载 32GiB 扇区对应的 Proof 参数
 ## 3. 导入导出同步数据裁剪快照
 当节点运行时间较长`.lotus`文件夹过大时，可选择通过导入导出同步数据来实现裁剪。
 ```sh
-# 先导出本机Daemon的快照
+# 先导出本机Daemon的快照，该命令运行时间较长。
 lotus chain export --skip-old-msgs --recent-stateroots=900 chain.car
+# 导出完成后，关闭lotus daemon
+lotus daemon stop
 # 首先备份.lotus/datastore/chain文件夹（若导入出现故障可以使用备份文件夹重新恢复即可），清空chain文件夹后进行导入
-lotus daemon --import-snapshot chain.car
+lotus daemon --import-snapshot chain.car 
+# 后续正常启动daemon节点，观察节点是否能够正常同步
 ```
 
 ## 4. 给Deamon配置公网IP
