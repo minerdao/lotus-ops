@@ -17,7 +17,6 @@
 - 时空证明运行流程、原理详解 - max
 - 爆块流程及原理详解 - max
 - 源码编译及编译常见问题 - mje
-- AP模板复制功能使用及原理
 - [分布式Miner模块配置和使用](./documents/distributed-miner-configuration.md)
 - [myScheduler调度程序使用](./documents/myscheduler-configuration.md)
 - [C2优化模块使用](./documents/c2-optimization-instructions.md)
