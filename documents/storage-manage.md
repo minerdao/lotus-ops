@@ -49,3 +49,12 @@ Fil挖矿的过程中存储性能至关重要，当存储性能无法满足要�
 　　#100%随机，70%读，30%写 4K
 　　fio -filename=/dev/emcpowerb -direct=1 -iodepth 1 -thread -rw=randrw -rwmixread=70 -ioengine=psync -bs=4k -size=1000G -numjobs=50 -runtime=180 -group_reporting -name=randrw_70read_4k
 ```
+## 3. 网络性能分析
+fil挖矿过程中网络架构的设计会对整个集群的封装效率和WindPost产生影响，服务器间的网络性能可以通过iperf3进行测试。
+- 在需要进行测试的服务器上安装iperf3
+`sudo apt-get install iperf3`
+- 在一台Server服务器上运行（可选择Miner机作为Server机器，方便测试各个存储机与Miner机之间的网络性能）
+`iperf3 -s`
+- 在客户端服务器上运行（可以选择存储机作为客户端）
+`iperf3 -c 192.168.1.2 -t 10  #该ip为Server服务器内网ip`
+可以根据网络测试结果来对封装期间写入存储的数据量进行调整，防止出现因为封装数据写入存储机过大占满Miner和存储机之间的网络传输带宽，此时若进行WindPost则可能会导致Miner机与存储之间无足够的带宽进行数据读取验证，读取超时丢失算力。
