@@ -34,7 +34,8 @@ lotus chain export --skip-old-msgs --recent-stateroots=900 chain.car
 lotus daemon stop
 # 首先备份.lotus/datastore/chain文件夹（若导入出现故障可以使用备份文件夹重新恢复即可），清空chain文件夹后进行导入
 lotus daemon --import-snapshot chain.car 
-# 后续正常启动daemon节点，观察节点是否能够正常同步
+# 后续正常启动daemon节点，观察节点是否能够正常同步，正常同步代表快照已经裁剪成功
+lotus sync wait
 ```
 
 ## 4. 给Deamon配置公网IP
