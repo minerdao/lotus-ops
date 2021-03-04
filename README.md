@@ -3,7 +3,6 @@
 - Filecoin挖矿流程详解
 - [Filecoin最新挖矿硬件推荐配置](./documents/hardware-configuration.md)
 - [扇区生命周期详解，扇区状态管理](./documents/sector-life-cycle.md)
-- 扇区状态重置、失败和错误扇区处理
 - [节点管理，节点常用操作，节点同步常见问题](./documents/daemon-operation.md)
 - [钱包管理及使用场景](./documents/wallet-management.md)
 - [Ansible部署工具使用](./documents/ansible-deploy-tool-usage.md)
@@ -13,7 +12,6 @@
 - [新矿工节点上线CheckList](./documents/new-miner-checklist.md)
 - Filecoin监控报警系统搭建
 - [Filecoin 订单配置](./documents/deals-configuration.md)
-- Miner接单密封流程
 - 时空证明运行流程、原理详解
 - 爆块流程及原理详解
 - 源码编译及编译常见问题
