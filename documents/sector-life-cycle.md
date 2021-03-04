@@ -15,7 +15,7 @@ Filecoin网络的扇区，需要通过一系列的计算过程，最终得到扇
 
 ## 2. 扇区状态管理
 扇区主要状态包括：PreCommit1、PreCommit2、Committing、FinalizeSector，状态变化如下图所示：
-![Distributed Miner](../images/sector-state.png)
+<img src="../images/sector-state.png" width="580px" >
 
 ### 更新扇区状态
 ```sh

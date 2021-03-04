@@ -62,14 +62,14 @@ lotus sync wait
 
 ### 4.2 更改Daemon配置
 修改`$LOTUS_PATH/config.toml`文件中的以下内容：
-- 将`ListenAddresses`中的端口改为内网的端口，如`1235`;
+- 将`ListenAddresses`中的端口改为内网的端口，如`1235`，IP为`0.0.0.0`不用改;
 - 将`AnnounceAddresses`中的IP改为公网IP，如`123.123.73.123`，端口改为公网端口`12350`。
 ```toml
 [Libp2p]
 ListenAddresses = ["/ip4/0.0.0.0/tcp/1235", "/ip6/::/tcp/0"]
 AnnounceAddresses = ["/ip4/123.123.73.123/tcp/12350"]
 ```
-注意：要修改的是Libp2p部分，而不是API部分。
+注意：**要修改的是Libp2p部分，而不是API部分。**
 
 修改好并重启Daemon后，可以通过以下命令，查看Daemon的公网连接地址：
 ```sh

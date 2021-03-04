@@ -106,7 +106,7 @@ $ echo "alias ap=/usr/bin/ansible-playbook" >> $HOME/.profile
 $ source $HOME/.profile
 ```
 #### 3.2 Clone工作目录
-将本项目clone至`$HOME/workspace`目录下。
+Clone Filguard团队提供的运维脚本至`$HOME/workspace`目录下。
 ```sh
 $ mkdir -p $HOME/workspace
 $ cd $HOME/workspace
