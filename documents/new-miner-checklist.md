@@ -17,7 +17,7 @@
 - [ ] 安装基础依赖库
   ```sh
   sudo apt update
-  sudo apt install -y make pkg-config mesa-opencl-icd ocl-icd-opencl-dev libclang-dev libhwloc-dev hwloc gcc git bzr jq tree openssh-server python3
+  sudo apt install -y make pkg-config mesa-opencl-icd ocl-icd-opencl-dev libclang-dev libhwloc-dev hwloc gcc git bzr jq tree openssh-server python3 cpufrequtils
   ```
 - [ ] 时钟校验
   ```sh
@@ -64,5 +64,6 @@
 
 ## 5. Worker CheckList
 - [ ] 配置Worker的环境变量，更改调度配置文件
+- [ ] PreCommit Worker设置性能模式`sudo cpufreq-set -g performance`
 - [ ] 批量启动P1 + P2 Worker
 - [ ] 批量启动C2 Worker

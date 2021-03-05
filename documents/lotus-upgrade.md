@@ -2,10 +2,6 @@
 
 ## 安装包下载
 请先根据自己的CPU和操作系统版本，下载Filguard团队提供的优化后的二进制升级包。
-- [lotus-v1.5.0-ubuntu18.04-amd.tar](https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar?Expires=1614619136&OSSAccessKeyId=TMP.3KirrxrgkpvCCemodaavWuLvWBS4VV716nSjsmd5U5pcYSNiQ3D2mr5wHKN58sUESjh9spnXJN366XiayVuFBigSrMBLfD&Signature=e969iZWAbrXMHfY4pbdYY3ojNis%3D)
-- [lotus-v1.5.0-ubuntu20.04-amd.tar](https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-2004/lotus-v1.5.0-ubuntu20.04-amd-7302.tar?Expires=1614619154&OSSAccessKeyId=TMP.3KirrxrgkpvCCemodaavWuLvWBS4VV716nSjsmd5U5pcYSNiQ3D2mr5wHKN58sUESjh9spnXJN366XiayVuFBigSrMBLfD&Signature=YdoSjyFuxx0xhI2M7Rr%2FZEAGp%2Bg%3D)
-- [lotus-v1.5.0-ubuntu18.04-intel.tar](https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/intel-2678-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-intel-2678.tar?Expires=1614619169&OSSAccessKeyId=TMP.3KirrxrgkpvCCemodaavWuLvWBS4VV716nSjsmd5U5pcYSNiQ3D2mr5wHKN58sUESjh9spnXJN366XiayVuFBigSrMBLfD&Signature=iqOYX7py5uG7gziSxprqiRue5wM%3D)
-- [lotus-v1.5.0-ubuntu20.04-intel.tar](https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/intel-2678-ubuntu-2004/lotus-v1.5.0-ubuntu20.04-intel-2678.tar?Expires=1614619180&OSSAccessKeyId=TMP.3KirrxrgkpvCCemodaavWuLvWBS4VV716nSjsmd5U5pcYSNiQ3D2mr5wHKN58sUESjh9spnXJN366XiayVuFBigSrMBLfD&Signature=pGrA38S7CFm0v4kd%2BDWTmO0ZVeY%3D)
 
 ## 更新说明
 本次1.5.0 Filguard优化版本主要更新以下功能：
