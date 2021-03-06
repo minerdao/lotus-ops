@@ -5,8 +5,8 @@
 - [ ] hostname按照以下格式命名:
   - Miner-192-168-1-3
   - Daemon-192-168-1-4
-  - WorkerP-192-168-1-5 (P1 + P2机器)
-  - WorkerC-192-168-1-6 (C2机器)
+  - WorkerP-192-168-1-5 (PreCommit Worker)
+  - WorkerC-192-168-1-6 (Commit Worker)
 - [ ] 禁用所有机器(Miner和Worker)的swap
 - [ ] Ubuntu系统禁用自动更新
 - [ ] 显卡驱动禁用自动更新
@@ -64,6 +64,8 @@
 
 ## 5. Worker CheckList
 - [ ] 配置Worker的环境变量，更改调度配置文件
+- [ ] 检查显卡驱动是否正常
+- [ ] 检查缓存盘是否正确挂载
 - [ ] PreCommit Worker设置性能模式`sudo cpufreq-set -g performance`
 - [ ] 批量启动P1 + P2 Worker
 - [ ] 批量启动C2 Worker
