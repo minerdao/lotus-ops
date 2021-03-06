@@ -1,7 +1,7 @@
 # Filecoin监控报警系统搭建
 
 ## 1. 安装Docker
-本文提到的监控报警系统，基于Docker进行部署，先在监控机上，运行本项目`scripts/install-docker.sh`来安装Docker。
+本文提到的监控报警系统，基于Docker进行部署，先在监控机上，运行本项目下`scripts/install-docker.sh`脚本来安装Docker。
 
 ## 2. 部署Prometheus
 修改`scripts/install-prometheus.sh`脚本中的`scrape_configs`，将每个Job中的`job_name`改为要监控的机器的主机名，`targets`改为要监控的机器的IP。
