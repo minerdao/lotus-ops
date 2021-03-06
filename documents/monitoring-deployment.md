@@ -14,5 +14,5 @@
 ## 4. 部署Grafana
 - 在监控机上，运行`scripts/install-grafana.sh`，安装Grafana。
 - 安装完成后，在跳板机或路由器上，增加外网3000端口到监控机3000端口的映射，让Grafana可以通过外网访问。
-- 在Grafana的`Configuration/Data Sources`中，添加数据源，选择Prometheus，URL为`http://localhost:9090`，然后点击底部的Save & Test按钮，测试成功后进入下一步。
+- 在Grafana的`Configuration/Data Sources`中，添加数据源，选择Prometheus，URL为`http://localhost:9090`，然后点击底部的`Save & Test`按钮，测试成功后进入下一步。
 - 在Grafana的`Dashboards/Manage`，点击右上角的Import按钮，再点击`Upload JSON file`按钮，选择本项目`config/Miner-monitoring.json`文件并导入。
