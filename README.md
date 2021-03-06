@@ -1,6 +1,6 @@
 # Filecoin 运维操作手册
 
-- Filecoin挖矿流程详解
+- [Filecoin挖矿流程详解](./documents/lotus-mining-process.md)
 - [Filecoin最新挖矿硬件推荐配置](./documents/hardware-configuration.md)
 - [扇区生命周期详解，扇区状态管理](./documents/sector-life-cycle.md)
 - [节点管理，节点常用操作，节点同步常见问题](./documents/daemon-operation.md)
@@ -12,15 +12,15 @@
 - [新矿工节点上线CheckList](./documents/new-miner-checklist.md)
 - [Filecoin监控报警系统搭建](./documents/monitoring-deployment.md)
 - [Filecoin 订单配置](./documents/deals-configuration.md)
-- 时空证明运行流程、原理详解
-- 爆块逻辑及优化方法
-- 源码编译及编译常见问题
 - [分布式Miner模块配置和使用](./documents/distributed-miner-configuration.md)
 - [myScheduler调度程序使用](./documents/myscheduler-configuration.md)
 - [C2优化模块使用](./documents/c2-optimization-instructions.md)
 - [CPU核心分配原理及使用](./documents/cores-optimization-instructions.md)
-- 消息池清理操作
 - [如何避免掉算力](./documents/miner-keep.md)
 - [Lotus日常运维CheckList](./documents/lotus-ops-checklist.md)
 - [常用环境变量说明](./documents/environment-usage.md)
+- 时空证明运行流程、原理详解
+- 爆块逻辑及优化方法
+- 消息池清理操作
+- 源码编译及编译常见问题
 - 常见运维问题定位与解决
