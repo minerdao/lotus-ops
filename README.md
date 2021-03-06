@@ -20,6 +20,7 @@
 - [C2优化模块使用](./documents/c2-optimization-instructions.md)
 - [CPU核心分配原理及使用](./documents/cores-optimization-instructions.md)
 - 消息池清理操作
+- [如何避免掉算力](./documents/miner-keep.md)
 - [Lotus日常运维CheckList](./documents/lotus-ops-checklist.md)
 - [常用环境变量说明](./documents/environment-usage.md)
 - 常见运维问题定位与解决
