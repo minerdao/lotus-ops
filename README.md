@@ -10,7 +10,7 @@
 - [Filecoin同构集群搭建流程](./documents/mining-cluster-deployment.md)
 - [Filecoin存储管理，存储i/o性能分析，网络分析](./documents/storage-manage.md)
 - [新矿工节点上线CheckList](./documents/new-miner-checklist.md)
-- Filecoin监控报警系统搭建
+- [Filecoin监控报警系统搭建](./documents/monitoring-deployment.md)
 - [Filecoin 订单配置](./documents/deals-configuration.md)
 - 时空证明运行流程、原理详解
 - 爆块逻辑及优化方法
