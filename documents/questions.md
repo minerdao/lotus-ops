@@ -35,17 +35,35 @@ a.是起一个 lotus-worker 还是依然30个 lotus-worker 并行
 b.SDR 和上述的4个环境变量如何设置
 c.我们原来worker也放了 proof和proof cache 证明参数的文件,看文档是否只有 daemon miner c2 需要.这个没有尝试过.
 
+- p1p2机器建议跟你们现在的跑法一致即可，明天可以详细沟通。
+
 4.gpu机器的部署.原来是8卡机起了8个 lotus-worker 通过 CUDA_visible 配置绑定gpu - mje
 
 现在是否可以,并且是否需要单卡并行 环境变量NUM_HANDLES、NUM_KERNELS 如何设置
 
+- worker还需要按照之前的方式启动就可以，c2worker启动前需要增加两个环境变量：`NUM_HANDLES=10`、`NUM_KERNELS=2`
+单卡并行可以已经实现，但是不建议这样做，因为目前优化显存占用已经很高。
+
 5.worker和gpu不通过 seal miner 直接落盘到 nfs存储如何实现 - mje
+
+- 只能通过启动多个seal miner来间接实现，但是该方法有个弊端，就是seal miner拆分多个会导致Sector ID并不是连续的，也就是说后续再进行合并就会出现Sector ID不全的情况，建议不要这样操作。 
 
 6.scheduler的配置中 AutoPledgeDiff 是什么意义 - xy
 
 自动化添加封装 lotus-miner sectors mypledge 的使用方式,该命令的后果是如何
 
+- AutoPledgeDiff 为 0 和 1 分别是两种 pledge 派发方式。
+① 默认值是 0，用于用户自己在自动化任务中批量派发 pledge 任务，例如 60分钟，一次性派发 20 个 pledge，这个模式目前使用较多；
+② 如果设置为 1，则表示平滑派发 pledge 任务，例如每3分钟派发一个 pledge。
+- 另外，
+① lotus-miner sectors pledge  官方标准命令，一次性派一个 pledge；
+② lotus-miner sectors mypledgeonce 自定义命令，为每一个有 AP 工作能力的算力机器分配一个 AP。如果 10 台设备都有 AP 工作能力时（各个AddPieceMax可能不相同），但如果发送 10 个 pledge 任务，系统会自动为每个 lotus-worker 平铺调度一个；
+③ lotus-miner sectors mypledge 自定义命令，为每一个有 AP 工作能力的算力机器分配它所有的  "AddPieceMax": X 这个数量的全部总和 AP。
+
+
 7.显卡驱动和cuda是否需要变更 - mje
+
+- 不需要
 
 8.如果在部署新程序中遇到问题，已经部署了一半发现无法继续，是否可以快速还原到官方版本 - max + xy
 
