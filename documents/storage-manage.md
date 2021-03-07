@@ -31,7 +31,7 @@ lotus-miner storage attach --seal --init /path/to/fast_cache
 `lotus-miner storage list`
 
 ### 1.3 多个存储路径管理
-当Miner挂载多个存储路径时，需要对多个存储路径进行管理时，可以手动对每个存储路径下的`sectorstore.json`配置文件进行修改权重的配比和存储路径的用途管理。当多个存储路径配置不同的权重时，Miner会根据各个存储路径的权重配比进行存储。若某一存储路径快满时，可以设置该路径下的`sectorstore.json`中`"CanSeal": false`、 `"CanStore": false`，这样Miner就不会往该路径下存储任何数据了。
+当Miner挂载多个存储路径时，需要对多个存储路径进行管理时，可以手动对每个存储路径下的`sectorstore.json`配置文件进行修改权重的配比和存储路径的用途管理。当多个存储路径配置不同的权重时，Miner会根据各个存储路径的权重配比进行存储。若某一存储路径快满时，可以设置该路径下的`sectorstore.json`中`"CanSeal": false`、 `"CanStore": false`，重启miner后生效，这样Miner就不会往该路径下存储任何数据了。
 
 ## 2. 存储i/o性能分析
 Filecoin挖矿的过程中存储性能至关重要，当存储性能无法满足要求时，会出现封装期间不断掉算力的窘境。
