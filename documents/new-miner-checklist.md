@@ -24,7 +24,8 @@
   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
   ntpdate ntp.aliyun.com
   ```
-- [ ] NVMe SSD批量组Raid0，挂载，设置挂载目录的权限
+- [ ] Seal-miner的NVME SSD组Raid5，挂载，设置目录挂载权限
+- [ ] NVME SSD批量组Raid0，挂载，设置挂载目录的权限
   - 更新挂载路径
   - 更新起始盘符
   - 更新`--raid-devices`数量
