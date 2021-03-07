@@ -1,5 +1,8 @@
 - hosts: precommit-worker,commit-worker
   remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
+  become_method: sudo
   tasks:
     - debug: var=ansible_all_ipv4_addresses
 
@@ -10,3 +13,7 @@
       loop:
         - '{{ lotus_worker_path_0 }}'
         - '{{ lotus_worker_path_1 }}'
+        - '/home/caslx/logs'
+        - '/home/caslx/file.log'
+        - '/home/caslx/node_exporter-0.18.1.linux-amd64'
+        - '/home/caslx/node_exporter-0.18.1.linux-amd64.tar.gz'
