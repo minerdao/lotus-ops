@@ -1,0 +1,12 @@
+- hosts: precommit-worker,commit-worker
+  remote_user: '{{ remote_user }}'
+  tasks:
+    - debug: var=ansible_all_ipv4_addresses
+
+    - name: Remove old worker path
+      file:
+        path: '{{ item }}'
+        state: absent
+      loop:
+        - '{{ lotus_worker_path_0 }}'
+        - '{{ lotus_worker_path_1 }}'
