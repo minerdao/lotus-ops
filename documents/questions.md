@@ -69,3 +69,38 @@ c.我们原来worker也放了 proof和proof cache 证明参数的文件,看文�
 
 分布式miner和调度，都可以快速切换回官方版本，但是要注意一点：
 针对已经跑了一些算力的情况，需要在winning-post-miner上，用原来miner的owner，重新初始化一个不带任何元数据的空miner，然后复制到window-post-miner上，所有封装过程中的扇区元数据，都保存在seal-miner和deal-miner上。
+
+**9.分布式miner和daemon之间如何连接？**
+
+分布式miner和daemon之间的连接架构如下图（可在新窗口查看大图）：
+
+![connection](../images/distributed-miner-connection.png)
+
+- **Daemon-1**：给Daemon-1配公网IP主要是为了提升节点的稳定性，只要节点健康稳定，爆块才会稳定。但是如果直接把导入了钱包的Daemon暴露在公网中也是非常不安全的，毕竟Lotus的钱包管理还是非常原始的。Daemon-1的作用就是连接更多外部的节点。然后让Daemon-2也连接到Daemon-1，因为是内网，所以连接非常快，Daemon-1可以理解为内网的miner和区块链通信的一个桥梁。
+
+  但是这里有个问题，就是我用端口映射的方式，给Daemon-1配公网IP以后，发现在Daemon-2上，无法通过 `lotus net connect /ip4/xxx.xxx.xxx.xx/... `连上Daemon-1，因为NAT映射是单向的。如果Daemon-1是直接配公网IP的，那就没有问题。
+
+- **Daemon-2**：内网的miner全部连接daemon2，同时这个daemon也启动在winning-post-miner上，保证出块的miner连接是最快的，考虑冗余的话，可以在window-post-miner上再同步一个轻节点daemon作为备份，关于轻节点daemon，请[参照快照导出导入和快照剪裁](https://github.com/filguard/lotus-ops/blob/master/documents/daemon-operation.md#3-%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE%E8%A3%81%E5%89%AA%E5%BF%AB%E7%85%A7)。
+
+- **Winning-post-miner**：只负责爆块，因为这台机器负载比较低，所以在上面同时启动Daemon-2。另外，Winning-post-miner也是sector-counter的服务端，负责统一分配扇区ID，其他miner（主要是seal-miner和deal-miner）都从这台机器上申请扇区ID。
+
+- **Window-post-miner**：只负责时空证明，上面可以同时同步一个备份的Daemon。
+
+- **Seal-miner**：负责分配任务，管理所有的seal-worker，连接Daemon-2。
+
+- **Deal-miner**：负责接单，连接Daemon-2，需要配置multiaddr，需要连接几台seal-worker，和上面seal-miner连接的worker不同，相当于是把所有的seal-worker分成了2组，seal-miner连接一批，deal-miner连接一批，具体架参考[分布式Miner架构](https://github.com/filguard/lotus-ops/blob/master/documents/distributed-miner-configuration.md#%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E)。
+
+- **关于多个seal-miner，或者seal-miner + deal-miner的说明**
+  这里建议订单少的话，就不需要deal-miner了，直接用seal-miner替代deal-miner即可。
+
+  因为如果配置了多个seal-miner，或者seal-miner + deal-miner以后，如果想回退到单miner，就会有个副作用：seal-miner只会包含自己的封装的扇区数据，无法同步deal-miner或其他seal-miner上的扇区数据，这样通过`lotus-miner sectors list`查看的扇区列表，就是不完整的，`lotus-miner info`的扇区统计数据也是不完整的，只是显示不完整，但是不会影响时空证明和爆块。
+  如果以后有回退到单miner的需求，或者比较介意这个问题，那就只能配一个seal-miner。按照我们的设计，集群越来越大以后，是不会再有回退到单miner的需求的，所以没有解决多个seal-miner之间扇区数据一致性的问题（分布式架构里面，也没这个必要）。
+
+
+**10.分布式miner如何切换回单miner？**
+
+按第8条的方法，初始化一个不含任何元数据(扇区数据)的winning-post-miner和window-post-miner，专门用来做时空证明和爆块。切换回单miner的时候，只需要停掉winning-post-miner和window-post-miner，然后在seal-miner上开启window-post和winning-post功能即可，也就是以seal-miner作为回退后的单miner（因为seal-miner上的数据是完整的，包含所有扇区数据，winning-post-miner和window-post-miner上没有扇区数据）。
+
+**11.分布式miner架构，miner之间如何交互？**
+
+miner之间的交互就是从同一个地方获取扇区id的问题，通过rpc交互，其他不需要交互，各司其职即可。所有的seal-worker只连seal-miner。post-miner不需要有worker，只能连接daemon查看链上的信息，如`lotus-miner proving deadlines`、`lotus-miner info`，但是无法看到扇区列表（post-miner本地元数据不含扇区数据）。日常的操作都在seal-miner上进行即可，post-miner几乎不用管。
