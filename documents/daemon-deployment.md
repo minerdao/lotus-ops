@@ -1,14 +1,14 @@
 # Filecoin节点搭建及启动
 
 ## 1. 编译安装
-### 安装基础依赖库
+### 1.1 安装基础依赖库
 ```sh
 $ sudo apt update
 $ sudo apt install mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl clang build-essential hwloc libhwloc-dev wget
 $ sudo apt upgrade
 ```
 
-### 安装 Golang
+### 1.2 安装 Golang
 ```sh
 # 下载golang安装包
 $ wget -c https://golang.org/dl/go1.15.8.linux-amd64.tar.gz
@@ -33,7 +33,7 @@ $ go version
 ```
 可直接运行本项目下的`./scripts/install-golang.sh`来安装Golang编译环境。
 
-### 安装 Rust
+### 1.3 安装 Rust
 ```sh
 $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o ./rust-setup.sh
 $ chmod a+x ./rust-setup.sh
@@ -44,7 +44,7 @@ $ rustup default nightly
 ```
 可直接运行本项目下的`./scripts/install-rust.sh`来安装Rust编译环境。
 
-### 编译Lotus
+### 1.4 编译Lotus
 ```sh
 $ git clone https://github.com/filecoin-project/lotus.git
 
@@ -63,14 +63,14 @@ env CGO_CFLAGS_ALLOW="-D__BLST_PORTABLE__" RUSTFLAGS="-C target-cpu=native -g" F
 可直接运行本项目下的`./scripts/build-amd.sh`和`./scripts/build-intel.sh`来针对AMD和Intel的CPU分别编译。
 
 ## 2. 启动节点
-### 直接启动Lotus节点
+### 2.1 直接启动Lotus节点
 ```sh
 $ lotus daemon
 ```
 lotus daemon启动后，默认会在`~/.lotus`目录下初始化Lotus节点目录。
 可在`lotus daemon`启动前，通过指定`LOTUS_PATH`环境变量来更改Lotus节点目录。
 
-### 通过快照启动Lotus节点
+### 2.2 通过快照启动Lotus节点
 通过以下命令，从现有节点上导出Lotus快照。
 ```sh
 $ lotus chain export --skip-old-msgs --recent-stateroots=2000 snapshot.car
