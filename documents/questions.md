@@ -12,6 +12,7 @@ A: 是，配置一个转发到公网的Daemon，参考[Daemon公网IP配置](htt
 然后在post-miner上同时启动一个Daemon，seal-miner、post-miner通过内网连这个Daemon即可，剩下的一台Daemon机器，就可以作为Seal-miner。
 
 **2.分布式miner的部署**
+
 Q: 我看到是需要起 winning,wdpost,seal 3个miner.其中一个miner开 sectorId获取即可
 我们原来是2台miner机器互备,一台miner多插了点SSD临时当worker
 现在是否 一台作为 winning miner
