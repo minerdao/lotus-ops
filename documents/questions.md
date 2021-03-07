@@ -88,7 +88,7 @@ c.我们原来worker也放了 proof和proof cache 证明参数的文件,看文�
 
 - **Seal-miner**：负责分配任务，管理所有的seal-worker，连接Daemon-2。
 
-- **Deal-miner**：负责接单，连接Daemon-2，需要配置multiaddr，需要连接几台seal-worker，和上面seal-miner连接的worker不同，相当于是把所有的seal-worker分成了2组，seal-miner连接一批，deal-miner连接一批，具体架参考[分布式Miner架构](https://github.com/filguard/lotus-ops/blob/master/documents/distributed-miner-configuration.md#%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E)。
+- **Deal-miner**：负责接单，连接Daemon-2，需要配置multiaddr，需要连接几台seal-worker，和上面seal-miner连接的worker不同，相当于是把所有的seal-worker分成了2组，seal-miner连接一组，deal-miner连接一组(要根据接单的量，来分配对应数量的seal-worker，按照我们的经验，1 ~ 2 台seal-worker就能满足订单密封的需要)，具体架参考[分布式Miner架构](https://github.com/filguard/lotus-ops/blob/master/documents/distributed-miner-configuration.md#%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E)。
 
 - **关于多个seal-miner，或者seal-miner + deal-miner的说明**
   这里建议订单少的话，就不需要deal-miner了，直接用seal-miner替代deal-miner即可。
