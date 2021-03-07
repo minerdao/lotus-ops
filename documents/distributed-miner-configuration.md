@@ -121,8 +121,7 @@ lotus-miner run --window-post=false --winning-post=false --p2p=true --sctype=get
 
 - **Seal-miner**：负责分配任务，管理所有的Seal-worker，连接Daemon-private。
 
-- **Deal-miner**：负责接单，连接Daemon-private，需要配置`multiaddress`，需要连接几台Seal-worker，和上面Seal-miner连接的Worker不同，相当于是把所有的Seal-worker分成了2组，Seal-miner连接一组，Deal-miner连接一组。
-  要根据订单的数量，来分配对应数量的Seal-worker，按照我们的经验，1 ~ 2 台Seal-worker就能满足订单密封的需要，具体架参考[分布式Miner架构](https://github.com/filguard/lotus-ops/blob/master/documents/distributed-miner-configuration.md#%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E)。
+- **Deal-miner**：负责接单，连接Daemon-private，需要配置`multiaddress`，需要连接几台Seal-worker，和上面Seal-miner连接的Worker不同，相当于是把所有的Seal-worker分成了2组，Seal-miner连接一组，Deal-miner连接一组。要根据订单的数量，来分配对应数量的Seal-worker，按照我们的经验，1 ~ 2 台Seal-worker就能满足订单密封的需要。
 
 ### 7.2 分布式Miner如何切换回单Miner？
 初始化一个不含任何元数据(扇区数据)的Winning-post-miner和Window-post-miner，专门用来做时空证明和爆块。切换回单Miner的时候，只需要停掉Winning-post-miner和Window-post-miner，然后在Seal-miner上开启`window-post`和`winning-post`功能即可，也就是以Seal-miner作为回退后的单Miner（因为Seal-miner上的数据是完整的，包含所有扇区数据，Winning-post-miner和Window-post-miner上没有扇区数据）。
