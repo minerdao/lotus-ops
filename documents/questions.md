@@ -105,3 +105,33 @@ c.我们原来worker也放了 proof和proof cache 证明参数的文件,看文�
 **11.分布式miner架构，miner之间如何交互？**
 
 miner之间的交互就是从同一个地方获取扇区id的问题，通过rpc交互，其他不需要交互，各司其职即可。所有的seal-worker只连seal-miner。post-miner不需要有worker，只能连接daemon查看链上的信息，如`lotus-miner proving deadlines`、`lotus-miner info`，但是无法看到扇区列表（post-miner本地元数据不含扇区数据）。日常的操作都在seal-miner上进行即可，post-miner几乎不用管。
+
+
+# 编译说明
+1.git 相关代码仓库
+```
+git clone https://github.com/filguard/lotus-optimized.git
+git cloen https://github.com/filguard/bellwoman.git
+git clone https://github.com/filguard/rust-fil-proofs.git
+git clone https://github.com/jyma/rust-dbfil-proofs.git
+#代码仓库必须放在同一目录下。（本次说明中路径配置也以代码仓库同一路径进行操作）
+```
+2.进入lotus编译目录`cd lotus-optimized`,执行编译。
+3.进入`lotus-optimized/extern/filecoin-ffi/rust/`，编辑Cargo.toml中添加replace标签：
+- 双路机器，代码修改核心绑定worker：
+```
+[replace]
+"bellperson:0.12.5" = { path = "../../../../bellwoman" }
+"storage-proofs-porep:5.4.0" = { path = "../../../../rust-dbfil-proofs/storage-proofs/porep" }
+"filecoin-proofs:5.4.0" = { path = "../../../../rust-dbfil-proofs/filecoin-proofs" }
+"storage-proofs:5.4.0" = { path = "../../../../rust-dbfil-proofs/storage-proofs" }
+```
+- 双路机器，代码未进行核心修改绑定worker：
+```
+[replace]
+"bellperson:0.12.5" = { path = "../../../../bellwoman" }
+"storage-proofs-porep:5.4.0" = { path = "../../../../rust-fil-proofs/storage-proofs/porep" }
+"filecoin-proofs:5.4.0" = { path = "../../../../rust-fil-proofs/filecoin-proofs" }
+"storage-proofs:5.4.0" = { path = "../../../../rust-fil-proofs/storage-proofs" }
+```
+4.根据步骤3中不同的worker进行编译即可。
