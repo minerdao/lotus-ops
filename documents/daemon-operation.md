@@ -76,6 +76,9 @@ AnnounceAddresses = ["/ip4/123.123.73.123/tcp/12350"]
 lotus net listen
 ```
 
+### 4.3 内网其他Daemon连接公网Daemon
+内网的其他Daemon，可以通过`lotus net connect /ip4/10.0.1.100/tcp/1235/p2p/12D3Koo.....`来连接配置了公网IP的Daemon。
+
 ## 5. 常见问题
 - 消息堵塞
 使用命令`lotus mpool pending --local | wc -l`查看本地堵塞消息数量，若不为0，则需要手动进行消息清理，具体清理方法参考「消息池操作」一章。
