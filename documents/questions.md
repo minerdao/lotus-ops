@@ -111,7 +111,7 @@ miner之间的交互就是从同一个地方获取扇区id的问题，通过rpc�
 1.git 相关代码仓库
 ```
 git clone https://github.com/filguard/lotus-optimized.git
-git cloen https://github.com/filguard/bellwoman.git
+git clone https://github.com/filguard/bellwoman.git
 git clone https://github.com/filguard/rust-fil-proofs.git
 git clone https://github.com/jyma/rust-dbfil-proofs.git
 #代码仓库必须放在同一目录下。（本次说明中路径配置也以代码仓库同一路径进行操作）
