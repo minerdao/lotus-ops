@@ -120,6 +120,7 @@ git clone https://github.com/jyma/rust-dbfil-proofs.git
 3.进入`lotus-optimized/extern/filecoin-ffi/rust/`，编辑Cargo.toml中添加replace标签：
 - 双路机器，代码修改核心绑定worker：
 ```
+#[dependencies]标签中，bellperson也需要改为对应的版本
 [replace]
 "bellperson:0.12.5" = { path = "../../../../bellwoman" }
 "storage-proofs-porep:5.4.0" = { path = "../../../../rust-dbfil-proofs/storage-proofs/porep" }
@@ -128,6 +129,7 @@ git clone https://github.com/jyma/rust-dbfil-proofs.git
 ```
 - 双路机器，代码未进行核心修改绑定worker：
 ```
+#[dependencies]标签中，bellperson也需要改为对应的版本
 [replace]
 "bellperson:0.12.5" = { path = "../../../../bellwoman" }
 "storage-proofs-porep:5.4.0" = { path = "../../../../rust-fil-proofs/storage-proofs/porep" }
