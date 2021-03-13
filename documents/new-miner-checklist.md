@@ -19,6 +19,10 @@
   sudo apt update
   sudo apt install -y make pkg-config mesa-opencl-icd ocl-icd-opencl-dev libclang-dev libhwloc-dev hwloc gcc git bzr jq tree openssh-server python3 cpufrequtils
   ```
+- [ ] 安装显卡驱动
+  ```
+  sudo ./NVIDIA-Linux-x86_64-xxx.xx.xx.run
+  ```
 - [ ] 时钟校验
   ```sh
   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
