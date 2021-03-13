@@ -79,6 +79,11 @@ Worker钱包用于发送和支付矿工执行的日常操作，包括：
   - Owner钱包地址余额不足。
 
 Worker钱包必须保持有充足的币，否则将会影响封装、时空证明等。
+修改worker钱包地址命令为：
+```
+lotus-miner actor propose-change-worker 新钱包地址
+lotus-miner actor confirm-change-worker 新钱包地址
+```
 
 #### 2.3 Control钱包
 Control钱包用来提交时空证明，以及提交PreCommit和ProveCommit消息。
