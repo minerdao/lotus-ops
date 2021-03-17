@@ -1,0 +1,28 @@
+- hosts: worker
+  remote_user: '{{ remote_user }}'
+  gather_facts: no
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Create workspace directory
+      file:
+        path: '{{ workspace }}'
+        state: directory
+
+    - name: Copy script to remote server
+      copy:
+        src: '{{ workspace }}/lotus-ops/scripts/worker-init.sh'
+        dest: '{{ workspace }}'
+        owner: root
+        group: root
+        mode: +x
+      loop:
+        - '{{ workspace }}/lotus-ops/scripts/worker-init.sh'
+        - '{{ workspace }}/lotus-ops/scripts/hostnameP1.sh'
+
+    - name: Install base depeneence
+      shell: '{{ workspace }}/worker-init.sh'
+
+    - name: Update hostname
+      shell: '{{ workspace }}/hostnameP1.sh'
