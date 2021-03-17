@@ -60,7 +60,7 @@
       shell: |
         tmux new-window -t lotus -n worker1
         tmux send-keys -t lotus:worker1 "export LOTUS_WORKER_PATH={{ lotus_worker_path_1 }}" C-m
-        tmux send-keys -t lotus:worker1 "export CUDA_VISIBLE_DEVICES=1" C-m
+        tmux send-keys -t lotus:worker1 "export CUDA_VISIBLE_DEVICES=0" C-m
         tmux send-keys -t lotus:worker1 "export TMPDIR={{ tmp_dir }}/tmp1" C-m
         tmux send-keys -t lotus:worker1 "env FIL_PROOFS_MULTICORE_SDR_PRODUCERS=1 ENV_CPU_CORE_BEGIN_NUM=8 ENV_CPU_CORE_END_NUM=16 lotus-worker run --listen={{ ansible_default_ipv4.address }}:{{ worker_port_1 }} --commit=false" C-m
         tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker1-`date +%Y-%m-%d-%H-%M`.log"

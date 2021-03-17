@@ -1,4 +1,4 @@
-- hosts: 10.0.2.11
+- hosts: commit-worker
   remote_user: '{{ remote_user }}'
   environment:
     RUST_LOG: '{{ rust_log }}'
@@ -10,9 +10,6 @@
     MINER_API_INFO: '{{ seal_miner_api_info }}'
     NUM_HANDLES: '{{ num_handles }}'
     NUM_KERNELS: '{{ num_kernels }}'
-  vars:
-    - lotus_worker_path_2: /home/caslx/disk_md0/lotusworker2
-    - worker_port_2: 3452
   tasks:
     - debug: var=ansible_default_ipv4.address
     - debug: var=ansible_all_ipv4_addresses
@@ -27,19 +24,19 @@
     #     - '{{ lotus_worker_path_0 }}'
     #     - '{{ lotus_worker_path_1 }}'
 
-    # - name: Create lotus worker path, log path, tmp path
-    #   file:
-    #     path: "{{ item }}"
-    #     state: directory
-    #     owner: '{{ remote_user }}'
-    #     group: '{{ remote_user }}'
-    #     mode: u=rwxr,g=xr,o=x
-    #   loop:
-    #     - '{{ lotus_worker_path_0 }}'
-    #     - '{{ lotus_worker_path_1 }}'
-    #     - '{{ log_path }}'
-    #     - '{{ tmp_dir }}/tmp0'
-    #     - '{{ tmp_dir }}/tmp1'
+    - name: Create lotus worker path, log path, tmp path
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: '{{ remote_user }}'
+        group: '{{ remote_user }}'
+        mode: u=rwxr,g=xr,o=x
+      loop:
+        - '{{ lotus_worker_path_0 }}'
+        - '{{ lotus_worker_path_1 }}'
+        - '{{ log_path }}'
+        - '{{ tmp_dir }}/tmp0'
+        - '{{ tmp_dir }}/tmp1'
 
     - name: Copy myscheduler config to commit worker
       copy:

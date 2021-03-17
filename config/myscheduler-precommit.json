@@ -1,10 +1,10 @@
 {
   "WorkerName": "",
-  "AddPieceMax": 3,
+  "AddPieceMax": 1,
   "PreCommit1Max": 7,
   "PreCommit2Max": 1,
   "Commit2Max": 0,
-  "DiskHoldMax": 200,
+  "DiskHoldMax": 240,
   "APDiskHoldMax": 0,
   "ForceP1FromLocalAP": true,
   "ForceP2FromLocalP1": true,
