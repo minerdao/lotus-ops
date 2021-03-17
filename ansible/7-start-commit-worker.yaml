@@ -1,7 +1,7 @@
 - hosts: commit-worker
   remote_user: '{{ remote_user }}'
   environment:
-    RUST_LOG: '{{ rust_log }}'
+    RUST_LOG: 'info'
     RUST_BACKTRACE: '{{ rust_backtrace }}'
     FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_parameter_cache }}'
     FIL_PROOFS_MAXIMIZE_CACHING: '{{ fil_proofs_maximize_caching }}'
@@ -27,19 +27,19 @@
     #     - '{{ lotus_worker_path_0 }}'
     #     - '{{ lotus_worker_path_1 }}'
 
-    # - name: Create lotus worker path, log path, tmp path
-    #   file:
-    #     path: "{{ item }}"
-    #     state: directory
-    #     owner: '{{ remote_user }}'
-    #     group: '{{ remote_user }}'
-    #     mode: u=rwxr,g=xr,o=x
-    #   loop:
-    #     - '{{ lotus_worker_path_0 }}'
-    #     - '{{ lotus_worker_path_1 }}'
-    #     - '{{ log_path }}'
-    #     - '{{ tmp_dir }}/tmp0'
-    #     - '{{ tmp_dir }}/tmp1'
+    - name: Create lotus worker path, log path, tmp path
+      file:
+        path: "{{ item }}"
+        state: directory
+        owner: '{{ remote_user }}'
+        group: '{{ remote_user }}'
+        mode: u=rwxr,g=xr,o=x
+      loop:
+        - '{{ lotus_worker_path_0 }}'
+        - '{{ lotus_worker_path_1 }}'
+        - '{{ log_path }}'
+        - '{{ tmp_dir }}/tmp0'
+        - '{{ tmp_dir }}/tmp1'
 
     - name: Copy myscheduler config to commit worker
       copy:

@@ -13,6 +13,6 @@
   tasks:
     - name: Start seal miner
       shell: |
-        tmux new-window -t lotus:0 -n seal-miner
+        tmux new -s lotus -d -n seal-miner
         tmux send-keys -t lotus:seal-miner "lotus-miner run --window-post=false --winning-post=false --p2p=true --sctype=get --sclisten={{ sector_counter_host }}:{{ sector_counter_port }}" C-m
         tmux pipe-pane -o "cat >>{{ log_path }}/seal-miner-`date +%Y-%m-%d-%H-%M`.log"
