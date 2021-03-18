@@ -3,7 +3,7 @@ Description=Node Exporter
 After=network.target
 
 [Service]
-User=cs
+User=caslx
 Type=simple
 ExecStart=/usr/local/bin/node_exporter --collector.textfile.directory="~/disk_md0/prometheus/run"
 
