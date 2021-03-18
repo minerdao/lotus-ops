@@ -1,4 +1,4 @@
-- hosts: precommit-worker
+- hosts: wuqing-precommit
   remote_user: '{{ remote_user }}'
   gather_facts: no
   become: yes

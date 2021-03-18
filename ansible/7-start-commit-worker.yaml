@@ -1,4 +1,4 @@
-- hosts: commit-worker
+- hosts: wuqing-commit
   remote_user: '{{ remote_user }}'
   environment:
     RUST_LOG: 'info'

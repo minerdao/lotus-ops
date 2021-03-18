@@ -1,4 +1,4 @@
-- hosts: precommit-worker
+- hosts: wuqing-precommit
   environment:
     RUST_LOG: '{{ rust_log }}'
     RUST_BACKTRACE: '{{ rust_backtrace }}'

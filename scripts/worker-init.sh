@@ -21,7 +21,7 @@ EOF
 
 
 #安装依赖包
-#apt update
+apt update
 apt install -y make pkg-config mesa-opencl-icd ocl-icd-opencl-dev libclang-dev libhwloc-dev hwloc gcc git bzr jq tree openssh-server python3 cpufrequtils
 
 
