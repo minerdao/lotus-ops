@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-workspace=$HOME/workspace
+workspace=/home/caslx/workspace
 
 cd $workspace
 wget -c https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/dcgm/datacenter-gpu-manager_1.7.2_amd64.deb
