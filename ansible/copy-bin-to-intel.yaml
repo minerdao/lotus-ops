@@ -5,7 +5,7 @@
   become_method: sudo
   vars:
     - lotus_bin_path: 'lotus-bin'
-    - version: '1.4.1'
+    - version: '1.5.0'
     - platform: 'intel'
   tasks:
     - name: Copy lotus bin to all intel
