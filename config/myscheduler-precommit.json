@@ -1,6 +1,6 @@
 {
   "WorkerName": "",
-  "AddPieceMax": 3,
+  "AddPieceMax": 1,
   "PreCommit1Max": 7,
   "PreCommit2Max": 1,
   "Commit2Max": 0,
@@ -12,5 +12,5 @@
   "IsPlanOffline": false,
   "AllowP2C2Parallel": false,
   "IgnoreOutOfSpace": true,
-  "AutoPledgeDiff": 0
+  "AutoPledgeDiff": 1
 }
