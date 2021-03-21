@@ -12,5 +12,5 @@
   "IsPlanOffline": false,
   "AllowP2C2Parallel": false,
   "IgnoreOutOfSpace": true,
-  "AutoPledgeDiff": 0
+  "AutoPledgeDiff": 1
 }
