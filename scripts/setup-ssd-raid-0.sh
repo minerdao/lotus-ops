@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-mount_point=/home/ubuntu/disk_md0
+currentUser=ubuntu
+mountPoint=/home/$currentUser/disk_md0
 
-for i in {1..2};
+for i in {0..3};
 do
 ssd=/dev/nvme${i}n1
 echo $ssd
@@ -19,7 +20,7 @@ echo "${ssd} was fdisked"
 sleep 1s
 done
 
-mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=2 /dev/nvme[1,2]n1p1 <<EOF
+mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=4 /dev/nvme[0,1,2,3]n1p1 <<EOF
   y
 EOF
 echo "Raid0 array created"
@@ -38,12 +39,12 @@ mkfs.ext4 /dev/md0
 sleep 30s
 
 echo "Mount raid0"
-mkdir $mount_point
-mount /dev/md0 $mount_point
+mkdir $mountPoint
+mount /dev/md0 $mountPoint
 
 echo "Change owner & mod"
-chown ubuntu:ubuntu $mount_point
+chown $currentUser:$currentUser $mountPoint
 
 echo "Setup fstab"
 uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
-echo "${uuid} ${mount_point} ext4 defaults 0 0" >> /etc/fstab
+echo "${uuid} ${mountPoint} ext4 defaults 0 0" >> /etc/fstab
