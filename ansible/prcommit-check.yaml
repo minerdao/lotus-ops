@@ -1,4 +1,4 @@
-- hosts: hangzhou-p1-01
+- hosts: wuqing-precommit3
   tasks:
     - debug: var=ansible_default_ipv4.address
     - debug: var=ansible_hostname
@@ -10,7 +10,7 @@
 
     - name: Copy check script to remote server
       copy:
-        src: '{{ workspace }}/lotus-ops/scripts/worker-nvidia-driver-check.sh'
+        src: '{{ workspace }}/lotus-ops/scripts/worker-premmit-check.sh'
         dest: '{{ workspace }}'
         owner: '{{ remote_user }}'
         group: '{{ remote_user }}'

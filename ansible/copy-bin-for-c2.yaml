@@ -1,0 +1,16 @@
+- hosts: worker-commit-1
+  remote_user: '{{ remote_user }}'
+  become: yes
+  become_user: root
+  become_method: sudo
+  vars:
+    - lotus_bin_path: 'lotus-bin'
+    - version: '1.5.0'
+  tasks:
+    - name: Copy lotus worker
+      copy:
+        src: '{{ item }}'
+        dest: '/usr/local/bin/'
+        mode: +x
+      loop:
+        - '{{ workspace }}/{{ lotus_bin_path }}/{{ version }}/lotus-worker'

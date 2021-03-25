@@ -1,4 +1,4 @@
-- hosts: wuqing-commit
+- hosts: wuqing-precommit2
   remote_user: '{{ remote_user }}'
   gather_facts: no
   become: yes
@@ -12,7 +12,7 @@
 
     - name: Copy script to remote server
       copy:
-        src: '{{ workspace }}/lotus-ops/scripts/worker-init.sh'
+        src: '{{ item }}'
         dest: '{{ workspace }}'
         owner: root
         group: root

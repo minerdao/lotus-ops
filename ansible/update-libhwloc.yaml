@@ -1,8 +1,8 @@
-- hosts: amd
+- hosts: hangzhou-p1-01,hangzhou-c2-01
   remote_user: '{{ remote_user }}'
   become: yes
   become_user: root
   become_method: sudo
   tasks:
     - name: Copy lotus bin to all amd
-      shell: 'apt install libhwloc-dev -y'
+      shell: 'ln -s /usr/lib/x86_64-linux-gnu/libhwloc.so.15.1.0 /usr/lib/x86_64-linux-gnu/libhwloc.so.5'

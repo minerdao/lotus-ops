@@ -1,4 +1,4 @@
-- hosts: wuqing-precommit
+- hosts: hangzhou-p1-01
   tasks:
     - debug: var=ansible_default_ipv4.address
     - debug: var=ansible_hostname

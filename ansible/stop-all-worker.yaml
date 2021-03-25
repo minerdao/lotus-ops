@@ -1,4 +1,4 @@
-- hosts: all-worker
+- hosts: worker-precommit-1,worker-commit-1 
   remote_user: '{{ remote_user }}'
   tasks:
     - debug: var=ansible_all_ipv4_addresses
