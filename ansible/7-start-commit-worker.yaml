@@ -51,7 +51,7 @@
 
     - name: Start commit worker 0
       shell: |
-        tmux new -s lotus -d -n worker0
+        tmux new -s lotus -d -n worker
         tmux send-keys -t lotus:worker0 "export LOTUS_WORKER_PATH={{ lotus_worker_path_0 }}" C-m
         tmux send-keys -t lotus:worker0 "export CUDA_VISIBLE_DEVICES=0" C-m
         tmux send-keys -t lotus:worker0 "export TMPDIR={{ tmp_dir }}/tmp0" C-m
