@@ -1,6 +1,6 @@
 # Filecoin 运维操作手册
 
-- [Filecoin挖矿流程详解](./documents/lotus-mining-process.md)
+- [Filecoin封装流程详解](./documents/lotus-mining-process.md)
 - [Filecoin最新挖矿硬件推荐配置](./documents/hardware-configuration.md)
 - [扇区生命周期详解，扇区状态管理](./documents/sector-life-cycle.md)
 - [Filecoin节点搭建及启动](./documents/daemon-deployment.md)
