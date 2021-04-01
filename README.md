@@ -19,6 +19,7 @@
 - [如何避免掉算力](./documents/miner-keep.md)
 - [Lotus日常运维CheckList](./documents/lotus-ops-checklist.md)
 - [常用环境变量说明](./documents/environment-usage.md)
+- [自动Pledge脚本使用说明](./documents/auto-pledge.md)
 - 时空证明运行流程、原理详解
 - 爆块逻辑及优化方法
 - 消息池清理操作

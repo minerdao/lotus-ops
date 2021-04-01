@@ -1,7 +1,3 @@
-#########################################################################
-# File Name: auto_pledge_sector.sh
-# Created Time: Wed 25 Mar 2020 06:47:41 PM CST
-#########################################################################
 #!/bin/bash
 
 lotus_path="/usr/local/bin"
@@ -51,7 +47,6 @@ do
     
     echo -e ""
     let idx++
-    #sleep 3m
     sleep ${tm}m
 
 done
