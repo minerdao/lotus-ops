@@ -46,6 +46,7 @@
 |     IsPlanOffline         |     false     |     如果设置为 true，表示该 worker 计划进入离线维护模式，在此状态下面：     【1】不接收新的 AP任务     【2】不接收新的 P1任务     【3】不接收新的 P2任务     【4】不接收新的 C1/C2任务     在worker 结束离线维护模式，重启时记得将 `IsPlanOffline` 重新设置为 `false`|
 |     AllowP2C2Parallel     |     false     |     允许该 worker并行支行 P2/C2 |
 |     IgnoreOutOfSpace      |     false     |     当miner日志中看到某个 worker 不断出现`out of space`时，它不会接收任何工作任务。如果此时 worker 的物理磁盘空间其实仍然存在部分剩余，则可以设置此参数为 true，系统临时跳过 out of space检测，此 worker 自动进入紧缩空间工作模式，待可用空间正常，再将此参数设置回   false  |
+|     AllowDelay      |     3     |  延迟分配任务，用于任务卡顿时，延迟第一轮的任务分配   |
 
 
 ## 3. lotus-worker run 初始参数
