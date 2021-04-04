@@ -39,7 +39,7 @@ ntpdate ntp.aliyun.com
 currentUser=fil
 mountPoint=/home/$currentUser/disk_md0
 
-for i in {0..1};
+for i in 0 2;
 do
 ssd=/dev/nvme${i}n1
 echo $ssd
@@ -57,7 +57,7 @@ echo "${ssd} was fdisked"
 sleep 1s
 done
 
-mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=2 /dev/nvme[0,1]n1p1 <<EOF
+mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=2 /dev/nvme[0,2]n1p1 <<EOF
   y
 EOF
 echo "Raid0 array created"
