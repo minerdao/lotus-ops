@@ -1,41 +1,41 @@
 #!/bin/bash
-# 关闭防火墙
+# disable ufw
 systemctl stop ufw
 systemctl disable ufw
 
-# 关闭swap
+# close swap
 sed -i  "s/\/swap.img/#\/swap.img/" /etc/fstab
 
 apt install net-tools -y
 
-# 安装依赖包
+# install dep
 apt update
 apt install -y libhwloc-dev hwloc jq tree openssh-server python3 cpufrequtils
 
-# 开启CPU性能模式
+# CPU performance
 cpufreq-set -g performance
-# 关闭更新
+# close upgrade
 sed -i  's/1/0' /etc/apt/apt.conf.d/10periodic
-# 重新生成kernel initramfs
+# recreate kernel initramfs
 update-initramfs -u
 
-# 禁用显卡驱动更新
+# disable nvidia update
 cat >> /etc/modprobe.d/blacklist-nouveau.conf <<EEE
 blacklist nouveau
 options nouveau modeset=0
 EEE
 
-# sudo配置
+# sudoers config
 cat >>/etc/sudoers <<FFF
 fil ALL=(ALL:ALL) ALL
 FFF
 
-# 时钟校验
+# ntp update
 apt install ntpdate -y
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ntpdate ntp.aliyun.com
 
-# SSD组raid0
+# SSD make raid0
 currentUser=fil
 mountPoint=/home/$currentUser/disk_md0
 
@@ -86,7 +86,7 @@ echo "Setup fstab"
 uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
 echo "/dev/md0 ${mountPoint} ext4 defaults 0 0" >> /etc/fstab
 
-# 配置网卡
+# setup netplan
 ipAddress=$1
 tee /etc/netplan/50-cloud-init.yaml <<"EOF"
 network:
@@ -99,7 +99,7 @@ network:
       dhcp4: true
       dhcp6: true
     enp194s0:
-      addresses: [\$ipAddress/24]
+      addresses: [$ipAddress/24]
       gateway4: 10.0.1.1
       nameservers:
         addresses: [202.106.0.20,114.114.114.114]
@@ -107,9 +107,9 @@ EOF
 
 netplan apply
 
-# 配置hostname
+# setup hostname
 hostname=$2
-sed -i "s/127.0.0.1 fil/127.0.0.1 ${hostname}/g" /etc/hosts
+sed -i "s/fil/${hostname}/g" /etc/hosts
 sed -i "s/fil/${hostname}/g" /etc/hostname
 
 # ./setup-base-worker.sh 10.0.1.11 WorkerP-10-0-1-11
