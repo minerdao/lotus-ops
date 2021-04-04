@@ -4,11 +4,7 @@ systemctl stop ufw
 systemctl disable ufw
 
 # 关闭swap
-sed -i  's/\/swap.img/#\/swap.img/' /etc/fstab
-
-# apt 更新
-apt-get update
-apt-get upgrade
+sed -i  "s/\/swap.img/#\/swap.img/" /etc/fstab
 
 apt install net-tools -y
 
@@ -92,7 +88,7 @@ echo "/dev/md0 ${mountPoint} ext4 defaults 0 0" >> /etc/fstab
 
 # 配置网卡
 ipAddress=$1
-tee /etc/netplan/50-cloud-init.yaml <<-'EOF'
+tee /etc/netplan/50-cloud-init.yaml <<"EOF"
 network:
   version: 2
   ethernets:
@@ -103,8 +99,7 @@ network:
       dhcp4: true
       dhcp6: true
     enp194s0:
-      dhcp: no
-      addresses: [$ipAddress/24]
+      addresses: [\$ipAddress/24]
       gateway4: 10.0.1.1
       nameservers:
         addresses: [202.106.0.20,114.114.114.114]
@@ -114,7 +109,8 @@ netplan apply
 
 # 配置hostname
 hostname=$2
-sed -i 's/127.0.0.1 fil/127.0.0.1 ${hostname}/g' /etc/hosts
-sed -i 's/fil/${hostname}/g' /etc/hostname
+sed -i "s/127.0.0.1 fil/127.0.0.1 ${hostname}/g" /etc/hosts
+sed -i "s/fil/${hostname}/g" /etc/hostname
 
 # ./setup-base-worker.sh 10.0.1.11 WorkerP-10-0-1-11
+# https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar
