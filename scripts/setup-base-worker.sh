@@ -39,7 +39,7 @@ ntpdate ntp.aliyun.com
 currentUser=fil
 mountPoint=/home/$currentUser/disk_md0
 
-for i in 0 2;
+for i in 0 1;
 do
 ssd=/dev/nvme${i}n1
 echo $ssd
@@ -57,7 +57,7 @@ echo "${ssd} was fdisked"
 sleep 1s
 done
 
-mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=2 /dev/nvme[0,2]n1p1 <<EOF
+mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=2 /dev/nvme[0,1]n1p1 <<EOF
   y
 EOF
 echo "Raid0 array created"
@@ -83,7 +83,6 @@ echo "Change owner & mod"
 chown $currentUser:$currentUser $mountPoint
 
 echo "Setup fstab"
-uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
 echo "/dev/md0 ${mountPoint} ext4 defaults 0 0" >> /etc/fstab
 
 # setup netplan
@@ -113,9 +112,6 @@ netplan apply
 hostname=$2
 sed -i "s/fil/${hostname}/g" /etc/hosts
 sed -i "s/fil/${hostname}/g" /etc/hostname
-
-# download lotus
-wget -c -P /home/fil/workspace https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar 
 
 # ./setup-base-worker.sh 10.0.1.11 WorkerP-10-0-1-11
 # https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar
