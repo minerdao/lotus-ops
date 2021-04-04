@@ -87,8 +87,7 @@ uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
 echo "/dev/md0 ${mountPoint} ext4 defaults 0 0" >> /etc/fstab
 
 # setup netplan
-ipAddress=$1
-tee /etc/netplan/50-cloud-init.yaml <<"EOF"
+tee /etc/netplan/50-cloud-init.yaml <<'EOF'
 network:
   version: 2
   ethernets:
@@ -99,11 +98,14 @@ network:
       dhcp4: true
       dhcp6: true
     enp194s0:
-      addresses: [$ipAddress/24]
+      addresses: [ipAddress/24]
       gateway4: 10.0.1.1
       nameservers:
         addresses: [202.106.0.20,114.114.114.114]
 EOF
+
+ipaddress=$1
+sed -i "s/ipAddress/${ipaddress}/g" /etc/netplan/50-cloud-init.yaml
 
 netplan apply
 
