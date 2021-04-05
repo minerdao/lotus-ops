@@ -83,7 +83,8 @@ echo "Change owner & mod"
 chown $currentUser:$currentUser $mountPoint
 
 echo "Setup fstab"
-echo "/dev/md0 ${mountPoint} ext4 defaults 0 0" >> /etc/fstab
+uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
+echo "${uuid} ${mountPoint} ext4 defaults 0 0" >> /etc/fstab
 
 # setup netplan
 tee /etc/netplan/50-cloud-init.yaml <<'EOF'
