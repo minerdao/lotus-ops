@@ -31,8 +31,8 @@ fil ALL=(ALL:ALL) ALL
 FFF
 
 # extend lv
-lvextend  -L  +150G /dev/mapper/ubuntu--vg-ubuntu--lv
-resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
+# lvextend  -L  +150G /dev/mapper/ubuntu--vg-ubuntu--lv
+# resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 
 # ntp update
 apt install ntpdate -y
