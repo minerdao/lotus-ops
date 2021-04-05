@@ -10,7 +10,7 @@ apt install net-tools -y
 
 # install dep
 apt update
-apt install -y make libhwloc-dev hwloc jq tree openssh-server python3 cpufrequtils
+apt install -y gcc make libhwloc-dev hwloc jq tree openssh-server python3 cpufrequtils
 
 # CPU performance
 cpufreq-set -g performance
