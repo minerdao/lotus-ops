@@ -10,7 +10,7 @@ apt install net-tools -y
 
 # install dep
 apt update
-apt install -y libhwloc-dev hwloc jq tree openssh-server python3 cpufrequtils
+apt install -y make libhwloc-dev hwloc jq tree openssh-server python3 cpufrequtils
 
 # CPU performance
 cpufreq-set -g performance
@@ -91,13 +91,13 @@ tee /etc/netplan/50-cloud-init.yaml <<'EOF'
 network:
   version: 2
   ethernets:
-    enp198s0f0:
+    enp197s0f0:
       dhcp4: true
       dhcp6: true
-    enp198s0f1:
+    enp197s0f1:
       dhcp4: true
       dhcp6: true
-    enp194s0:
+    enp193s0:
       addresses: [ipAddress/24]
       gateway4: 10.0.1.1
       nameservers:
