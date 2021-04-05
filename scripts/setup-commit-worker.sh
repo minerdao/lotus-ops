@@ -71,5 +71,5 @@ cat /etc/netplan/50-cloud-init.yaml
 cat /etc/hosts
 cat /etc/hostname
 
-# sudo ./setup-commit-worker.sh 10.0.2.11 WorkerP-10-0-2-11
+# sudo ./setup-commit-worker.sh 10.0.2.13 WorkerC-10-0-2-13
 # https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar
