@@ -101,7 +101,7 @@ network:
       addresses: [ipAddress/24]
       gateway4: 10.0.1.1
       nameservers:
-        addresses: [202.106.0.20,114.114.114.114]
+        addresses: [114.114.114.114]
 EOF
 
 ipaddress=$1
@@ -114,5 +114,5 @@ hostname=$2
 sed -i "s/fil/${hostname}/g" /etc/hosts
 sed -i "s/fil/${hostname}/g" /etc/hostname
 
-# ./setup-base-worker.sh 10.0.1.11 WorkerP-10-0-1-11
+# sudo ./setup-base-worker.sh 10.0.1.11 WorkerP-10-0-1-11
 # https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar
