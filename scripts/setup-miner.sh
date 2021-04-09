@@ -52,19 +52,21 @@ network:
       dhcp6: true
     enp194s0f0:
       dhcp4: no
+      dhcp6: no
     enp194s0f1:
       dhcp4: no
-    bonds:
-      bond0:
-        interfaces:
-          - enp194s0f0
-          - enp194s0f1
-        addresses: [ipAddress/24]
-        gateway4: 10.0.99.1
-        nameservers:
-          addresses: [114.114.114.114]
-        parameters:
-          mode: balance-xor
+      dhcp6: no
+  bonds:
+     bond0:
+       interfaces:
+         - enp194s0f0
+         - enp194s0f1
+       addresses: [ipAddress/24]
+       gateway4: 10.0.99.1
+       nameservers:
+        addresses: [114.114.114.114]
+       parameters:
+         mode: balance-rr
 EOF
 
 ipaddress=$1
