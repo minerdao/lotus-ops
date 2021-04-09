@@ -122,5 +122,5 @@ cat /etc/hostname
 lvextend  -L  +150G /dev/mapper/ubuntu--vg-ubuntu--lv
 resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 
-# sudo ./setup-base-worker.sh 10.0.1.11 WorkerP-10-0-1-11
+# sudo ./setup-precommit-worker.sh 10.0.1.11 WorkerP-10-0-1-11
 # https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar

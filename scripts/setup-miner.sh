@@ -81,5 +81,5 @@ cat /etc/netplan/50-cloud-init.yaml
 cat /etc/hosts
 cat /etc/hostname
 
-# sudo ./setup-miner-worker.sh 10.0.99.11 Miner-10-0-99-11
+# sudo ./setup-miner.sh 10.0.99.11 Miner-10-0-99-11
 # https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar
