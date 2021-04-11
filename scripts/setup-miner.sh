@@ -50,17 +50,17 @@ network:
     enp198s0f1:
       dhcp4: true
       dhcp6: true
-    enp194s0f0:
+    enp193s0f0:
       dhcp4: no
       dhcp6: no
-    enp194s0f1:
+    enp193s0f1:
       dhcp4: no
       dhcp6: no
   bonds:
      bond0:
        interfaces:
-         - enp194s0f0
-         - enp194s0f1
+         - enp193s0f0
+         - enp193s0f1
        addresses: [ipAddress/24]
        gateway4: 10.0.99.1
        nameservers:
