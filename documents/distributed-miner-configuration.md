@@ -104,7 +104,19 @@ lotus-miner run --window-post=false --winning-post=false --p2p=true --sctype=get
 
 ## 7. 常见问题
 
-### 7.1 分布式Miner和Daemon之间如何连接？
+### 7.1 如何增加Seal-miner？
+找一个包含扇区少的Miner或无扇区的Miner，例如PoSt-miner，将`LOTUS_MINER_PATH`目录拷贝到新Seal-miner的对应目录下，修改`config.toml`中`[API]`部分的IP改为Seal-miner的内网IP，例如：
+```
+[API]
+  ListenAddress = "/ip4/10.0.99.12/tcp/2345/http"
+  RemoteListenAddress = "10.0.99.12:2345"
+  Timeout = "30s"
+```
+然后配置好环境变量，启动Seal-miner即可，注意启动的时候，要指定`--sctype`和`--sclisten`参数为扇区分配的Miner，其中`--sctype=get`。
+Seal-miner启动后，需要分配一部分worker给这个新的Seal-miner。
+然后Pledge的时候，先手动`lotus-miner sectors pledge`一个，然后在`lotus-miner sealing jobs`中确认一下新生成的扇区ID，是否是当前最大的扇区ID。
+
+### 7.2 分布式Miner和Daemon之间如何连接？
 
 分布式miner和daemon之间的连接架构如下图（可点击查看大图）：
 
@@ -123,17 +135,17 @@ lotus-miner run --window-post=false --winning-post=false --p2p=true --sctype=get
 
 - **Deal-miner**：负责接单，连接Daemon-private，需要配置`multiaddress`，需要连接几台Seal-worker，和上面Seal-miner连接的Worker不同，相当于是把所有的Seal-worker分成了2组，Seal-miner连接一组，Deal-miner连接一组。要根据订单的数量，来分配对应数量的Seal-worker，按照我们的经验，1 ~ 2 台Seal-worker就能满足订单密封的需要。
 
-### 7.2 分布式Miner如何切换回单Miner？
+### 7.3 分布式Miner如何切换回单Miner？
 初始化一个不含任何元数据(扇区数据)的Winning-post-miner和Window-post-miner，专门用来做时空证明和爆块。切换回单Miner的时候，只需要停掉Winning-post-miner和Window-post-miner，然后在Seal-miner上开启`window-post`和`winning-post`功能即可，也就是以Seal-miner作为回退后的单Miner（因为Seal-miner上的数据是完整的，包含所有扇区数据，Winning-post-miner和Window-post-miner上没有扇区数据）。
 
-### 7.3 关于多个Seal-miner，或者Seal-miner + Deal-miner的说明
+### 7.4 关于多个Seal-miner，或者Seal-miner + Deal-miner的说明
 建议订单少的话，就不需要Deal-miner了，直接用Seal-miner替代Deal-miner即可。
 
 因为如果配置了多个Seal-miner，或者Seal-miner + Deal-miner以后，如果想回退到单miner，就会有个副作用：Seal-miner只会包含自己的封装的扇区数据，无法同步Deal-miner或其他Seal-miner上的扇区数据，这样通过`lotus-miner sectors list`查看的扇区列表，就是不完整的，`lotus-miner info`的扇区统计数据也是不完整的，只是显示不完整，但是不会影响时空证明和出块。
 
 如果以后有回退到单miner的需求，或者比较介意这个问题，那就只能配一个Seal-miner。按照我们的设计，集群越来越大以后，是不会再有回退到单miner的需求的，所以没有解决多个Seal-miner之间扇区数据一致性的问题（分布式架构里面，也没这个必要）。
 
-### 7.4 分布式Miner架构，Miner之间如何交互？
+### 7.5 分布式Miner架构，Miner之间如何交互？
 Miner之间的交互就是从同一个地方获取扇区id的问题，通过rpc交互，其他不需要交互，各司其职即可。所有的Seal-worker只连Seal-miner。
 
 Window-post-miner和Winning-post-miner不需要有Worker，只需要连接Daemon和区块链交互即可，如：
