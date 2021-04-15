@@ -112,8 +112,8 @@ lotus-miner run --window-post=false --winning-post=false --p2p=true --sctype=get
   RemoteListenAddress = "10.0.99.12:2345"
   Timeout = "30s"
 ```
-然后配置好环境变量，启动Seal-miner即可，注意启动的时候，要指定`--sctype`和`--sclisten`参数为扇区分配的Miner，其中`--sctype=get`。
-Seal-miner启动后，需要分配一部分worker给这个新的Seal-miner。
+然后配置好环境变量，启动Seal-miner即可，注意启动的时候，要指定`--sctype`和`--sclisten`参数为扇区分配的Miner，其中`--sctype=get`。  
+Seal-miner启动后，需要分配一部分worker给这个新的Seal-miner。  
 然后Pledge的时候，先手动`lotus-miner sectors pledge`一个，然后在`lotus-miner sealing jobs`中确认一下新生成的扇区ID，是否是当前最大的扇区ID。
 
 ### 7.2 分布式Miner和Daemon之间如何连接？
