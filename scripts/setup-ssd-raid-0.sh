@@ -20,7 +20,7 @@ echo "${ssd} was fdisked"
 sleep 1s
 done
 
-mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=2 /dev/nvme[0,1]n1p1 <<EOF
+mdadm --verbose --create /dev/md0 --chunk=128 --level=raid0 --raid-devices=2 /dev/nvme[0,1]n1p1 <<EOF
   y
 EOF
 echo "Raid0 array created"
@@ -34,7 +34,7 @@ echo "Update initramfs"
 update-initramfs -u
 
 echo "Format"
-mkfs.ext4 /dev/md0
+mkfs.xfs -f -d agcount=128,su=128k,sw=2 -r extsize=256k /dev/md0
 
 sleep 30s
 
@@ -47,4 +47,4 @@ chown $currentUser:$currentUser $mountPoint
 
 echo "Setup fstab"
 uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
-echo "/dev/md0 ${mountPoint} ext4 defaults 0 0" >> /etc/fstab
+echo "/dev/md0 ${mountPoint} xfs defaults 0 0" >> /etc/fstab
