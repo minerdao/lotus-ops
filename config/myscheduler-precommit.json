@@ -1,6 +1,6 @@
 {
   "WorkerName": "",
-  "AddPieceMax": 3,
+  "AddPieceMax": 2,
   "PreCommit1Max": 7,
   "PreCommit2Max": 1,
   "Commit2Max": 0,
