@@ -9,12 +9,9 @@
     FIL_PROOFS_USE_GPU_TREE_BUILDER: '{{ fil_proofs_use_gpu_tree_builder }}'
     FIL_PROOFS_USE_MULTICORE_SDR: '{{ fil_proofs_use_multicore_sdr }}'
     MINER_API_INFO: '{{ seal_miner_api_info }}'
-  vars:
-    - worker_port_0: 3450
-    - worker_port_1: 3451
   tasks:
     - debug: var=ansible_default_ipv4.address
-    - debug: var=ansible_all_ipv4_addresses[1]
+    - debug: var=ansible_all_ipv4_addresses[0]
     - debug: var=ansible_hostname
     - debug: var=lotus_miner_path
 
@@ -27,8 +24,7 @@
         mode: u=rwxr,g=xr,o=x
       loop:
         - '{{ fil_proofs_parent_cache }}'
-        - '{{ lotus_worker_path_0 }}'
-        - '{{ lotus_worker_path_1 }}'
+        - '{{ lotus_worker_path }}'
         - '{{ tmp_dir }}/tmp0'
         - '{{ tmp_dir }}/tmp1'
         - '{{ log_path }}'
@@ -38,29 +34,16 @@
         src: '{{ workspace }}/lotus-ops/config/myscheduler-precommit.json'
         dest: '{{ item }}/myscheduler.json'
       loop:
-        - '{{ lotus_worker_path_0 }}'
-        - '{{ lotus_worker_path_1 }}'
+        - '{{ lotus_worker_path }}'
 
     - name: Start precommit worker 0
       shell: |
-        tmux new -s lotus -d -n worker0
-        tmux send-keys -t lotus:worker0 "export LOTUS_WORKER_PATH={{ lotus_worker_path_0 }}" C-m
-        tmux send-keys -t lotus:worker0 "export CUDA_VISIBLE_DEVICES=0" C-m
-        tmux send-keys -t lotus:worker0 "export TMPDIR={{ tmp_dir }}/tmp0" C-m
-        tmux send-keys -t lotus:worker0 "export FIL_PROOFS_MULTICORE_SDR_PRODUCERS=1" C-m
-        tmux send-keys -t lotus:worker0 "export ENV_CPU_CORE_BEGIN_NUM=0" C-m
-        tmux send-keys -t lotus:worker0 "export ENV_CPU_CORE_END_NUM=8" C-m
-        tmux send-keys -t lotus:worker0 "lotus-worker run --listen={{ ansible_all_ipv4_addresses[1] }}:{{ worker_port_0 }} --commit=false" C-m
-        tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker0-`date +%Y-%m-%d-%H-%M`.log"
-
-    - name: Start commit worker 1
-      shell: |
-        tmux new-window -t lotus -n worker1
-        tmux send-keys -t lotus:worker1 "export LOTUS_WORKER_PATH={{ lotus_worker_path_1 }}" C-m
-        tmux send-keys -t lotus:worker1 "export CUDA_VISIBLE_DEVICES=1" C-m
-        tmux send-keys -t lotus:worker1 "export TMPDIR={{ tmp_dir }}/tmp1" C-m
-        tmux send-keys -t lotus:worker0 "export FIL_PROOFS_MULTICORE_SDR_PRODUCERS=1" C-m
-        tmux send-keys -t lotus:worker0 "export ENV_CPU_CORE_BEGIN_NUM=8" C-m
-        tmux send-keys -t lotus:worker0 "export ENV_CPU_CORE_END_NUM=16" C-m
-        tmux send-keys -t lotus:worker1 "lotus-worker run --listen={{ ansible_all_ipv4_addresses[1] }}:{{ worker_port_1 }} --commit=false" C-m
-        tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker1-`date +%Y-%m-%d-%H-%M`.log"
+        tmux new -s lotus -d -n worker
+        tmux send-keys -t lotus:worker "export LOTUS_WORKER_PATH={{ lotus_worker_path }}" C-m
+        tmux send-keys -t lotus:worker "export CUDA_VISIBLE_DEVICES=0" C-m
+        tmux send-keys -t lotus:worker "export TMPDIR={{ tmp_dir }}/tmp0" C-m
+        tmux send-keys -t lotus:worker "export FIL_PROOFS_MULTICORE_SDR_PRODUCERS=1" C-m
+        tmux send-keys -t lotus:worker "export ENV_CPU_CORE_BEGIN_NUM=0" C-m
+        tmux send-keys -t lotus:worker "export ENV_CPU_CORE_END_NUM=8" C-m
+        tmux send-keys -t lotus:worker "lotus-worker run --listen={{ ansible_all_ipv4_addresses[1] }}:{{ worker_port_0 }} --commit=false" C-m
+        tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker-`date +%Y-%m-%d-%H-%M`.log"

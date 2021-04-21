@@ -47,4 +47,4 @@ chown $currentUser:$currentUser $mountPoint
 
 echo "Setup fstab"
 uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
-echo "/dev/md0 ${mountPoint} xfs defaults 0 0" >> /etc/fstab
+echo "${uid} ${mountPoint} xfs defaults 0 0" >> /etc/fstab

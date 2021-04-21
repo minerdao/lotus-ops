@@ -13,7 +13,7 @@
   tasks:
     - name: Start post miner
       shell: |
-        tmux new-window -t lotus:1 -n winning-post-miner
+        tmux new -s lotus -d -n winning-post-miner
         tmux send-keys -t lotus:winning-post-miner "ulimit -n 1048576" C-m
         tmux send-keys -t lotus:winning-post-miner "lotus-miner run --winning-post=true --window-post=false --p2p=false --sctype=alloce --sclisten={{ sector_counter_host }}:{{ sector_counter_port }}" C-m
         tmux pipe-pane -o "cat >>{{ log_path }}/winning-post-miner-`date +%Y-%m-%d-%H-%M`.log"
