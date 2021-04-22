@@ -46,10 +46,8 @@ network:
   ethernets:
     enp197s0f0:
       dhcp4: true
-      dhcp6: true
     enp197s0f1:
       dhcp4: true
-      dhcp6: true
     enp193s0f0:
       dhcp4: no
     enp193s0f0:
@@ -82,4 +80,3 @@ cat /etc/hosts
 cat /etc/hostname
 
 # sudo ./setup-daemon.sh 10.0.99.10 Daemon-10-0-99-10
-# https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar

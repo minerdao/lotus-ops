@@ -57,7 +57,7 @@ echo "${ssd} was fdisked"
 sleep 1s
 done
 
-mdadm --verbose --create /dev/md0 --level=raid0 --raid-devices=2 /dev/nvme[0,1]n1p1 <<EOF
+mdadm --verbose --create /dev/md0 --chunk=128 --level=raid0 --raid-devices=2 /dev/nvme[0,1]n1p1 <<EOF
   y
 EOF
 echo "Raid0 array created"
@@ -71,9 +71,9 @@ echo "Update initramfs"
 update-initramfs -u
 
 echo "Format"
-mkfs.ext4 /dev/md0
+mkfs.xfs -f -d agcount=128,su=128k,sw=2 -r extsize=256k /dev/md0
 
-sleep 30s
+sleep 10s
 
 echo "Mount raid0"
 mkdir $mountPoint
@@ -93,10 +93,8 @@ network:
   ethernets:
     enp197s0f0:
       dhcp4: true
-      dhcp6: true
     enp197s0f1:
       dhcp4: true
-      dhcp6: true
     enp193s0:
       addresses: [ipAddress/24]
       gateway4: 10.0.1.1
@@ -118,9 +116,7 @@ cat /etc/netplan/50-cloud-init.yaml
 cat /etc/hosts
 cat /etc/hostname
 
-
 lvextend  -L  +150G /dev/mapper/ubuntu--vg-ubuntu--lv
 resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 
 # sudo ./setup-precommit-worker.sh 10.0.1.11 WorkerP-10-0-1-11
-# https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar

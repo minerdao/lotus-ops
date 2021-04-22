@@ -46,16 +46,12 @@ network:
   ethernets:
     enp198s0f0:
       dhcp4: true
-      dhcp6: true
     enp198s0f1:
       dhcp4: true
-      dhcp6: true
     enp193s0f0:
       dhcp4: no
-      dhcp6: no
     enp193s0f1:
       dhcp4: no
-      dhcp6: no
   bonds:
      bond0:
        interfaces:
@@ -84,4 +80,3 @@ cat /etc/hosts
 cat /etc/hostname
 
 # sudo ./setup-miner.sh 10.0.99.11 Miner-10-0-99-11
-# https://cs-cn-filecoin.oss-cn-beijing.aliyuncs.com/filguard/amd-7302-ubuntu-1804/lotus-v1.5.0-ubuntu18.04-amd-7302.tar
