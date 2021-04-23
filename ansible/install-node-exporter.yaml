@@ -1,13 +1,13 @@
-- hosts: worker64
+- hosts: public-daemon,private-daemon,winning-post-miner,window-post-miner,seal-miner,precommit-worker,commit-worker
   remote_user: '{{ remote_user }}'
   gather_facts: no
   become: yes
   become_user: root
   become_method: sudo
   tasks:
-    - name: Create workspace directory
+    - name: Create prometheus run direction
       file:
-        path: '{{ workspace }}'
+        path: '/home/fil/disk_md0/prometheus/run'
         state: directory
 
     - name: Copy node exporter script to remote server
