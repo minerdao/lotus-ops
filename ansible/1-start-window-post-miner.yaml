@@ -15,5 +15,5 @@
       shell: |
         tmux new -s lotus -d -n window-post-miner
         tmux send-keys -t lotus:window-post-miner "ulimit -n 1048576" C-m
-        tmux send-keys -t lotus:window-post-miner "lotus-miner run --window-post=true --winning-post=false --p2p=false --sctype=alloce --sclisten={{ sector_counter_host }}:{{ sector_counter_port }}" C-m
+        tmux send-keys -t lotus:window-post-miner "lotus-miner run --window-post=true --winning-post=false --p2p=false --sctype=get --sclisten={{ sector_counter_host }}:{{ sector_counter_port }}" C-m
         tmux pipe-pane -o "cat >>{{ log_path }}/window-post-miner-`date +%Y-%m-%d-%H-%M`.log"
