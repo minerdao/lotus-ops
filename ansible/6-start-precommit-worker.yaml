@@ -44,5 +44,5 @@
         tmux send-keys -t lotus:worker "export FIL_PROOFS_MULTICORE_SDR_PRODUCERS=1" C-m
         tmux send-keys -t lotus:worker "export ENV_CPU_CORE_BEGIN_NUM=0" C-m
         tmux send-keys -t lotus:worker "export ENV_CPU_CORE_END_NUM=16" C-m
-        tmux send-keys -t lotus:worker "lotus-worker run --listen={{ ansible_all_ipv4_addresses[0] }}:{{ worker_port_0 }} --commit=false" C-m
+        tmux send-keys -t lotus:worker "lotus-worker run --listen={{ ansible_all_ipv4_addresses[0] }}:{{ worker_port }} --commit=false" C-m
         tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker-`date +%Y-%m-%d-%H-%M`.log"
