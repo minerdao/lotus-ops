@@ -1,0 +1,28 @@
+- hosts: precommit-worker,commit-worker
+  tasks:
+    - debug: var=ansible_default_ipv4.address
+    - debug: var=ansible_hostname
+
+    - name: Create workspace directory
+      file:
+        path: '{{ workspace }}'
+        state: directory
+        owner: '{{ remote_user }}'
+        group: '{{ remote_user }}'
+        mode: +x
+
+    - name: Copy check script to remote server
+      copy:
+        src: '{{ workspace }}/lotus-ops/scripts/worker-pre-check.sh'
+        dest: '{{ workspace }}'
+        owner: '{{ remote_user }}'
+        group: '{{ remote_user }}'
+        mode: +x
+
+    - name: Worker pre check
+      shell: '{{ workspace }}/worker-pre-check.sh'
+      register: check_result
+
+    - name: Echo check result
+      debug:
+        msg: '{{ check_result.stdout }}'
