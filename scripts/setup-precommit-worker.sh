@@ -10,7 +10,7 @@ apt install net-tools -y
 
 # install dep
 apt update
-apt install -y gcc make libhwloc-dev hwloc jq tree openssh-server python3 cpufrequtils
+apt install -y gcc make libhwloc-dev hwloc jq tree python3 cpufrequtils
 
 # CPU performance
 cpufreq-set -g performance
@@ -39,7 +39,7 @@ ntpdate ntp.aliyun.com
 currentUser=fil
 mountPoint=/home/$currentUser/disk_md0
 
-for i in 0 1;
+for i in 0 1 2 3 4;
 do
 ssd=/dev/nvme${i}n1
 echo $ssd
@@ -57,7 +57,7 @@ echo "${ssd} was fdisked"
 sleep 1s
 done
 
-mdadm --verbose --create /dev/md0 --chunk=128 --level=raid0 --raid-devices=2 /dev/nvme[0,1]n1p1 <<EOF
+mdadm --create --verbose /dev/md0 --chunk=128 --level=0 --raid-devices=5 /dev/nvme[0,1,2,3,4]n1p1 <<EOF
   y
 EOF
 echo "Raid0 array created"
@@ -71,7 +71,10 @@ echo "Update initramfs"
 update-initramfs -u
 
 echo "Format"
-mkfs.xfs -f -d agcount=128,su=128k,sw=2 -r extsize=256k /dev/md0
+mkfs.xfs -f -d agcount=128,su=128k,sw=5 -r extsize=640k /dev/md0
+
+# sudo mkfs.xfs -f -d agcount=128,su=128k,sw=2 -r extsize=256k  /dev/md0
+# mkfs.xfs -f -d agcount=128,su=128k,sw=5 -r extsize=640k /dev/md0
 
 sleep 10s
 
@@ -87,36 +90,40 @@ uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
 echo "${uuid} ${mountPoint} ext4 defaults 0 0" >> /etc/fstab
 
 # setup netplan
-tee /etc/netplan/50-cloud-init.yaml <<'EOF'
+tee /etc/netplan/00-installer-config.yaml <<'EOF'
 network:
   version: 2
   ethernets:
-    enp197s0f0:
-      dhcp4: true
-    enp197s0f1:
-      dhcp4: true
-    enp193s0:
-      addresses: [ipAddress/24]
+    eno1:
+      dhcp4: no
+      addresses:
+      - ipAddress/24
       gateway4: 10.0.1.1
       nameservers:
-        addresses: [114.114.114.114]
+        addresses:
+        - 114.114.114.114
+    enp66s0
+      dhcp4: no
+      addresses:
+      - ipAddress/24
+      gateway4: 10.0.1.1
+      nameservers:
+        addresses:
+        - 114.114.114.114
 EOF
 
 ipaddress=$1
-sed -i "s/ipAddress/${ipaddress}/g" /etc/netplan/50-cloud-init.yaml
+sed -i "s/ipAddress/${ipaddress}/g" /etc/netplan/00-installer-config.yaml
 
-netplan apply
+# netplan apply
 
 # setup hostname
 hostname=$2
 sed -i "s/fil/${hostname}/g" /etc/hosts
 sed -i "s/fil/${hostname}/g" /etc/hostname
 
-cat /etc/netplan/50-cloud-init.yaml
+cat /etc/netplan/00-installer-config.yaml
 cat /etc/hosts
 cat /etc/hostname
-
-lvextend  -L  +150G /dev/mapper/ubuntu--vg-ubuntu--lv
-resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 
 # sudo ./setup-precommit-worker.sh 10.0.1.11 WorkerP-10-0-1-11
