@@ -10,7 +10,7 @@ apt install net-tools -y
 
 # install dep
 apt update
-apt install -y gcc make libhwloc-dev hwloc jq tree openssh-server python3 cpufrequtils
+apt install -y gcc make libhwloc-dev hwloc jq tree fio cpufrequtils
 
 # CPU performance
 cpufreq-set -g performance
@@ -40,33 +40,28 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ntpdate ntp.aliyun.com
 
 # setup netplan
-tee /etc/netplan/50-cloud-init.yaml <<'EOF'
+tee /etc/netplan/00-installer-config.yaml <<'EOF'
 network:
   version: 2
   ethernets:
-    enp197s0f0:
-      dhcp4: true
-    enp197s0f1:
-      dhcp4: true
-    enp193s0f0:
-      dhcp4: no
-    enp193s0f0:
-      dhcp4: no
-    bonds:
-      bond0:
-        interfaces:
-          - enp193s0f0
-          - enp193s0f1
-        addresses: [ipAddress/24]
-        gateway4: 10.0.99.1
-        nameservers:
-          addresses: [114.114.114.114]
-        parameters:
-          mode: balance-xor
+    eno1:
+      addresses:
+      - 10.0.1.27/24
+      gateway4: 10.0.1.1
+      nameservers:
+        addresses:
+        - 114.114.114.114
+    enp65s0:
+      addresses:
+      - ipAddress/24
+      gateway4: 10.0.99.1
+      nameservers:
+        addresses:
+        - 114.114.114.114
 EOF
 
 ipaddress=$1
-sed -i "s/ipAddress/${ipaddress}/g" /etc/netplan/50-cloud-init.yaml
+sed -i "s/ipAddress/${ipaddress}/g" /etc/netplan/00-installer-config.yaml
 
 netplan apply
 
@@ -74,8 +69,9 @@ netplan apply
 hostname=$2
 sed -i "s/fil/${hostname}/g" /etc/hosts
 sed -i "s/fil/${hostname}/g" /etc/hostname
+hostname ${hostname}
 
-cat /etc/netplan/50-cloud-init.yaml
+cat /etc/netplan/00-installer-config.yaml
 cat /etc/hosts
 cat /etc/hostname
 
