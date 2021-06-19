@@ -95,15 +95,13 @@ network:
   version: 2
   ethernets:
     eno1:
-      dhcp4: no
       addresses:
       - ipAddress/24
       gateway4: 10.0.1.1
       nameservers:
         addresses:
         - 114.114.114.114
-    enp66s0
-      dhcp4: no
+    enp66s0:
       addresses:
       - ipAddress/24
       gateway4: 10.0.1.1
@@ -115,12 +113,13 @@ EOF
 ipaddress=$1
 sed -i "s/ipAddress/${ipaddress}/g" /etc/netplan/00-installer-config.yaml
 
-# netplan apply
+netplan apply
 
 # setup hostname
 hostname=$2
 sed -i "s/fil/${hostname}/g" /etc/hosts
 sed -i "s/fil/${hostname}/g" /etc/hostname
+hostname ${hostname}
 
 cat /etc/netplan/00-installer-config.yaml
 cat /etc/hosts
