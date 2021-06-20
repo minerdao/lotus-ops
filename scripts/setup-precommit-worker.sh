@@ -87,7 +87,7 @@ chown $currentUser:$currentUser $mountPoint
 
 echo "Setup fstab"
 uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
-echo "${uuid} ${mountPoint} ext4 defaults 0 0" >> /etc/fstab
+echo "${uuid} ${mountPoint} xfs defaults 0 0" >> /etc/fstab
 
 # setup netplan
 tee /etc/netplan/00-installer-config.yaml <<'EOF'
