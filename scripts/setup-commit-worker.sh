@@ -10,7 +10,7 @@ apt install net-tools -y
 
 # install dep
 apt update
-apt install -y gcc make libhwloc-dev hwloc jq tree fio cpufrequtils
+apt install -y gcc make libhwloc-dev hwloc jq tree fio cpufrequtils ntpdate
 
 # CPU performance
 cpufreq-set -g performance
@@ -35,7 +35,6 @@ FFF
 # resize2fs /dev/mapper/ubuntu--vg-ubuntu--lv
 
 # ntp update
-apt install ntpdate -y
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ntpdate ntp.aliyun.com
 
