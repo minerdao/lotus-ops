@@ -10,7 +10,7 @@ apt install net-tools -y
 
 # install dep
 apt update
-apt install -y gcc make libhwloc-dev hwloc jq tree fio cpufrequtils ntpdate
+apt install -y gcc make libhwloc-dev hwloc jq tree fio ntpdate
 
 # CPU performance
 cpufreq-set -g performance
@@ -45,7 +45,7 @@ network:
   ethernets:
     eno1:
       addresses:
-      - 10.0.1.21/24
+      - 10.0.1.31/24
       gateway4: 10.0.1.1
       nameservers:
         addresses:
