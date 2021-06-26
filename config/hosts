@@ -29,7 +29,7 @@ fil_proofs_use_multicore_sdr=1
 fil_proofs_multicore_sdr_producers=1
 
 # Rust环境变量
-rust_log=trace
+rust_log=info
 rust_backtrace=full
 
 # Repo环境变量

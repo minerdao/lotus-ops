@@ -80,7 +80,7 @@ lotus-miner run --window-post=false --winning-post=true --p2p=false --sctype=all
 
 ### 5.2 Deal-miner
 ```
-lotus-miner run --window-post=false --winning-post=false --p2p=true --sctype=get --sclisten=192.16810.50:1357
+lotus-miner run --window-post=false --winning-post=false --p2p=true --sctype=get --sclisten=192.168.10.50:1357
 ```
 其中`--sclisten`监听的地址和端口为做扇区分配Server Miner的IP和端口。  
 Deal-miner需要配置外网端口转发和`lotus-miner actor set-addrs`配置多地址。
@@ -89,7 +89,7 @@ Deal-miner需要配置外网端口转发和`lotus-miner actor set-addrs`配置�
 
 ### 5.3 Seal-miner
 ```
-lotus-miner run --window-post=false --winning-post=false --p2p=true --sctype=get --sclisten=192.16810.50:1357
+lotus-miner run --window-post=false --winning-post=false --p2p=true --sctype=get --sclisten=192.168.10.50:1357
 ```
 
 ### 5.4 需要注意的几个问题
