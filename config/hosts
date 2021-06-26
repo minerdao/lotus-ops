@@ -20,7 +20,7 @@
 remote_user=fil
 
 # fil proofs 环境变量
-fil_proofs_parameter_cache=/home/fil/disk_md0/proofs_param/v28
+fil_proofs_parameter_cache=/home/fil/disk_md0/proof_params/v28
 fil_proofs_parent_cache=/home/fil/disk_md0/cache/parent
 fil_proofs_maximize_caching=1
 fil_proofs_use_gpu_column_builder=1
