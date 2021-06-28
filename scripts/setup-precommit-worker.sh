@@ -10,12 +10,14 @@ apt install net-tools -y
 
 # install dep
 apt update
-apt install -y gcc make libhwloc-dev hwloc jq tree fio cpufrequtils
+apt install -y gcc make libhwloc-dev hwloc jq tree fio openssh-server python3 dkms linux-tools-4.15.0-144-generic linux-cloud-tools-4.15.0-144-generic linux-tools-generic linux-cloud-tools-generic
 
 # CPU performance
-cpufreq-set -g performance
+echo "sudo cpupower frequency-set -g performance" >> ~/.profile
+echo "sudo nvidia-smi -pm 1" >> ~/.profile
 # close upgrade
-sed -i  's/1/0' /etc/apt/apt.conf.d/10periodic
+sed -i  's/1/0/' /etc/apt/apt.conf.d/10periodic
+sed -i  's/1/0/g' /etc/apt/apt.conf.d/20auto-upgrades
 # recreate kernel initramfs
 update-initramfs -u
 
@@ -27,9 +29,10 @@ EEE
 
 # sudoers config
 cat >>/etc/sudoers <<FFF
-fil ALL=(ALL:ALL) ALL
+fil ALL=(ALL:ALL) NOPASSWD: ALL
 FFF
-
+sed -i '/%sudo/d' /etc/sudoers
+echo "%sudo   ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 # ntp update
 apt install ntpdate -y
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
@@ -48,7 +51,7 @@ parted -a optimal $ssd <<EOF
   rm 2
   rm 3
   mklabel gpt
-  mkpart primary ext4 0% 100%
+  mkpart primary xfs 0% 100%
   set 1 raid on
   ignore
   quit
@@ -88,6 +91,14 @@ chown $currentUser:$currentUser $mountPoint
 echo "Setup fstab"
 uuid=$(blkid -o export /dev/md0 | awk 'NR==2 {print}')
 echo "${uuid} ${mountPoint} xfs defaults 0 0" >> /etc/fstab
+
+
+#install nvidia 
+nvidia_path='/home/worker/NVIDIA-Linux-x86_64-450.80.02.run'
+bash $nvidia_path
+
+# dkms
+dkms install -m nvidia -v $(ls /usr/src | grep nvidia | awk '{print $NF}' | awk 'BEGIN{FS="-";}{ print $2}')
 
 # setup netplan
 tee /etc/netplan/00-installer-config.yaml <<'EOF'
