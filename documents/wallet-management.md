@@ -47,6 +47,12 @@ $ lotus wallet import
 # 例如: lotus wallet import fxxxxx001.privatekey
 ```
 
+钱包可用余额提现：
+```sh
+$ lotus-miner actor withdraw <command options> <amount (FIL)>
+```
+提现的金额将转入owner钱包。
+
 ## 2. 为Miner配置多个钱包
 一个Miner可以配置：Owner地址、Worker地址、Control地址。
 
