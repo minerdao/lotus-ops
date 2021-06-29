@@ -1,7 +1,7 @@
 # Filecoin封装流程详解
 
 ## 封装流程总览
-![Distributed Miner](../images/mining-process.png)
+<img src="../images/mining-process.png" width="600">
 
 ## 调度总览
-![Distributed Miner](../images/schedule-amd7542-32.png)
+<img src="../images/schedule-amd7542-32.png" width="600">
