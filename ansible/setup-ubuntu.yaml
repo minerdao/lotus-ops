@@ -8,7 +8,7 @@
     - name: Update ubuntu mirrors to aliyun
       shell: '
         cp -r /etc/apt/sources.list /etc/apt/sources.list.bak &&
-        sed -i "s/\/\/.*archive.ubuntu.com/\/\/mirrors.aliyun.com/g;s/\/\/.*security.ubuntu.com/\/\/mirrors.aliyun.com/g" /etc/apt/sources.list
+        sed -i "s/\/\/.*archive.ubuntu.com/g;s/\/\/.*security.ubuntu.com/g" /etc/apt/sources.list
       '
 
     - name: Update apt
@@ -17,6 +17,6 @@
     - name: Install base library
       shell: '
         apt install -y mesa-opencl-icd ocl-icd-opencl-dev ntpdate ubuntu-drivers-common &&
-        ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&
-        ntpdate ntp.aliyun.com
+        ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime &&
+        ntpdate time.windows.com
       '

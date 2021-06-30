@@ -1,27 +1,27 @@
-[public-daemon]
-192.168.1.10
+# [public-daemon]
+# 192.168.1.10
 
-[window-post-miner]
-192.168.1.11
+# [window-post-miner]
+# 192.168.1.11
 
-[winning-post-miner]
-192.168.1.12
+# [winning-post-miner]
+# 192.168.1.12
 
-[seal-miner]
-192.168.1.13
+# [seal-miner]
+# 192.168.1.13
 
 [precommit-worker]
-192.168.1.[20:50]
+192.168.1.[36:36]
 
-[commit-worker]
-192.168.1.[60:80]
+# [commit-worker]
+# 192.168.1.[60:80]
 
 [all:vars]
-remote_user=fil
+remote_user=root
 
 # fil proofs 环境变量
-fil_proofs_parameter_cache=/home/fil/disk_md0/proof_params/v28
-fil_proofs_parent_cache=/home/fil/disk_md0/cache/parent
+fil_proofs_parameter_cache=/mnt/md0/proof_params/v28
+fil_proofs_parent_cache=/mnt/md0/cache/parent
 fil_proofs_maximize_caching=1
 fil_proofs_use_gpu_column_builder=1
 fil_proofs_use_gpu_tree_builder=1
@@ -33,16 +33,16 @@ rust_log=info
 rust_backtrace=full
 
 # Repo环境变量
-lotus_path=/home/fil/disk_md0/lotus
-lotus_miner_path=/home/fil/disk_md0/lotusminer
-lotus_worker_path_0=/home/fil/disk_md0/lotusworker0
-lotus_worker_path_1=/home/fil/disk_md0/lotusworker1
+lotus_path=/root/lotus
+lotus_miner_path=/root/lotusminer
+lotus_worker_path_0=/root/lotusworker0
+lotus_worker_path_1=/root/lotusworker1
 lotus_worker_port_0=3450
 lotus_worker_port_1=3451
-log_path=/home/fil/logs
-tmp_dir=/home/fil/tmp
+log_path=/mnt/md0/logs
+tmp_dir=/mnt/md0/tmp
 worker_port=3456
-workspace=/home/fil/workspace
+workspace=/root/workspace
 
 # C2 环境变量
 num_handles=15

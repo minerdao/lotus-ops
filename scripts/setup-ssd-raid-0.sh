@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-currentUser=fil
-mountPoint=/home/$currentUser/disk_md0
+currentUser=root
+mountPoint=/mnt/md0
 
-for i in {0..4};
+for i in {b,c,d,e};
 do
-ssd=/dev/nvme${i}n1
+ssd=/dev/sd${i}
 echo $ssd
 parted -a optimal $ssd <<EOF
   rm 1
@@ -20,7 +20,7 @@ echo "${ssd} was fdisked"
 sleep 1s
 done
 
-mdadm --verbose --create /dev/md0 --chunk=128 --level=raid0 --raid-devices=5 /dev/nvme[0,1,2,3,4]n1p1 <<EOF
+mdadm --verbose --create /dev/md0 --chunk=128 --level=raid0 --raid-devices=4 /dev/sd[a,b,c,d] <<EOF
   y
 EOF
 echo "Raid0 array created"

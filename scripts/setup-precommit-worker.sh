@@ -35,16 +35,16 @@ sed -i '/%sudo/d' /etc/sudoers
 echo "%sudo   ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 # ntp update
 apt install ntpdate -y
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-ntpdate ntp.aliyun.com
+ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+ntpdate time.windows.com
 
 # SSD make raid0
-currentUser=fil
-mountPoint=/home/$currentUser/disk_md0
+currentUser=root
+mountPoint=/mnt/md0
 
-for i in 0 1 2 3 4;
+for i in {b,c,d,e};
 do
-ssd=/dev/nvme${i}n1
+ssd=/dev/sd${i}
 echo $ssd
 parted -a optimal $ssd <<EOF
   rm 1
@@ -60,7 +60,7 @@ echo "${ssd} was fdisked"
 sleep 1s
 done
 
-mdadm --create --verbose /dev/md0 --chunk=128 --level=0 --raid-devices=5 /dev/nvme[0,1,2,3,4]n1p1 <<EOF
+mdadm --create --verbose /dev/md0 --chunk=128 --level=0 --raid-devices=5 /dev/sd[b,c,d,e] <<EOF
   y
 EOF
 echo "Raid0 array created"
@@ -128,8 +128,8 @@ netplan apply
 
 # setup hostname
 hostname=$2
-sed -i "s/fil/${hostname}/g" /etc/hosts
-sed -i "s/fil/${hostname}/g" /etc/hostname
+sed -i "s/root/${hostname}/g" /etc/hosts
+sed -i "s/root/${hostname}/g" /etc/hostname
 hostname ${hostname}
 
 cat /etc/netplan/00-installer-config.yaml
