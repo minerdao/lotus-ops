@@ -9,6 +9,7 @@
     LOTUS_PATH: '{{ lotus_path }}'
     TMPDIR: '{{ tmp_dir }}'
     LOTUS_MINER_PATH: '{{ lotus_miner_path }}'
+    TMPDIR: '{{ tmp_dir }}'
   tasks:
     - name: Create tmp path
       file:

@@ -48,6 +48,10 @@
   ```sh
   export LOTUS_WORKER_PATH=/home/user/nvme_disk/lotusworker
   ```
+- `FIL_PROOFS_PARENT_CACHE`：Parent cache 参数；
+  ```sh
+  export FIL_PROOFS_PARENT_CACHE=/home/user/disk/parent_cache
+  ```
 - `FIL_PROOFS_MAXIMIZE_CACHING`：最大化内存参数；
   ```sh
   export FIL_PROOFS_MAXIMIZE_CACHING=1

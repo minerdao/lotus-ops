@@ -47,10 +47,16 @@ $ lotus wallet import
 # 例如: lotus wallet import fxxxxx001.privatekey
 ```
 
+钱包可用余额提现：
+```sh
+$ lotus-miner actor withdraw <command options> <amount (FIL)>
+```
+提现的金额将转入owner钱包。
+
 ## 2. 为Miner配置多个钱包
 一个Miner可以配置：Owner地址、Worker地址、Control地址。
 
-![Distributed Miner](../images/wallet.png)
+<img src="../images/wallet.png" width=600 alt="Multiple wallet">
 
 Miner初始化的时候，会创建一个`f0`开头的Actor地址并发送到链上，所有发送到Miner的转账消息，都会发送到Actor账户中。
 可以为Miner配置以下几个不同类型的钱包，分别负责提现、时空证明、PreCommitSector、ProveCommitSector。
