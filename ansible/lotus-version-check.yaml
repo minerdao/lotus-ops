@@ -1,4 +1,4 @@
-- hosts: precommit-worker,commit-worker
+- hosts: amd
   tasks:
     - debug: var=ansible_default_ipv4.address
     - debug: var=ansible_hostname
@@ -13,14 +13,14 @@
 
     - name: Copy check script to remote server
       copy:
-        src: '{{ workspace }}/lotus-ops/scripts/worker-pre-check.sh'
+        src: '{{ workspace }}/lotus-ops/scripts/lotus-version-check.sh'
         dest: '{{ workspace }}'
         owner: '{{ remote_user }}'
         group: '{{ remote_user }}'
         mode: +x
 
-    - name: Worker pre check
-      shell: '{{ workspace }}/worker-pre-check.sh'
+    - name: Lotus version check
+      shell: '{{ workspace }}/lotus-version-check.sh'
       register: check_result
 
     - name: Echo check result

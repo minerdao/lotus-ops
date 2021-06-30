@@ -10,7 +10,7 @@ sudo mv node_exporter-0.18.1.linux-amd64/node_exporter /usr/local/bin/
 sudo chmod a+x /usr/local/bin/node_exporter
 rm -rf $workspace/node_exporter-0.18.1.linux-amd64*
 
-mkdir -p /home/$currentUser/disk_md0/prometheus/run
+mkdir -p /home/$currentUser/prometheus/run
 
 sudo systemctl enable node-exporter
 sudo systemctl start node-exporter
