@@ -47,7 +47,9 @@ lotus-miner sectors remove <SectorId>
 执行了该命令以后，将会在Miner的日志中看到以下错误，不要惊慌，这种日志属于正常提示。
 
 ##### `Committing`状态的顽固扇区处理
-针对`Committing`状态的顽固扇区，同样是按照上面的方法，在`unsealed`和`seald`目录下创建一个空的扇区文件，但是**不同**的是，创建并重启Worker以后，该扇区并不会出现在`lotus-miner sealing jobs`列表中，而是直接变为`CommitFailed`，这个时候，执行以下命令删除扇区即可：
+针对`Committing`状态的顽固扇区，同样是按照上面的方法，在`unsealed`和`seald`目录下创建一个空的扇区文件。
+
+但是**不同**的是，创建并重启Worker以后，该扇区并不会出现在`lotus-miner sealing jobs`列表中，而是直接变为`CommitFailed`，这个时候，执行以下命令删除扇区即可：
 ```sh
 lotus-miner sectors remove <SectorId>
 ```
