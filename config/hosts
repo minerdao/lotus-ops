@@ -26,7 +26,7 @@ fil_proofs_maximize_caching=1
 fil_proofs_use_gpu_column_builder=1
 fil_proofs_use_gpu_tree_builder=1
 fil_proofs_use_multicore_sdr=1
-fil_proofs_multicore_sdr_producers=1
+fil_proofs_multicore_sdr_producers=2
 
 # Rust环境变量
 rust_log=info
@@ -45,7 +45,7 @@ worker_port=3456
 workspace=/root/workspace
 
 # C2 环境变量
-num_handles=15
+num_handles=10
 num_kernels=2
 
 # 扇区分配Miner的IP和端口
@@ -57,3 +57,55 @@ fullnode_api_info=<token>:<address>
 
 # 替换为Miner的token和listenAddress
 seal_miner_api_info=<token>:<address>
+
+# FFI_BUILD_FROM_SOURCE：从源码编译底层库
+FFI_BUILD_FROM_SOURCE=1
+
+# IPFS_GATEWAY：配置证明参数下载的代理地址。
+IPFS_GATEWAY=https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/
+
+# TMPDIR：临时文件夹路径，用于存放显卡锁定文件。
+TMPDIR=/mnt/md0/tmp
+
+## Lotus Deamon环境变量
+# LOTUS_PATH：lotus daemon 路径
+LOTUS_PATH=/root/lotus
+
+## 3. Lotus Miner环境变量
+# LOTUS_MINER_PATH：lotus miner 路径，例如：
+export LOTUS_MINER_PATH=/root/lotusminer
+# FULLNODE_API_INFO：lotus daemon API 环境变量；
+# export FULLNODE_API_INFO=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.JSdq-OviNQW2dZslvyargJsqgLrlYCjoZCIFkb2u96g:/ip4/192.168.1.10/tcp/1234/htt
+
+## 4. Lotus Worker环境变量
+# LOTUS_WORKER_PATH：Lotus worker 路径；
+LOTUS_WORKER_PATH=/root/lotusworker
+# FIL_PROOFS_PARENT_CACHE：Parent cache 参数；
+FIL_PROOFS_PARENT_CACHE=/mnt/md0/cache/parent
+# FIL_PROOFS_MAXIMIZE_CACHING：最大化内存参数；
+FIL_PROOFS_MAXIMIZE_CACHING=1
+# FIL_PROOFS_USE_MULTICORE_SDR：CPU多核心绑定；
+FIL_PROOFS_USE_MULTICORE_SDR=1
+# FIL_PROOFS_USE_GPU_TREE_BUILDER：使用GPU计算Precommit2 TREE hash
+FIL_PROOFS_USE_GPU_TREE_BUILDER=1
+# FIL_PROOFS_USE_GPU_COLUMN_BUILDER：使用GUP计算Precommit2 COLUMN hash；
+FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1
+#BELLMAN_NO_GPU：不使用GPU计算Commit2；
+# 如果要启用 GPU，则不能让这个环境变量（BELLMAN_NO_GPU）出现在系统的环境变量中（env）;
+# 如果它出现在 env 中，则需要使用unset BELLMAN_NO_GPU命令取消，因为设置 export BELLMAN_NO_GPU=0 无效；
+# export BELLMAN_NO_GPU=1
+# MINER_API_INFO：Lotus miner的API信息；
+# export MINER_API_INFO=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0.JSdq-OviNQW2dZslvyargJsqgLrlYCjoZCIFkb2u96g:/ip4/192.168.1.10/tcp/1234/http
+# BELLMAN_CUSTOM_GPU：指定Commit2的GPU型号；
+# export BELLMAN_CUSTOM_GPU="GeForce RTX 2080 Ti:4352"
+
+PATH=$PATH:/usr/local/go/bin
+BELLMAN_CPU_UTILIZATION=0.875
+ENV_CPU_CORE_BEGIN_NUM=1
+FIL_PROOFS_SDR_PARENTS_CACHE_SIZE=2048
+LOTUS_MAX_HEAP=240GiB
+LOTUS_PATH=/root/.lotus
+BELLMAN_CUSTOM_GPU="GeForce RTX 3060 Ti:4864"
+
+alias ls='ls --color'
+alias sh='bash'
