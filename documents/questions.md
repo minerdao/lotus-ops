@@ -27,11 +27,13 @@ lotus-miner sectors remove --really-do-it <SectorId>
 
 ##### `PreCommit1`，`PreCommit2`状态的顽固扇区处理
 针对`PreCommit1`，`PreCommit2`这两种状态的扇区，按如下的方法来处理：
+
 ①. 找一个空闲的Worker（没有任何封装任务），在`LOTUS_WORKER_PATH`的`unsealed`和`seald`目录下，分别创建对应扇区ID的空扇区文件，假设顽固扇区的ID为，那分别在`unsealed`和`seald`目录下执行：
 ```sh
 touch s-t0xxxxxx-100
 # 其中t0xxxxxx是矿工ID
 ```
+
 ②. 重启该Worker，注意观察Worker的日志中，该扇区会不会开始封装，如果没有开始封装，可以再重启一下Miner。
 
 ③. 待该扇区开始封装，在`lotus-miner sealing jobs`列表中能看到以后，就可以执行命令先终止掉任务。
