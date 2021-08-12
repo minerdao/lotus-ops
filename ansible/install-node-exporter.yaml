@@ -1,4 +1,5 @@
-- hosts: public-daemon,winning-post-miner,window-post-miner,seal-miner,precommit-worker,commit-worker
+# - hosts: public-daemon,private-daemon,winning-post-miner,window-post-miner,seal-miner,precommit-worker,commit-worker
+- hosts: 10.0.1.17
   remote_user: '{{ remote_user }}'
   gather_facts: no
   become: yes
@@ -7,7 +8,7 @@
   tasks:
     - name: Create prometheus run direction
       file:
-        path: '/home/fil/disk_md0/prometheus/run'
+        path: '/home/fil/prometheus/run'
         state: directory
 
     - name: Copy node exporter script to remote server

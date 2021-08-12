@@ -1,9 +1,10 @@
-- hosts: precommit-worker
+- hosts: 10.0.1.16
   remote_user: '{{ remote_user }}'
   environment:
     RUST_LOG: '{{ rust_log }}'
     RUST_BACKTRACE: '{{ rust_backtrace }}'
     FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_parameter_cache }}'
+    FIL_PROOFS_PARENT_CACHE: '{{ fil_proofs_parent_cache }}'
     FIL_PROOFS_MAXIMIZE_CACHING: '{{ fil_proofs_maximize_caching }}'
     FIL_PROOFS_USE_GPU_COLUMN_BUILDER: '{{ fil_proofs_use_gpu_column_builder }}'
     FIL_PROOFS_USE_GPU_TREE_BUILDER: '{{ fil_proofs_use_gpu_tree_builder }}'
@@ -14,7 +15,7 @@
     - debug: var=ansible_all_ipv4_addresses[0]
     - debug: var=ansible_hostname
     - debug: var=lotus_miner_path
-
+    
     - name: Create cache path, lotus worker path, tmp path, log path
       file:
         path: '{{ item }}'
@@ -24,8 +25,9 @@
         mode: u=rwxr,g=xr,o=x
       loop:
         - '{{ fil_proofs_parent_cache }}'
-        - '{{ lotus_worker_path }}'
-        - '{{ tmp_dir }}/tmp'
+        - '{{ lotus_worker_path_0 }}'
+        - '{{ lotus_worker_path_1 }}'
+        - '{{ tmp_dir }}'
         - '{{ log_path }}'
 
     - name: Copy myscheduler config to precommit worker
@@ -33,16 +35,33 @@
         src: '{{ workspace }}/lotus-ops/config/myscheduler-precommit.json'
         dest: '{{ item }}/myscheduler.json'
       loop:
-        - '{{ lotus_worker_path }}'
+        - '{{ lotus_worker_path_0 }}'
+        - '{{ lotus_worker_path_1 }}'
 
     - name: Start precommit worker 0
       shell: |
-        tmux new -s lotus -d -n worker
-        tmux send-keys -t lotus:worker "export LOTUS_WORKER_PATH={{ lotus_worker_path }}" C-m
-        tmux send-keys -t lotus:worker "export CUDA_VISIBLE_DEVICES=0" C-m
-        tmux send-keys -t lotus:worker "export TMPDIR={{ tmp_dir }}/tmp" C-m
-        tmux send-keys -t lotus:worker "export FIL_PROOFS_MULTICORE_SDR_PRODUCERS=1" C-m
-        tmux send-keys -t lotus:worker "export ENV_CPU_CORE_BEGIN_NUM=0" C-m
-        tmux send-keys -t lotus:worker "export ENV_CPU_CORE_END_NUM=16" C-m
-        tmux send-keys -t lotus:worker "lotus-worker run --listen={{ ansible_all_ipv4_addresses[0] }}:{{ worker_port }} --commit=false" C-m
-        tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker-`date +%Y-%m-%d-%H-%M`.log"
+        tmux new -s lotus -d -n worker0
+        tmux send-keys -t lotus:worker0 "export LOTUS_WORKER_PATH={{ lotus_worker_path_0 }}" C-m
+        tmux send-keys -t lotus:worker0 "export CUDA_VISIBLE_DEVICES=0" C-m
+        tmux send-keys -t lotus:worker0 "export TMPDIR={{ tmp_dir }}" C-m
+        tmux send-keys -t lotus:worker0 "export FIL_PROOFS_MULTICORE_SDR_PRODUCERS=1" C-m
+        tmux send-keys -t lotus:worker0 "export ENV_CPU_CORE_BEGIN_NUM=0" C-m
+        tmux send-keys -t lotus:worker0 "export ENV_CPU_CORE_END_NUM=8" C-m
+        tmux send-keys -t lotus:worker0 "echo $ENV_CPU_CORE_BEGIN_NUM" C-m
+        tmux send-keys -t lotus:worker0 "echo $ENV_CPU_CORE_END_NUM" C-m
+        tmux send-keys -t lotus:worker0 "lotus-worker run --listen={{ ansible_all_ipv4_addresses[0] }}:{{ lotus_worker_port_0 }} --commit=false" C-m
+        tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker0-`date +%Y-%m-%d-%H-%M`.log"
+
+    - name: Start commit worker 1
+      shell: |
+        tmux new-window -t lotus -n worker1
+        tmux send-keys -t lotus:worker1 "export LOTUS_WORKER_PATH={{ lotus_worker_path_1 }}" C-m
+        tmux send-keys -t lotus:worker1 "export CUDA_VISIBLE_DEVICES=0" C-m
+        tmux send-keys -t lotus:worker1 "export TMPDIR={{ tmp_dir }}" C-m
+        tmux send-keys -t lotus:worker1 "export FIL_PROOFS_MULTICORE_SDR_PRODUCERS=1" C-m
+        tmux send-keys -t lotus:worker1 "export ENV_CPU_CORE_BEGIN_NUM=8" C-m
+        tmux send-keys -t lotus:worker1 "export ENV_CPU_CORE_END_NUM=16" C-m
+        tmux send-keys -t lotus:worker1 "echo $ENV_CPU_CORE_BEGIN_NUM" C-m
+        tmux send-keys -t lotus:worker1 "echo $ENV_CPU_CORE_END_NUM" C-m
+        tmux send-keys -t lotus:worker1 "lotus-worker run --listen={{ ansible_default_ipv4.address }}:{{ lotus_worker_port_1 }} --commit=false" C-m
+        tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker1-`date +%Y-%m-%d-%H-%M`.log"
