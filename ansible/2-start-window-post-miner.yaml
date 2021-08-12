@@ -1,13 +1,14 @@
 - hosts: window-post-miner
   remote_user: '{{ remote_user }}'
   environment:
+    RUST_LOG: '{{ rust_log }}'
+    RUST_BACKTRACE: '{{ rust_backtrace }}'
     FIL_PROOFS_PARAMETER_CACHE: '{{ fil_proofs_parameter_cache }}'
     FIL_PROOFS_MAXIMIZE_CACHING: '{{ fil_proofs_maximize_caching }}'
     FIL_PROOFS_USE_GPU_COLUMN_BUILDER: '{{ fil_proofs_use_gpu_column_builder }}'
     FIL_PROOFS_USE_GPU_TREE_BUILDER: '{{ fil_proofs_use_gpu_tree_builder }}'
     FULLNODE_API_INFO: '{{ fullnode_api_info }}'
     LOTUS_PATH: '{{ lotus_path }}'
-    TMPDIR: '{{ tmp_dir }}'
     LOTUS_MINER_PATH: '{{ lotus_miner_path }}'
     TMPDIR: '{{ tmp_dir }}'
   tasks:

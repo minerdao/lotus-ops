@@ -122,18 +122,18 @@ Seal-miner启动后，需要分配一部分worker给这个新的Seal-miner。
 
 ![connection](../images/dirtributed-miner-architecture.png)
 
-- **Public-daemon**：需要配置公网IP，给Public-daemon配公网IP主要是为了提升节点的稳定性和评分，只有节点健康稳定，爆块才会稳定。但是如果直接把导入了钱包的Daemon暴露在公网中也是非常不安全的，毕竟Lotus的钱包管理还是非常原始的。Public-daemon的作用就是连接更多的外部节点。然后让Private-daemon也连接到Public-daemon，因为是内网，连接会非常快。Public-daemon是内网的Miner和外部区块链通信的一个桥梁。
+- **Daemon-public**：需要配置公网IP，给Daemon-public配公网IP主要是为了提升节点的稳定性和评分，只有节点健康稳定，爆块才会稳定。但是如果直接把导入了钱包的Daemon暴露在公网中也是非常不安全的，毕竟Lotus的钱包管理还是非常原始的。Daemon-public的作用就是连接更多的外部节点。然后让Daemon-private也连接到Daemon-public，因为是内网，连接会非常快。Daemon-public是内网的Miner和外部区块链通信的一个桥梁。
 [如何给Daemon配置公网IP?](https://github.com/filguard/lotus-ops/blob/master/documents/daemon-operation.md#4-%E7%BB%99deamon%E9%85%8D%E7%BD%AE%E5%85%AC%E7%BD%91ip)
 
-- **Private-daemon**：内网的Miner全部连接Private-daemon，同时这个Daemon也启动在Winning-post-miner上，保证出块的Miner连接是最快的，考虑冗余的话，可以在Window-post-miner上再同步一个轻节点Daemon作为备份，关于轻节点Daemon，请[参照快照导出导入和快照剪裁](https://github.com/filguard/lotus-ops/blob/master/documents/daemon-operation.md#3-%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE%E8%A3%81%E5%89%AA%E5%BF%AB%E7%85%A7)。
+- **Daemon-private**：内网的Miner全部连接Daemon-private，同时这个Daemon也启动在Winning-post-miner上，保证出块的Miner连接是最快的，考虑冗余的话，可以在Window-post-miner上再同步一个轻节点Daemon作为备份，关于轻节点Daemon，请[参照快照导出导入和快照剪裁](https://github.com/filguard/lotus-ops/blob/master/documents/daemon-operation.md#3-%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE%E8%A3%81%E5%89%AA%E5%BF%AB%E7%85%A7)。
 
-- **Winning-post-miner**：只负责出块，因为这台机器负载比较低，所以在上面同时启动Private-daemon。另外，Winning-post-miner也是sector-counter的服务端，负责统一分配扇区ID，其他Miner（主要是Seal-miner和Deal-miner）都从这台机器上申请扇区ID。
+- **Winning-post-miner**：只负责出块，因为这台机器负载比较低，所以在上面同时启动Daemon-private。另外，Winning-post-miner也是sector-counter的服务端，负责统一分配扇区ID，其他Miner（主要是Seal-miner和Deal-miner）都从这台机器上申请扇区ID。
 
 - **Window-post-miner**：只负责时空证明，上面可以同时同步一个备份的轻节点Daemon。
 
-- **Seal-miner**：负责分配任务，管理所有的Seal-worker，连接Private-daemon。
+- **Seal-miner**：负责分配任务，管理所有的Seal-worker，连接Daemon-private。
 
-- **Deal-miner**：负责接单，连接Private-daemon，需要配置`multiaddress`，需要连接几台Seal-worker，和上面Seal-miner连接的Worker不同，相当于是把所有的Seal-worker分成了2组，Seal-miner连接一组，Deal-miner连接一组。要根据订单的数量，来分配对应数量的Seal-worker，按照我们的经验，1 ~ 2 台Seal-worker就能满足订单密封的需要。
+- **Deal-miner**：负责接单，连接Daemon-private，需要配置`multiaddress`，需要连接几台Seal-worker，和上面Seal-miner连接的Worker不同，相当于是把所有的Seal-worker分成了2组，Seal-miner连接一组，Deal-miner连接一组。要根据订单的数量，来分配对应数量的Seal-worker，按照我们的经验，1 ~ 2 台Seal-worker就能满足订单密封的需要。
 
 ### 7.3 分布式Miner如何切换回单Miner？
 初始化一个不含任何元数据(扇区数据)的Winning-post-miner和Window-post-miner，专门用来做时空证明和爆块。切换回单Miner的时候，只需要停掉Winning-post-miner和Window-post-miner，然后在Seal-miner上开启`window-post`和`winning-post`功能即可，也就是以Seal-miner作为回退后的单Miner（因为Seal-miner上的数据是完整的，包含所有扇区数据，Winning-post-miner和Window-post-miner上没有扇区数据）。

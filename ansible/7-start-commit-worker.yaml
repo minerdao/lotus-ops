@@ -1,4 +1,4 @@
-- hosts: 10.0.2.13
+- hosts: commit-worker
   remote_user: '{{ remote_user }}'
   environment:
     RUST_LOG: '{{ rust_log }}'

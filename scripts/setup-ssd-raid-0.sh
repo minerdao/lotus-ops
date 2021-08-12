@@ -2,7 +2,7 @@
 currentUser=fil
 mountPoint=/home/$currentUser/disk_md0
 
-for i in {0..4};
+for i in {0..1};
 do
 ssd=/dev/nvme${i}n1
 echo $ssd
@@ -20,7 +20,7 @@ echo "${ssd} was fdisked"
 sleep 1s
 done
 
-mdadm --verbose --create /dev/md0 --chunk=128 --level=raid0 --raid-devices=5 /dev/nvme[0,1,2,3,4]n1p1 <<EOF
+mdadm --verbose --create /dev/md0 --chunk=128 --level=raid0 --raid-devices=2 /dev/nvme[0,1]n1p1 <<EOF
   y
 EOF
 echo "Raid0 array created"
@@ -31,7 +31,7 @@ echo "Generate raid0 config"
 mdadm -Dsv > /etc/mdadm/mdadm.conf
 
 echo "Update initramfs"
-# update-initramfs -u
+update-initramfs -u
 
 echo "Format"
 mkfs.xfs -f -d agcount=128,su=128k,sw=2 -r extsize=256k /dev/md0
