@@ -8,11 +8,13 @@ Lotus-ops是FilGuard团队根据自身Lotus的运维实践，针对Lotus挖矿�
 - 提供Prometheus + Grafana + Node-exporter监控工具部署脚本，可快速搭建Filecoin集群监控平台；
 - 提供Lotus常见命令的快捷操作，提升运维效率。
 
+![monitor-servers](./images/monitor-servers.png)
+![monitor-metric](./images/monitor-metric.png)
+
 ## 如何使用
 具体使用请参照[Lotus-ops部署运维工具使用说明](./documents/ansible-deploy-tool-usage.md)。
 
 ## Filecoin运维操作手册
-
 - [Filecoin封装流程详解](./documents/lotus-mining-process.md)
 - [Filecoin最新挖矿硬件推荐配置](./documents/hardware-configuration.md)
 - [扇区生命周期详解，扇区状态管理](./documents/sector-life-cycle.md)
