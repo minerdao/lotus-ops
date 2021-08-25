@@ -108,9 +108,9 @@ lotus-miner run --window-post=false --winning-post=false --p2p=true --sctype=get
 找一个包含扇区少的Miner或无扇区的Miner，例如PoSt-miner，将`LOTUS_MINER_PATH`目录拷贝到新Seal-miner的对应目录下，修改`config.toml`中`[API]`部分的IP改为Seal-miner的内网IP，例如：
 ```
 [API]
-  ListenAddress = "/ip4/10.0.99.12/tcp/2345/http"
-  RemoteListenAddress = "10.0.99.12:2345"
-  Timeout = "30s"
+ListenAddress = "/ip4/10.0.99.12/tcp/2345/http"
+RemoteListenAddress = "10.0.99.12:2345"
+Timeout = "30s"
 ```
 然后配置好环境变量，启动Seal-miner即可，注意启动的时候，要指定`--sctype`和`--sclisten`参数为扇区分配的Miner，其中`--sctype=get`。  
 Seal-miner启动后，需要分配一部分worker给这个新的Seal-miner。  
