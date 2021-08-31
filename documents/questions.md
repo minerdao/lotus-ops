@@ -55,11 +55,13 @@ lotus-miner sectors remove <SectorId>
 ```sh
 lotus-miner sectors remove <SectorId>
 ```
+注意！V5版本更新了MaxProveCommitDuration（ProveCommit超时时间）为30天，删除Committing状态的扇区会销毁前置质押中的存储质押部分质押币，请谨慎操作！
 
 #### 1.4 删除以后还要做什么？
 顽固扇区删除以后，最好重启一下Seal-Miner，这样扇区状态就会重新更新，顽固扇区也就不会被再次调度了。
 
 ## Worker掉线如何处理？
-
+示例：假设miner106集群中1-87算力机的worker0掉线。可参照以下步骤操作。
+<img src="https://z3.ax1x.com/2021/08/31/haea6I.png">
 ## 任务积压如何处理？
 
