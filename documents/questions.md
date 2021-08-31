@@ -4,20 +4,20 @@
 #### 1.1 什么是顽固扇区？
 所谓顽固扇区，是指因Worker掉线、扇区超时等原因导致的，无法被成功调度并完成封装的扇区。
 
-顽固扇区并**不是**指`SealPreCommit1Failed`，`PreCommitFailed`，`CommitFailed`这几种状态的扇区，因为这几种状态的扇区，均可直接执行`lotus-miner sectors remove --really-do-it <SectorId>`来直接删除。
+顽固扇区并**不是**指`SealPreCommit1Failed`，`PreCommitFailed`，`CommitFailed`这几种状态的扇区，因为这几种状态的扇区，均可通过`lotus-miner sectors remove --really-do-it <SectorId>`命令直接删除掉。
 
-顽固扇区一般是指`PreCommit1`，`PreCommit2`，`Committing`，`FinalizeSector`这几种正常状态的扇区，但是无法成功被调度并封装，执行以下两个命令也无法删除。
+而顽固扇区是指`PreCommit1`，`PreCommit2`，`Committing`，`FinalizeSector`这几种正常状态的扇区，但缺无法成功被调度并完成封装的扇区，执行以下两个命令也无法删除掉。
 ```sh
 lotus-miner sectors update-state --really-do-it <sectorId> Removing
 lotus-miner sectors remove --really-do-it <SectorId>
 ```
 
 #### 1.2 顽固扇区有什么影响？如何发现它？
-顽固扇区会停留在扇区列表中，一直等待不断调度（但又无法调度成功），不仅浪费了调度系统的队列资源，还会影响扇区封装任务下发的数量。你会发现，扇区明明在列表中，就是无法封装成功，想删还删不掉，非常的痛苦。
+顽固扇区会停留在扇区列表中，一直不断被调度（但又无法调度成功，扇区日志中通常有大量重复的`retry`操作），不仅浪费了调度系统的队列资源，还会影响扇区封装任务下发的数量。你会发现，扇区明明在列表中，就是无法封装成功，想删还删不掉，非常的痛苦。
 
-因为Lotus的扇区号都是自增的，只要执行`lotus-miner sectors list --fast`查看一下扇区列表，那么列表的最后面，都是正在封装的扇区，而且这些扇区ID都是连续的。正常情况下，前面封装完的扇区都是`Proving`状态，如果看到前面`Proving`状态的扇区中夹杂了`PreCommit1`，`PreCommit2`，`Committing`这些状态的扇区，那这些就是顽固扇区了。
+如何发现顽固扇区呢？因为Lotus的扇区号都是自增的，只要执行`lotus-miner sectors list --fast`查看一下扇区列表，列表的最后面，都是正在封装的扇区，而且这些扇区ID都是连续的。正常情况下，前面封装完的扇区都是`Proving`状态，如果看到前面`Proving`状态的扇区中夹杂了`PreCommit1`，`PreCommit2`，`Committing`这些状态的扇区，那这些就是顽固扇区了。
 
-<img src="../images/sectors-list.png">
+<img src="../images/sectors-list.png" width="400">
 
 另外，也可以通过`lotus-miner sealing jobs | sort -k2`查看正在封装的任务列表，如果发现列表头部的扇区ID和后面的差距很大，如果差了几十个甚至更多，那这些扇区也就是顽固扇区了，或者是扇区封装已经进入死循环了，要尽快处理掉。
 
@@ -63,5 +63,6 @@ lotus-miner sectors remove <SectorId>
 ## Worker掉线如何处理？
 示例：假设miner106集群中1-87算力机的worker0掉线。可参照以下步骤操作。
 <img src="https://z3.ax1x.com/2021/08/31/haea6I.png">
+
 ## 任务积压如何处理？
 
