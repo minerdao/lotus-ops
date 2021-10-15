@@ -10,6 +10,7 @@
     FULLNODE_API_INFO: '{{ fullnode_api_info }}'
     LOTUS_PATH: '{{ lotus_path }}'
     LOTUS_MINER_PATH: '{{ lotus_miner_path }}'
+    TMPDIR: '{{ tmp_dir }}'
   vars:
     - miner_log_path: '/home/ubuntu/logs'
   tasks:
