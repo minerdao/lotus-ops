@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=fil
 Type=simple
-ExecStart=/usr/local/bin/node_exporter --collector.textfile.directory="/home/fil/disk_md0/prometheus/run"
+ExecStart=/usr/local/bin/node_exporter --collector.textfile.directory="/home/fil/prometheus/run"
 
 [Install]
 WantedBy=multi-user.target

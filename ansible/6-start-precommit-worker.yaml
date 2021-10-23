@@ -63,5 +63,5 @@
         tmux send-keys -t lotus:worker1 "export ENV_CPU_CORE_END_NUM=16" C-m
         tmux send-keys -t lotus:worker1 "echo $ENV_CPU_CORE_BEGIN_NUM" C-m
         tmux send-keys -t lotus:worker1 "echo $ENV_CPU_CORE_END_NUM" C-m
-        tmux send-keys -t lotus:worker1 "lotus-worker run --listen={{ ansible_default_ipv4.address }}:{{ lotus_worker_port_1 }} --commit=false" C-m
+        tmux send-keys -t lotus:worker1 "lotus-worker run --listen={{ ansible_all_ipv4_addresses[0] }}:{{ lotus_worker_port_1 }} --commit=false" C-m
         tmux pipe-pane -o "cat >>{{ log_path }}/lotus-worker1-`date +%Y-%m-%d-%H-%M`.log"
