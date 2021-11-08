@@ -4,9 +4,9 @@ Lotus-ops是FilGuard团队根据自身Lotus的运维实践，针对Lotus挖矿�
 ## 功能介绍
 - 无缝支持FilGuard团队的Lotus优化软件；
 - 提供Ansible Playbook一键部署脚本，批量一键部署Daemon、Miner、Worker；
-- 提供常用的Shell脚本，用于对Lotus的基础运行环境进行初始化；
+- 提供常用的Shell脚本，用于初始化Lotus的基础运行环境，如安装基础依赖、SSD组Raid0、安装网卡驱动、Worker检查等等；
 - 提供Prometheus + Grafana + Node-exporter监控工具部署脚本，可快速搭建Filecoin集群监控平台；
-- 提供Lotus常见命令的快捷操作，提升运维效率。
+- 提供Lotus常用命令的快捷操作，提升运维效率。
 
 ![monitor-servers](./images/monitor-servers.png)
 ![monitor-metric](./images/monitor-metric.png)
