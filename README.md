@@ -12,7 +12,12 @@ Lotus-ops是FilGuard团队根据自身Lotus的运维实践，针对Lotus挖矿�
 ![monitor-metric](./images/monitor-metric.png)
 
 ## 如何使用
-具体使用请参照[Lotus-ops部署运维工具使用说明](./documents/ansible-deploy-tool-usage.md)。
+请参照[Lotus-ops部署运维工具使用说明](./documents/ansible-deploy-tool-usage.md)。
+
+## 加入社群
+我们的技术社群为矿工和开发者提供技术交流、资源合作、新项目研究等，欢迎大家加入讨论。
+- [Telegram交流群](https://t.me/joinchat/TOGYnsZ2itA0NGZl)
+- [Discord交流群](https://discord.gg/4f3DjmDk7j)
 
 ## Filecoin运维操作手册
 - [Filecoin封装流程详解](./documents/lotus-mining-process.md)
