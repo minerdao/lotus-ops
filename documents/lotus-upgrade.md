@@ -5,6 +5,7 @@
 ##### **新的证明参数**
 支持Snap Deals的证明参数，需要下载更新的证明参数，并更新到daemon、miner和C2机器上的对应目录。使用以下命令下载证明参数：
   ```
+  // 注意是v1.14.0版本的lotus，需自行编译一下官方的
   make lotus-shed
   ./lotus-shed fetch-params --proving-params 32GiB or 64GiB
   ```
