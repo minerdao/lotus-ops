@@ -7,9 +7,11 @@
   ```
   // 注意是v1.14.0版本的lotus，需自行编译一下官方的
   make lotus-shed
-  ./lotus-shed fetch-params --proving-params 32GiB or 64GiB
+  ./lotus-shed fetch-params --proving-params 32GiB
+  ./lotus-shed fetch-params --proving-params 64GiB
   ```
 **注意：证明参数下载较慢，请提前做好准备。**
+
 
 ### 何时升级
 初步的更新时间将在下周五即2.25日左右，到时候将会提供测试完成的二进制代码，直接替换即可。
@@ -17,6 +19,15 @@
 ### 如何升级
 - 未封装新算力的，只需要替换daemon和miner上的证明参数、Lotus二进制文件即可；
 - 正在封装的，请在升级前1天，停止封装，确保所有扇区已经落盘，时空证明没有错误，升级完成后再开启封装。
+
+### 升级准备
+带显卡的机器，包括Miner, Precommit Worker, Commit Worker上，均需要安装Cuda Toolkit。
+wget https://developer.download.nvidia.com/compute/cuda/11.6.0/local_installers/cuda_11.6.0_510.39.01_linux.run
+sudo sh cuda_11.6.0_510.39.01_linux.run
+
+export PATH="/usr/local/cuda-11.6/bin:$PATH"
+export LD_LIBRARY_PATH=/usr/local/cuda-11.6/lib64
+export CUDA_HOME=/usr/local/cuda
 
 ### 升级步骤
 1. 停止pledge sector的任务脚本。

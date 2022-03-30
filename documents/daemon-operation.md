@@ -6,9 +6,9 @@ lotus daemon
 # 停止lotus节点
 lotus daemon stop
 # 导入链快照
-lotus daemon --import-snapshot chain.car 
+lotus daemon --import-snapshot snapshot.car 
 # 导出链快照
-lotus chain export --skip-old-msgs --recent-stateroots=900 chain.car
+lotus chain export --skip-old-msgs --recent-stateroots=900 snapshot.car
 # 查看连接的节点
 lotus net peers
 # 查看连接状态

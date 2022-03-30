@@ -2,8 +2,8 @@
 workspace=$HOME/workspace
 
 cd $workspace &&
-wget -c https://golang.org/dl/go1.16.linux-amd64.tar.gz &&
-tar -xvf go1.16.linux-amd64.tar.gz
+wget -c https://golang.org/dl/go1.17.linux-amd64.tar.gz &&
+tar -xvf go1.17.linux-amd64.tar.gz
 
 sudo chown -R root:root ./go
 sudo rm -rfv /usr/local/go
