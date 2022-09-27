@@ -1,5 +1,5 @@
 # Lotus-ops
-Lotus-ops是FilGuard团队根据自身Lotus的运维实践，针对Lotus挖矿软件的部署运维，整理并开源的一套Ansible Playbook脚本和Shell脚本。另外还提供了完善的Filecoin运维操作手册，供广大Filecoin运维人员参考。
+Lotus-ops是我们根据自身Lotus的运维实践，针对Lotus挖矿软件的部署运维，整理并开源的一套Ansible Playbook脚本和Shell脚本。另外还提供了完善的Filecoin运维操作手册，供广大Filecoin运维人员参考。
 
 ## 功能介绍
 - 无缝支持FilGuard团队的Lotus优化软件；
