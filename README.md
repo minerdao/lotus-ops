@@ -14,11 +14,6 @@ Lotus-ops是我们根据自身Lotus的运维实践，针对Lotus挖矿软件的�
 ## 如何使用
 请参照[Lotus-ops部署运维工具使用说明](https://github.com/minerdao/posts/blob/master/posts/filecoin/ansible-deploy-tool-usage.md)。
 
-## 加入社群
-我们的技术社群为矿工和开发者提供技术交流、资源合作、新项目研究等，欢迎大家加入讨论。
-- [Telegram交流群](https://t.me/joinchat/TOGYnsZ2itA0NGZl)
-- [Discord交流群](https://discord.gg/4f3DjmDk7j)
-
 ## Filecoin运维操作手册
 我们整理了Filecoin相关运维和操作手册，包括：
 - [Filecoin封装流程详解](https://github.com/minerdao/posts/blob/master/posts/filecoin/lotus-mining-process.md)
@@ -40,3 +35,11 @@ Lotus-ops是我们根据自身Lotus的运维实践，针对Lotus挖矿软件的�
 - [自动Pledge脚本使用说明](https://github.com/minerdao/posts/blob/master/posts/filecoin/auto-pledge.md)
 - 常见运维问题定位与解决
   - [顽固扇区如何删除？](https://github.com/minerdao/posts/blob/master/posts/questions.md#1-顽固扇区如何删除)
+
+## 加入社群
+MinerDAO社区聚集了Filecoin, Aleo, IronFish等当前热门挖矿项目的矿工、开发者、投资人。
+我们为矿工和开发者提供技术交流、算法优化、资源合作、新项目研究等，欢迎大家加入讨论。
+- 微信号: maxmillion-eth (备注: MinerDAO)
+  <img src="https://raw.githubusercontent.com/minerdao/posts/master/images/wechat-max.png" width="200">
+- [Telegram交流群](https://t.me/joinchat/TOGYnsZ2itA0NGZl)
+- [Discord交流群](https://discord.gg/4f3DjmDk7j)
